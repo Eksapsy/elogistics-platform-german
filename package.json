@@ -4,6 +4,7 @@
   "description": "Form to assign some products along with the selected Courier + sender/receiver, which then are delivered to them accordingly via emails.",
   "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
     "server": "nodemon server/index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently -t \"HH:mm:ss\" --names \"SERVER,CLIENT\" -c \"bgYellow.bold,bgBlue.bold\" --prefix \"[{name} {time}]\" \"npm run server\" \"npm run client\"",
