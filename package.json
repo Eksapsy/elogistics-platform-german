@@ -1,0 +1,28 @@
+{
+  "name": "eproduct-form",
+  "version": "1.0.0",
+  "description": "Form to assign some products along with the selected Courier + sender/receiver, which then are delivered to them accordingly via emails.",
+  "main": "server/index.js",
+  "scripts": {
+    "server": "nodemon server/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently -t \"HH:mm:ss\" --names \"SERVER,CLIENT\" -c \"bgYellow.bold,bgBlue.bold\" --prefix \"[{name} {time}]\" \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NODE_ENV_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "keywords": [
+    "Germanos",
+    "Heroku",
+    "Form",
+    "BackEnd",
+    "FrontEnd",
+    "Express",
+    "React",
+    "Redux"
+  ],
+  "author": "Apostolis Anastasiou",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.0"
+  }
+}
