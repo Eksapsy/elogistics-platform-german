@@ -8,7 +8,7 @@
     "npm": "5.4.0"
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node index.js",
     "server": "npm run start --prefix server",
     "client": "npm run start --prefix client",
     "dev": "concurrently -t \"HH:mm:ss\" --names \"SERVER,CLIENT\" -c \"bgYellow.bold,bgBlue.bold\" --prefix \"[{name} {time}]\" \"npm run server\" \"npm run client\"",
