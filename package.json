@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Form to assign some products along with the selected Courier + sender/receiver, which then are delivered to them accordingly via emails.",
   "main": "server/index.js",
+  "engines": {
+    "node": "8.4.0",
+    "npm": "5.4.0"
+  },
   "scripts": {
     "start": "node server/index.js",
     "server": "npm run start --prefix server",
@@ -10,6 +14,10 @@
     "dev": "concurrently -t \"HH:mm:ss\" --names \"SERVER,CLIENT\" -c \"bgYellow.bold,bgBlue.bold\" --prefix \"[{name} {time}]\" \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NODE_ENV_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
   },
+  "cacheDirectories": [
+    "server/node_modules",
+    "client/node_modules"
+  ],
   "keywords": [
     "Germanos",
     "Heroku",
