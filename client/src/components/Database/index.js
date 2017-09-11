@@ -6,6 +6,7 @@ import {
 	Message,
 	Grid,
 	Button,
+	Checkbox,
 	Icon
 } from 'semantic-ui-react';
 
@@ -24,6 +25,13 @@ export default class Database extends Component {
 					<Divider horizontal>
 						<Header content='Import Excel' as='h2' color='black'/>
 					</Divider>
+					<Message>
+						<center>
+							<Header content='Replace old database' as='h3' color='red'/>
+							<Checkbox toggle fitted/>
+						</center>
+					</Message>
+					<Divider/>
 					<Message
 							attached
 							color='blue'
@@ -71,10 +79,45 @@ export default class Database extends Component {
 						<Grid.Column width={2} className='attached fluid segment'>
 							<Button content='Import' basic color='red' size='large'/>
 						</Grid.Column>
-						<Grid.Column width={16}>
-
-						</Grid.Column>
 					</Grid>
+					<Message
+							attached='bottom'
+							color='blue'
+							size='small'
+					>
+						<Grid columns={7}>
+							<Grid.Row>
+								<Grid.Column>
+									<center>Johnny</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>Johnny@testmail.com</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>Olivia</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>Olivia@testmail.com</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>ACS Courier</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>ACS Courier</center>
+									<Divider vertical/>
+								</Grid.Column>
+								<Grid.Column>
+									<center>GoldenBrand LCD Monitor 23'</center>
+									<Divider vertical/>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					</Message>
 				</Form>
 		);
 	}
