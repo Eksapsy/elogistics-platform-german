@@ -11,6 +11,32 @@ import {
 } from 'semantic-ui-react';
 
 export default class Database extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { replaceDatabase: false };
+
+		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+	}
+
+	handleCheckboxChange(e, state) {
+		const { checked } = state;
+		this.setState({ replaceDatabase: checked });
+	}
+
+	renderDatabaseChangeWarning() {
+
+		if (this.state.replaceDatabase === true) {
+			return(
+				<Header as='h4' color='red' content='I hope you are sure about that'/>
+			);
+			return(
+					<div>
+
+					</div>
+			)
+		}
+	}
+
 	render() {
 		return (
 				<Form>
@@ -27,8 +53,9 @@ export default class Database extends Component {
 					</Divider>
 					<Message>
 						<center>
-							<Header content='Replace old database' as='h3' color='red'/>
-							<Checkbox toggle fitted/>
+							<Header content='Replace old database' as='h3' color='blue'/>
+							<Checkbox toggle fitted onChange={this.handleCheckboxChange}/>
+							{this.renderDatabaseChangeWarning()}
 						</center>
 					</Message>
 					<Divider/>

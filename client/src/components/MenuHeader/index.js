@@ -30,7 +30,6 @@ class MenuHeader extends Component {
 				this.props.history.push('/database');
 				break;
 		}
-		console.log(this.props.history.location.pathname);
 	}
 
 
