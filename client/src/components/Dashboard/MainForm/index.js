@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {
+	Form,
 	Header,
 	Grid,
 	Dropdown,
+	Modal,
 	Button,
 	Icon,
-	Divider
+	Divider,
 } from 'semantic-ui-react';
 
 
@@ -32,7 +34,8 @@ class MainForm extends Component {
 
 	render() {
 		return (
-				<div>
+				<Form>
+					<Divider horizontal hidden/>
 					<Grid centered>
 						<Grid.Column width={12}>
 							<Grid.Row>
@@ -107,7 +110,30 @@ class MainForm extends Component {
 							</Grid.Row>
 						</Grid.Column>
 					</Grid>
-				</div>
+
+					<Divider hidden/>
+
+					<Modal
+							trigger={<Button inverted color='blue' size='large'>Submit</Button>}
+							basic size='small'
+					    dimmer='blurring'
+					>
+						<Header icon='email' content='Send Order Email' />
+						<Modal.Content>
+							<p>Do you really want to send the Order Emails?</p>
+							<p>After this confirmation an Email informing about
+								the order is gonna be sent to both the Sender & the Receiver.</p>
+						</Modal.Content>
+						<Modal.Actions>
+							<Button basic color='red' inverted>
+								<Icon name='remove' />No
+							</Button>
+							<Button basic color='green' inverted>
+								<Icon name='checkmark' />Yes
+							</Button>
+						</Modal.Actions>
+					</Modal>
+				</Form>
 		);
 	}
 }

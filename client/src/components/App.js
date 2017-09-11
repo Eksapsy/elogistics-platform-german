@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MenuHeader from './MenuHeader/index';
 import Dashboard from './Dashboard/index';
+import Database from './Database/index';
 import NotFound from './NotFound/index';
 import Footer from './Footer/index';
 import {
@@ -25,8 +26,8 @@ export default class App extends Component {
 								<Switch>
 									<Redirect exact from='/' to='/dashboard'/>
 									<Route path='/dashboard' component={Dashboard}/>
+									<Route path='/database' component={Database}/>
 									<Route path='*' component={NotFound}/>
-									{/*<Route path='/database' component={Database}/>*/}
 								</Switch>
 							</Segment>
 

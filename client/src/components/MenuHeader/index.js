@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import {
 	Segment,
+	Sticky,
 	Menu,
 	Header,
 	Icon
@@ -10,7 +11,12 @@ import {
 class MenuHeader extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { activeItem: 'Form' };
+
+		const { pathname } = this.props.history.location;
+		const activeItem = pathname === '/dashboard' ? 'Form'
+				: pathname === '/database' ? 'Database' : '';
+
+		this.state = { activeItem };
 		this.handleItemClick = this.handleItemClick.bind(this);
 	}
 
@@ -24,12 +30,15 @@ class MenuHeader extends Component {
 				this.props.history.push('/database');
 				break;
 		}
+		console.log(this.props.history.location.pathname);
 	}
 
+
 	render() {
-		const { activeItem } = this.state;
+		const { activeItem, contextRef } = this.state;
 		return(
 				<Segment>
+
 					<Header as='h2' textAlign='center' >
 						<Icon.Group size='large'>
 							<Icon circular name='shop'/>
@@ -42,10 +51,12 @@ class MenuHeader extends Component {
 								content='Electronic Business - Product Form'
 						/>
 					</Header>
-					<Menu stackable pointing secondary color='blue' size='massive' widths={3}>
-						<Menu.Item name='Form' active={activeItem === 'Form'} onClick={this.handleItemClick}/>
-						<Menu.Item name='Database' active={activeItem === 'Database'} onClick={this.handleItemClick}/>
-					</Menu>
+
+						<Menu stackable pointing secondary color='blue' size='massive' widths={3}>
+							<Menu.Item name='Form' active={activeItem === 'Form'} onClick={this.handleItemClick}/>
+							<Menu.Item name='Database' active={activeItem === 'Database'} onClick={this.handleItemClick}/>
+						</Menu>
+
 				</Segment>
 		);
 	}

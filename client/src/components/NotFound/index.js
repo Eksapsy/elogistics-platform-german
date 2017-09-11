@@ -12,6 +12,8 @@ export default class NotFound extends Component {
 						<Divider horizontal>
 							<h1>Page Not Found</h1>
 						</Divider>
+
+						<h4>Darth Vader would be proud of seeing you trying to find the Dark Secrets of this Website</h4>
 						<Divider hidden/>
 					</header>
 				</center>

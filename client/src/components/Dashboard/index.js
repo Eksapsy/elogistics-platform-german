@@ -25,12 +25,7 @@ export default class Dashboard extends Component {
 					</Divider>
 					<Divider hidden/>
 
-					<Form>
-						<MainForm/>
-						<Divider horizontal hidden/>
-
-						<Button inverted color='blue' size='large'>Submit</Button>
-					</Form>
+					<MainForm/>
 				</Container>
 		);
 	}
