@@ -8,9 +8,12 @@ require('./models/FormData');
 const app = express();
 mongoose.connect(keys.mongoURI);
 
+app.use(express.static('./uploads'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 require('./routes/dataRoutes')(app);
+require('./routes/storageRoutes')(app);
 
 if(process.env.NODE_ENV === "production") {
 	const path = require('path');

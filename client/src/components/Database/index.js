@@ -1,151 +1,84 @@
 import React, {Component} from 'react';
+import { Route } from 'react-router-dom';
+import ImportExcelComponent from './ImportExcelComponent/index';
+import InsertItemsForm from './InsertItemsForm/index';
 import {
-	Form,
+	Menu,
 	Divider,
-	Header,
-	Message,
-	Grid,
-	Button,
-	Checkbox,
-	Icon
+	Icon,
+	Header
 } from 'semantic-ui-react';
 
-export default class Database extends Component {
+class Database extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { replaceDatabase: false };
-
-		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-	}
-
-	handleCheckboxChange(e, state) {
-		const { checked } = state;
-		this.setState({ replaceDatabase: checked });
-	}
-
-	renderDatabaseChangeWarning() {
-
-		if (this.state.replaceDatabase === true) {
-			return(
-				<Header as='h4' color='red' content='I hope you are sure about that'/>
-			);
-			return(
-					<div>
-
-					</div>
-			)
-		}
 	}
 
 	render() {
 		return (
-				<Form>
-					<Divider hidden/>
-					<Divider horizontal>
-						<Header block textAlign='center' as='h1' color='black'>
-							<Icon link name='database'/>
-							<Header.Content>Modify Database</Header.Content>
-						</Header>
-					</Divider>
-					<Divider hidden/>
-					<Divider horizontal>
-						<Header content='Import Excel' as='h2' color='black'/>
-					</Divider>
-					<Message>
-						<center>
-							<Header content='Replace old database' as='h3' color='blue'/>
-							<Checkbox toggle fitted onChange={this.handleCheckboxChange}/>
-							{this.renderDatabaseChangeWarning()}
-						</center>
-					</Message>
-					<Divider/>
-					<Message
-							attached
-							color='blue'
-							size='large'
-					>
-						<Grid columns={7}>
-							<Grid.Column>
-								<Header>1st Column:</Header>
-								Sender Names
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>2nd Column:</Header>
-								Sender Emails
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>3rd Column:</Header>
-								Receiver Names
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>4th Column:</Header>
-								Receiver Emails
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>5th Column:</Header>
-								Receiver Couriers
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>6th Column:</Header>
-								Courier Names
-								<Divider vertical/>
-							</Grid.Column>
-							<Grid.Column>
-								<Header>7th Column:</Header>
-								Product Names
-								<Divider vertical/>
-							</Grid.Column>
-						</Grid>
-					</Message>
-					<Grid columns={3} centered>
-						<Grid.Column width={2} className='attached fluid segment'>
-							<Button content='Import' basic color='red' size='large'/>
-						</Grid.Column>
-					</Grid>
-					<Message
-							attached='bottom'
-							color='blue'
-							size='small'
-					>
-						<Grid columns={7}>
-							<Grid.Row>
-								<Grid.Column>
-									<center>Johnny</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>Johnny@testmail.com</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>Olivia</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>Olivia@testmail.com</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>ACS Courier</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>ACS Courier</center>
-									<Divider vertical/>
-								</Grid.Column>
-								<Grid.Column>
-									<center>GoldenBrand LCD Monitor 23'</center>
-									<Divider vertical/>
-								</Grid.Column>
-							</Grid.Row>
-						</Grid>
-					</Message>
-				</Form>
+					<div>
+						<DatabaseHeader/>
+						<DatabaseMenu {...this.props}/>
+							<Route path='/database/insert-items' component={InsertItemsForm}/>
+							<Route path='/database/import-by-excel' component={ImportExcelComponent}/>
+					</div>
 		);
 	}
 }
+
+class DatabaseHeader extends Component {
+	render() {
+		return(
+			<div>
+				<Divider hidden/>
+				<Divider horizontal>
+					<Header block textAlign='center' as='h1' color='black'>
+						<Icon link name='database'/>
+						<Header.Content>Modify Database</Header.Content>
+					</Header>
+				</Divider>
+
+				<Divider hidden/>
+			</div>
+		);
+	}
+}
+
+class DatabaseMenu extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {activeItem: 'Insert Single Items'};
+		this.handleMenuClick = this.handleMenuClick.bind(this);
+	}
+
+	handleMenuClick(e, {name}) {
+		this.setState({activeItem: name});
+		switch (name) {
+			case 'Insert Single Items':
+				this.props.history.push('/database/insert-items');
+				break;
+			case 'Import Excel':
+				this.props.history.push('/database/import-by-excel');
+				break;
+		}
+	}
+
+	render() {
+		const {activeItem} = this.state;
+
+		return(
+			<div>
+				<Menu stackable pointing color='blue' size='large' widths={2}>
+					<Menu.Item name='Insert Single Items' active={activeItem === 'Insert Single Items'}
+					           onClick={this.handleMenuClick}/>
+					<Menu.Item name='Import Excel' active={activeItem === 'Import Excel'} onClick={this.handleMenuClick}/>
+				</Menu>
+
+				<Divider horizontal hidden/>
+				<Divider horizontal hidden/>
+			</div>
+		);
+	}
+}
+
+export default Database;

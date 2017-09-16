@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {
 	Container,
-	Form,
 	Header,
-	Message,
 	Divider,
-	Button,
 	Icon
 } from 'semantic-ui-react';
 import MainForm from './MainForm/index';

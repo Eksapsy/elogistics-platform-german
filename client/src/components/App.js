@@ -8,8 +8,6 @@ import Footer from './Footer/index';
 import {
 	Container,
 	Segment,
-	Divider,
-	Icon
 } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './styles.css';
@@ -25,8 +23,9 @@ export default class App extends Component {
 							<Segment>
 								<Switch>
 									<Redirect exact from='/' to='/dashboard'/>
+									<Redirect exact from='/database' to='/database/insert-items'/>
 									<Route path='/dashboard' component={Dashboard}/>
-									<Route path='/database' component={Database}/>
+									<Route path='/database/' component={Database}/>
 									<Route path='*' component={NotFound}/>
 								</Switch>
 							</Segment>

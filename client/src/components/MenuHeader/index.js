@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
 	Segment,
-	Sticky,
 	Menu,
 	Header,
 	Icon
@@ -13,8 +12,10 @@ class MenuHeader extends Component {
 		super(props);
 
 		const { pathname } = this.props.history.location;
-		const activeItem = pathname === '/dashboard' ? 'Form'
-				: pathname === '/database' ? 'Database' : '';
+		const activeItem =
+				pathname === '/' || pathname === '/dashboard' ? 'Form'
+						: pathname === '/database/insert-items' || pathname === '/database/import-by-excel' ? 'Database'
+								: '';
 
 		this.state = { activeItem };
 		this.handleItemClick = this.handleItemClick.bind(this);
@@ -55,7 +56,6 @@ class MenuHeader extends Component {
 							<Menu.Item name='Form' active={activeItem === 'Form'} onClick={this.handleItemClick}/>
 							<Menu.Item name='Database' active={activeItem === 'Database'} onClick={this.handleItemClick}/>
 						</Menu>
-
 				</Segment>
 		);
 	}
