@@ -1,3 +1,6 @@
-/**
- * Created by root on 10/9/2017.
- */
+import { combineReducers } from 'redux';
+import emailReducer from './emailReducer';
+
+export default combineReducers({
+  emailForm: emailReducer
+});
