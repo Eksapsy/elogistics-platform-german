@@ -5,10 +5,6 @@ import InsertItemsForm from './InsertItemsForm/index';
 import { Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
 
 class Database extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div>

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import emailReducer from './emailReducer';
+import dataReducer from './dataReducer';
+import emailyFormReducer from './formDataReducer';
 
 export default combineReducers({
-  emailForm: emailReducer
+  dataBinded: dataReducer,
+  emailForm: emailyFormReducer
 });

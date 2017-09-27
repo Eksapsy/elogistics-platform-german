@@ -1,5 +1,4 @@
 import { FETCH_FORM_DATA, POST_SENDER, POST_RECEIVER, POST_COURIER, POST_PRODUCT } from '../actions/types';
-import axios from 'axios';
 
 const initialState = {
   senders: [],
@@ -16,7 +15,7 @@ export default (state = initialState, action) => {
         receivers: action.payload.receivers,
         couriers: action.payload.couriers,
         products: action.payload.products
-      }
+      };
     case POST_SENDER:
       return {
         ...state,

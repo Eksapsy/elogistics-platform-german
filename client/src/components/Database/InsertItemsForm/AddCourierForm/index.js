@@ -14,15 +14,16 @@ class AddCourierForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e, {name, value}) {
+  async handleChange(e, {name, value}) {
     this.setState({
       [name]: value
     });
+  // await this.props.formData.changeCourier(value);
   }
 
   async handleSubmit() {
     const {courierName} = this.state;
-    await this.props.addCourier(courierName);
+    await this.props.dataActions.addCourier(courierName);
     await window.location.reload();
   }
 
@@ -44,5 +45,12 @@ class AddCourierForm extends Component {
       );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dataActions: {
+      ...actions.dataActions
+    }
+  };
+}
 
-export default connect(null, actions)(AddCourierForm);
+export default connect(null, mapDispatchToProps)(AddCourierForm);

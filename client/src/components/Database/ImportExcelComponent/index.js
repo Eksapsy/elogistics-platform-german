@@ -53,8 +53,8 @@ export default class ImportExcelComponent extends Component {
               </Header>
             </Message.Header>
             <p><strong>
-            								Importing excel should be done by an expert!
-            							</strong></p>
+                  								Importing excel should be done by an expert!
+                  							</strong></p>
           </center>
         </Message>
         <Message>
@@ -93,7 +93,7 @@ export default class ImportExcelComponent extends Component {
           <Dropzone name='file' multiple={ false } accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' onDrop={ this.onDrop }>
             Drop Excel Files here
           </Dropzone>
-          <Header as='h4' color='green' ref='fileNameHeader' content='' />
+          <Header as='h4' color='green' content='' />
         </center>
         <Message attached='bottom' color='blue' size='small'>
           <Grid columns={ 4 }>

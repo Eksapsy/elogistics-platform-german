@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../../actions';
-import { Form, Segment, Divider, Header, Input, Button } from 'semantic-ui-react';
+import { Divider, Header } from 'semantic-ui-react';
 import AddSenderForm from './AddSenderForm';
 import AddReceiverForm from './AddReceiverForm';
 import AddCourierForm from './AddCourierForm';
