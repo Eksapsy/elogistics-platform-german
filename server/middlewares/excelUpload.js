@@ -3,17 +3,16 @@ const XLSX = require('xlsx');
 const path = require('path');
 const _ = require('lodash');
 
-const Sender   = mongoose.model('senders');
+const Sender = mongoose.model('senders');
 const Receiver = mongoose.model('receivers');
-const Courier  = mongoose.model('couriers');
-const Product  = mongoose.model('products');
+const Courier = mongoose.model('couriers');
+const Product = mongoose.model('products');
 
 module.exports = async (req, res, next) => {
 	const workbook = XLSX.readFile(
-			path.resolve(__dirname, '../uploads', 'diakritiko.xlsx')
+		path.resolve(__dirname, '../uploads', 'diakritiko.xlsx')
 	);
 
-	await console.log('ReplaceOldDatabase: ', req.body.replaceOldDatabase);
 	if (req.body.replaceOldDatabase) {
 		console.log('Removing old database.');
 		await Sender.remove((err, sender) => {
@@ -34,7 +33,7 @@ module.exports = async (req, res, next) => {
 	await console.log('Workbook Parsed!');
 
 	/* Saving Senders */
-	const sender_names  = await getSenderNames(workbook);
+	const sender_names = await getSenderNames(workbook);
 	const sender_emails = await getSenderEmails(workbook);
 
 	for (i = 0; i < sender_names.length; i++) {
@@ -45,8 +44,8 @@ module.exports = async (req, res, next) => {
 	}
 
 	/* Saving Receivers */
-	const receiver_names    = await getReceiverNames(workbook);
-	const receiver_emails   = await getReceiverEmails(workbook);
+	const receiver_names = await getReceiverNames(workbook);
+	const receiver_emails = await getReceiverEmails(workbook);
 	const receiver_couriers = await getReceiverCourier(workbook);
 
 	for (i = 0; i < receiver_names.length; i++) {
@@ -58,7 +57,7 @@ module.exports = async (req, res, next) => {
 	}
 
 	/* Saving Couriers */
-	const courier_names  = await getCourierNames(workbook);
+	const courier_names = await getCourierNames(workbook);
 
 	for (i = 0; i < courier_names.length; i++) {
 		const courier = await new Courier({
@@ -67,8 +66,8 @@ module.exports = async (req, res, next) => {
 	}
 
 	/* Saving Products */
-	const product_id_array  = await getProductIdArray(workbook);
-	const product_names     = await getProductName(workbook);
+	const product_id_array = await getProductIdArray(workbook);
+	const product_names = await getProductName(workbook);
 
 	for (i = 0; i < product_names.length; i++) {
 		const product = await new Product({
@@ -88,7 +87,9 @@ function getSenderNames(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Senders'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'NAME');
 
 }
@@ -97,7 +98,9 @@ function getSenderEmails(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Senders'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'EMAIL');
 }
 /*------------*/
@@ -108,7 +111,9 @@ function getReceiverNames(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Receivers'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'NAME');
 }
 
@@ -116,7 +121,9 @@ function getReceiverEmails(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Receivers'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'EMAIL');
 }
 
@@ -124,7 +131,9 @@ function getReceiverCourier(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Receivers'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'Courier');
 }
 /*------------*/
@@ -135,7 +144,9 @@ function getCourierNames(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Couriers'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'NAME');
 }
 /*------------*/
@@ -146,7 +157,9 @@ function getProductIdArray(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Products'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'ID');
 }
 
@@ -154,7 +167,9 @@ function getProductName(workbook) {
 	if (!workbook) return;
 
 	const ws = workbook.Sheets['Products'];
-	const ws_json = XLSX.utils.sheet_to_json(ws, { header: 2 }); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'NAME');
 }
 /*------------*/

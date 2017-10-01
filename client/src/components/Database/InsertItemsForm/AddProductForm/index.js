@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions'
 import { Segment, Form, Header, Divider, Input, Button } from 'semantic-ui-react';
@@ -23,7 +24,7 @@ class AddProductForm extends Component {
 
   async handleSubmit() {
     const {productCode, productName} = this.state;
-    await this.props.addProduct(productCode, productName);
+    await this.props.dataActions.addProduct(productCode, productName);
     await window.location.reload();
   }
 
@@ -47,4 +48,10 @@ class AddProductForm extends Component {
   }
 }
 
-export default connect(null, actions)(AddProductForm);
+const mapActionsToProps = (dispatch) => {
+  return ({
+    dataActions: bindActionCreators(actions.dataActions, dispatch)
+  });
+};
+
+export default connect(null, mapActionsToProps)(AddProductForm);

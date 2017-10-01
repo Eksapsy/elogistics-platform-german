@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { Form, Header, Grid, Dropdown, Modal, Button, Icon, Divider } from 'semantic-ui-react';
@@ -145,11 +146,12 @@ class MainForm extends Component {
   }
 }
 
-const mapStateToProps = ({dataBinded, emailForm}) => {
+const mapStateToProps = ({dataBinded, emailForm, components}) => {
   return {
     dataBinded,
-    emailForm
+    emailForm,
+    components
   }
 };
 
-export default connect(mapStateToProps)(MainForm);
+export default withRouter(connect(mapStateToProps)(MainForm));

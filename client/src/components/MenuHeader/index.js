@@ -28,6 +28,9 @@ class MenuHeader extends Component {
 			case 'database':
 				this.props.history.push('/database');
 				break;
+			default:
+				this.props.history.push('/not-found');
+				break;
 		}
 	}
 

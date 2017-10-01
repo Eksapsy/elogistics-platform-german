@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions'
 import { Segment, Form, Header, Divider, Input, Button } from 'semantic-ui-react';
@@ -45,12 +46,12 @@ class AddCourierForm extends Component {
       );
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dataActions: {
-      ...actions.dataActions
-    }
-  };
-}
 
-export default connect(null, mapDispatchToProps)(AddCourierForm);
+const mapActionsToProps = (dispatch) => {
+  return ({
+    dataActions: bindActionCreators(actions.dataActions, dispatch)
+  });
+};
+
+
+export default connect(null, mapActionsToProps)(AddCourierForm);

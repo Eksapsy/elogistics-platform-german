@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import ImportExcelComponent from './ImportExcelComponent/index';
 import InsertItemsForm from './InsertItemsForm/index';
 import { Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
+import axios from 'axios';
 
 class Database extends Component {
 	render() {
@@ -18,10 +22,17 @@ class Database extends Component {
 }
 
 class DatabaseHeader extends Component {
+
+	async onDownloadExcelIconClick() {
+		const excelPath = axios.get('/api/export-excel');
+
+		window.open(excelPath);
+	}
+
 	render() {
 		const header = (
 		<Header block textAlign='center' as='h1' color='black'>
-    <Icon link name='database' />
+    <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } />
     <Header.Content>Modify Database</Header.Content>
   </Header>
 		);
@@ -57,6 +68,8 @@ class DatabaseMenu extends Component {
 			case 'Import Excel':
 				this.props.history.push('/database/import-by-excel');
 				break;
+			default:
+				this.props.history.push('/not-found');
 		}
 	}
 
@@ -76,4 +89,10 @@ class DatabaseMenu extends Component {
 	}
 }
 
-export default Database;
+const mapActionsToProps = (dispatch) => {
+	return {
+		dataActions: bindActionCreators(actions.dataActions, dispatch)
+	};
+};
+
+export default connect(null, mapActionsToProps)(Database);

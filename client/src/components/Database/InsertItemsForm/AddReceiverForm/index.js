@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions'
 import { Segment, Form, Header, Divider, Input, Button } from 'semantic-ui-react';
@@ -24,7 +25,7 @@ class AddReceiverForm extends Component {
 
   async handleSubmit() {
     const {receiverName, receiverEmail, receiverCourier} = this.state;
-    await this.props.addReceiver(receiverName, receiverEmail, receiverCourier);
+    await this.props.dataActions.addReceiver(receiverName, receiverEmail, receiverCourier);
     await window.location.reload();
   }
 
@@ -49,4 +50,10 @@ class AddReceiverForm extends Component {
   }
 }
 
-export default connect(null, actions)(AddReceiverForm);
+const mapActionsToProps = (dispatch) => {
+  return ({
+    dataActions: bindActionCreators(actions.dataActions, dispatch)
+  });
+};
+
+export default connect(null, mapActionsToProps)(AddReceiverForm);

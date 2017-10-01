@@ -33,12 +33,18 @@ class App extends Component {
                 <Route path='*' component={ NotFound } />
               </Switch>
             </Segment>
-            <Footer/>
           </div>
         </BrowserRouter>
+        <Footer/>
       </Container>
       );
   }
 }
 
-export default connect(null, dataActions)(App);
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+}
+
+export default connect(mapStateToProps, dataActions)(App);
