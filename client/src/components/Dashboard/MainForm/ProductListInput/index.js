@@ -33,7 +33,6 @@ class ProductListInput extends Component {
   }
 
   filteredProductsForAddComponent(products) {
-    console.log('--------------------------');
     return products.filter((product) => {
       return !_.includes(this.props.emailForm.products, {
         name: product.text
@@ -58,18 +57,22 @@ class ProductListInput extends Component {
       const productName = products[i].name;
       const productAmount = products[i].amount;
       ui_items.push(
-        <Grid.Column width={ 16 }>
-          <Segment color='blue'>
+        <li key={ i }>
+          <Grid>
             <Grid.Row>
-              <Grid.Column width={ 12 }>
-                <Dropdown key={ i } placeholder='Product' value={ productName } fluid search selection options={ productNames } size='big' />
+              <Grid.Column width={ 10 }>
+                <Segment color='blue'>
+                  <Dropdown key={ i } placeholder='Product' value={ productName } fluid search selection options={ productNames } size='big' />
+                </Segment>
               </Grid.Column>
-              <Grid.Column width={ 4 }>
-                <InputNumber value={ productAmount } key={ i } onChange={ this.updateAmount.bind(this) } />
+              <Grid.Column width={ 6 }>
+                <Segment color='blue'>
+                  <InputNumber value={ productAmount } key={ i } onChange={ this.updateAmount.bind(this) } />
+                </Segment>
               </Grid.Column>
             </Grid.Row>
-          </Segment>
-        </Grid.Column>
+          </Grid>
+        </li>
       );
     }
 
@@ -90,8 +93,14 @@ class ProductListInput extends Component {
               </Header>
             </Divider>
           </Grid.Row>
-          { this.renderList() }
-          <AddProductComponent onKeyPress={ this.handleKeyPressOnAddComponent.bind(this) } onFilled={ this.addProductItem.bind(this) } filterProducts={ this.filteredProductsForAddComponent.bind(this) } />
+          <Grid.Row width={ 16 }>
+            <ul style={ { listStyle: 'none' } }>
+              { this.renderList() }
+            </ul>
+          </Grid.Row>
+          <Grid.Row width={ 16 }>
+            <AddProductComponent onKeyPress={ this.handleKeyPressOnAddComponent.bind(this) } onFilled={ this.addProductItem.bind(this) } filterProducts={ this.filteredProductsForAddComponent.bind(this) } />
+          </Grid.Row>
         </Grid>
       </div>
       );

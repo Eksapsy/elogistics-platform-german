@@ -69,12 +69,20 @@ class AddProductComponent extends Component {
     const productNames = this.props.filterProducts(products);
 
     return (
-      <Grid.Column width={ 16 }>
-        <Segment color='red'>
-          <Dropdown placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
-          <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } />
-        </Segment>
-      </Grid.Column>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={ 10 }>
+            <Segment color='red' style={ { width: '520px' } }>
+              <Dropdown placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={ 6 }>
+            <Segment color='red' style={ { width: '280px' } }>
+              <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } />
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
       );
   }
 }

@@ -65,7 +65,7 @@ class InputNumber extends Component {
     const {leftArrowAnimationVisible, rightArrowAnimationVisible} = this.state;
 
     const amountArrowsLabel = (
-    <Menu compact>
+    <Menu compact size='tiny'>
       <Menu.Item as='a' onClick={ this.decreaseNumber.bind(this) }>
         <Transition animation='bounce' duration={ 500 } visible={ leftArrowAnimationVisible }>
           <Icon name='chevron left' size='small' />
@@ -80,10 +80,10 @@ class InputNumber extends Component {
     );
 
     return (
-      <Input type='number' value={ this.state.inputValue } label={ amountArrowsLabel } labelPosition='right' placeholder='Amount' size='small' onChange={ this.onChange.bind(this) }
-        onKeyPress={ this.props.onKeyPress } ref={ (input) => {
-                                                     this.numberInput = input
-                                                   } } />
+      <Input type='number' value={ this.state.inputValue } label={ amountArrowsLabel } labelPosition='right' placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
+        style={ { width: '128px' } } ref={ (input) => {
+                                             this.numberInput = input
+                                           } } />
       );
   }
 }
