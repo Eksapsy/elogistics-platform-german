@@ -7,8 +7,8 @@ const initialState = {
 	products: []
 };
 
-export default (state = initialState, action) => {
-	switch (action.types) {
+export default (state = initialState, action = {}) => {
+	switch (action.type) {
 		case CHANGE_SENDER:
 			return {
 				...state,
@@ -27,10 +27,7 @@ export default (state = initialState, action) => {
 		case CHANGE_PRODUCTS:
 			return {
 				...state,
-				products: {
-					...state.products,
-					...action.products
-				}
+				products: action.products
 			};
 
 		default:

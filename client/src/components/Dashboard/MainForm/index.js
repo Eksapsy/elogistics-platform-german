@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { Form, Header, Grid, Dropdown, Modal, Button, Icon, Divider } from 'semantic-ui-react';
+import SenderSegment from './SenderSegment';
+import ReceiverSegment from './ReceiverSegment';
+import CourierSegment from './CourierSegment';
 import ProductListInput from './ProductListInput';
 
 class MainForm extends Component {
@@ -52,27 +55,9 @@ class MainForm extends Component {
   render() {
     const {courierValue, modalOpen} = this.state;
 
-    const senderNames = this.props.dataBinded.senders.map((sender) => {
-      return {
-        key: uuid(),
-        value: sender.name,
-        text: sender.name
-      };
-    });
-    const receiverNames = this.props.dataBinded.receivers.map((receiver) => {
-      return {
-        key: uuid(),
-        value: receiver.name,
-        text: receiver.name
-      };
-    });
-    const courierNames = this.props.dataBinded.couriers.map((courier) => {
-      return {
-        key: uuid(),
-        value: courier.name,
-        text: courier.name
-      };
-    });
+
+
+
 
     return (
       <Form>
@@ -80,44 +65,15 @@ class MainForm extends Component {
         <Grid centered>
           <Grid.Column width={ 12 }>
             <Grid.Row>
-              <Divider hidden/>
-              <Divider/>
-              <Divider horizontal>
-                <Header block textAlign='center' as='h3' color='blue'>
-                  <Icon name='mail forward' />
-                  <Header.Content>Sender</Header.Content>
-                </Header>
-              </Divider>
-              <Grid.Column width={ 16 }>
-                <Dropdown placeholder='Sender' fluid search selection options={ senderNames } />
-              </Grid.Column>
+              <SenderSegment/>
             </Grid.Row>
             <Divider hidden/>
             <Divider/>
-            <Divider horizontal>
-              <Header block textAlign='center' as='h3' color='blue'>
-                <Icon name='home' />
-                <Header.Content>Receiver</Header.Content>
-              </Header>
-            </Divider>
             <Grid.Row>
-              <Grid.Column width={ 16 }>
-                <Dropdown placeholder='Receiver' fluid search selection options={ receiverNames } onChange={ this.receiverAdded } />
-              </Grid.Column>
+              <ReceiverSegment/>
             </Grid.Row>
-            <Divider hidden/>
-            <Divider/>
-            <Divider horizontal>
-              <Header block textAlign='center' as='h3' color='blue'>
-                <Icon name='send' />
-                <Header.Content>Courier</Header.Content>
-              </Header>
-            </Divider>
             <Grid.Row>
-              <Grid.Column width={ 16 }>
-                <Dropdown value={ courierValue } ref='courierDropdown' placeholder='Courier' fluid search selection options={ courierNames } onChange={ this.courierChanged }
-                />
-              </Grid.Column>
+              <CourierSegment/>
             </Grid.Row>
             <Grid.Row>
               <ProductListInput/>
@@ -125,7 +81,9 @@ class MainForm extends Component {
           </Grid.Column>
         </Grid>
         <Divider hidden/>
-        <Button inverted color='blue' size='large' onClick={ this.showModal }>Submit</Button>
+        <center>
+          <Button inverted color='blue' size='large' onClick={ this.showModal }>Submit</Button>
+        </center>
         <Modal basic size='small' dimmer='blurring' open={ modalOpen } onClose={ this.closeModal }>
           <Header icon='mail' content='Send Order Email' />
           <Modal.Content>
@@ -146,11 +104,10 @@ class MainForm extends Component {
   }
 }
 
-const mapStateToProps = ({dataBinded, emailForm, components}) => {
+const mapStateToProps = ({dataBinded, emailForm}) => {
   return {
     dataBinded,
     emailForm,
-    components
   }
 };
 

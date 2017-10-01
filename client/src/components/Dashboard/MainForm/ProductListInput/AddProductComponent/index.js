@@ -17,6 +17,10 @@ class AddProductComponent extends Component {
     };
   }
 
+  getProductFullname(product) {
+    return product.id + '-' + product.name;
+  }
+
   onProductChange(e, data) {
     this.setState({
       productValue: data.value
@@ -46,32 +50,29 @@ class AddProductComponent extends Component {
   onKeyPress(e, data) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (this.productValue && this.amountValue) {
-        this.props.onKeyPress(e, data);
+      if (this.state.productValue) {
+        this.props.onKeyPress(e, {
+          ...this.state
+        });
       }
     }
   }
 
   render() {
-    const productNames = this.props.dataBinded.products.map((product) => {
+    const products = this.props.dataBinded.products.map((product) => {
       return {
         key: uuid(),
-        value: product.id + '-' + product.name,
-        text: product.id + '-' + product.name,
+        value: this.getProductFullname(product),
+        text: this.getProductFullname(product)
       };
     });
+    const productNames = this.props.filterProducts(products);
 
     return (
       <Grid.Column width={ 16 }>
         <Segment color='red'>
-          <Grid.Row>
-            <Grid.Column width={ 12 } floated='left'>
-              <Dropdown placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
-            </Grid.Column>
-            <Grid.Column width={ 4 }>
-              <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } />
-            </Grid.Column>
-          </Grid.Row>
+          <Dropdown placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
+          <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } />
         </Segment>
       </Grid.Column>
       );

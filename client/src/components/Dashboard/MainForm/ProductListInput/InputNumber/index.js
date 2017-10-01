@@ -6,11 +6,11 @@ class InputNumber extends Component {
   constructor(props) {
     super(props);
 
-    const value = this.props.value > this.props.minimumValue || this.props.minimumValue || 0;
+    const value = this.props.value > this.props.minimumValue ? this.props.value : this.props.minimumValue;
+    this.minimumValue = typeof this.props.minimumValue === 'number' ? this.props.minimumValue : Number.MIN_SAFE_INTEGER;
+    this.maximumValue = typeof this.props.maximumValue === 'number' ? this.props.maximumValue : Number.MAX_SAFE_INTEGER;
     this.state = {
-      inputValue: value || 0,
-      minimumValue: this.props.minimumValue || Number.MIN_SAFE_INTEGER,
-      maximumValue: this.props.maximumValue || Number.MAX_SAFE_INTEGER,
+      inputValue: value,
       leftArrowAnimationVisible: true,
       rightArrowAnimationVisible: true
     };
@@ -31,7 +31,8 @@ class InputNumber extends Component {
   }
 
   decreaseNumber(e) {
-    if (this.state.inputValue > this.state.minimumValue) {
+    const newValue = this.numberInput.props.value - 1;
+    if (newValue >= this.minimumValue) {
       this.onChange(e, {
         ...this.numberInput.props,
         value: this.numberInput.props.value - 1
@@ -42,7 +43,8 @@ class InputNumber extends Component {
   }
 
   increaseNumber(e) {
-    if (this.state.inputValue < this.state.maximumValue) {
+    const newValue = this.numberInput.props.value + 1;
+    if (newValue <= this.maximumValue) {
       this.onChange(e, {
         ...this.numberInput.props,
         value: this.numberInput.props.value + 1

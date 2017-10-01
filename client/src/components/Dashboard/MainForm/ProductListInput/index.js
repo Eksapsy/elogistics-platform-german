@@ -7,49 +7,65 @@ import * as actions from '../../../../actions';
 import uuid from 'uuid';
 import AddProductComponent from './AddProductComponent';
 import InputNumber from './InputNumber';
+import _ from 'lodash';
 import './styles.css'
 
 class ProductListInput extends Component {
 
   addProductItem(data) {
-    console.log('====================================');
-    console.log('added item!');
-    console.log('====================================');
+    const {products: lastProducts} = this.props.emailForm;
+    const newProducts = lastProducts.concat({
+      name: data.productValue,
+      amount: data.amountValue
+    });
+    this.props.formDataActions.changeProducts(newProducts);
+  }
+
+  getProductFullname(product) {
+    return product.id + '-' + product.name;
   }
 
   handleKeyPressOnAddComponent(e, data) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      console.log('====================================');
-      console.log('event: ', e);
-      console.log('data: ', data);
-      console.log('====================================');
       this.addProductItem(data);
     }
   }
+
+  filteredProductsForAddComponent(products) {
+    console.log('--------------------------');
+    return products.filter((product) => {
+      return !_.includes(this.props.emailForm.products, {
+        name: product.text
+      });
+    });
+  }
+
+  updateAmount(e, data) {}
 
   renderList() {
     const productNames = this.props.dataBinded.products.map((product) => {
       return {
         key: uuid(),
-        value: product.id + '-' + product.name,
-        text: product.id + '-' + product.name,
+        value: this.getProductFullname(product),
+        text: this.getProductFullname(product)
       };
     });
 
     let ui_items = [];
-    const {productList} = this.props.emailForm;
-    for (let i = 0; i < this.props.emailForm.productList; i++) {
-      const productName = productList[i];
-      ui_items.add(
+    const {products} = this.props.emailForm;
+    for (let i = 0; i < this.props.emailForm.products.length; i++) {
+      const productName = products[i].name;
+      const productAmount = products[i].amount;
+      ui_items.push(
         <Grid.Column width={ 16 }>
           <Segment color='blue'>
             <Grid.Row>
               <Grid.Column width={ 12 }>
-                <Dropdown placeholder='Product' value={ productName } fluid search selection options={ productNames } size='big' />
+                <Dropdown key={ i } placeholder='Product' value={ productName } fluid search selection options={ productNames } size='big' />
               </Grid.Column>
               <Grid.Column width={ 4 }>
-                <InputNumber updateValue={ this.updateAmount.bind(this) } />
+                <InputNumber value={ productAmount } key={ i } onChange={ this.updateAmount.bind(this) } />
               </Grid.Column>
             </Grid.Row>
           </Segment>
@@ -75,7 +91,7 @@ class ProductListInput extends Component {
             </Divider>
           </Grid.Row>
           { this.renderList() }
-          <AddProductComponent onKeyPress={ this.handleKeyPressOnAddComponent.bind(this) } onFilled={ this.addProductItem.bind(this) } />
+          <AddProductComponent onKeyPress={ this.handleKeyPressOnAddComponent.bind(this) } onFilled={ this.addProductItem.bind(this) } filterProducts={ this.filteredProductsForAddComponent.bind(this) } />
         </Grid>
       </div>
       );
