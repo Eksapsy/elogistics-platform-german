@@ -54,6 +54,10 @@ class AddProductComponent extends Component {
         this.props.onKeyPress(e, {
           ...this.state
         });
+        this.setState({
+          productValue: '',
+          amountValue: 1
+        });
       }
     }
   }
@@ -73,12 +77,12 @@ class AddProductComponent extends Component {
         <Grid.Row>
           <Grid.Column width={ 10 }>
             <Segment color='red' style={ { width: '520px' } }>
-              <Dropdown placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
+              <Dropdown value={ this.state.productValue } placeholder='Product' fluid search selection options={ productNames } size='big' onChange={ this.onProductChange.bind(this) } />
             </Segment>
           </Grid.Column>
           <Grid.Column width={ 6 }>
             <Segment color='red' style={ { width: '280px' } }>
-              <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ this.state.amountValue } />
+              <InputNumber value={ this.state.amountValue } onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ this.state.amountValue } />
             </Segment>
           </Grid.Column>
         </Grid.Row>

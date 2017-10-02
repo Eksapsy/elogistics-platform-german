@@ -83,6 +83,22 @@ class ProductListInput extends Component {
     return ui_items;
   }
 
+  renderListSegment() {
+    const list_ui = this.renderList();
+    if (list_ui.length > 0) {
+      return (
+        <ul style={ { listStyle: 'none' } }>
+          { this.renderList() }
+        </ul>
+        );
+    } else {
+      return (
+        <div>
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
@@ -98,9 +114,7 @@ class ProductListInput extends Component {
             </Divider>
           </Grid.Row>
           <Grid.Row width={ 16 }>
-            <ul style={ { listStyle: 'none' } }>
-              { this.renderList() }
-            </ul>
+            { this.renderListSegment() }
           </Grid.Row>
           <Grid.Row width={ 16 }>
             <AddProductComponent onKeyPress={ this.handleKeyPressOnAddComponent.bind(this) } onFilled={ this.addProductItem.bind(this) } filterProducts={ this.filteredProductsForAddComponent.bind(this) } />

@@ -16,8 +16,6 @@ class InputNumber extends Component {
     };
   }
 
-  componentWillReceiveProps() {}
-
   toggleLeftArrowAnimationVisibility() {
     this.setState({
       leftArrowAnimationVisible: !this.state.leftArrowAnimationVisible
@@ -87,7 +85,7 @@ class InputNumber extends Component {
     );
 
     return (
-      <Input type='number' value={ this.state.inputValue } label={ amountArrowsLabel } labelPosition='right' placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
+      <Input type='number' value={ this.props.value } label={ amountArrowsLabel } labelPosition='right' placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
         style={ { width: '128px' } } ref={ (input) => {
                                              this.numberInput = input
                                            } } />
