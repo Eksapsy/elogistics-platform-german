@@ -10,7 +10,7 @@ class InputNumber extends Component {
     this.minimumValue = typeof this.props.minimumValue === 'number' ? this.props.minimumValue : Number.MIN_SAFE_INTEGER;
     this.maximumValue = typeof this.props.maximumValue === 'number' ? this.props.maximumValue : Number.MAX_SAFE_INTEGER;
     this.state = {
-      inputValue: value,
+      inputValue: Number.parseInt(value),
       leftArrowAnimationVisible: true,
       rightArrowAnimationVisible: true
     };
@@ -55,10 +55,17 @@ class InputNumber extends Component {
   }
 
   onChange(e, data) {
-    this.setState({
-      inputValue: Number(data.value)
-    });
-    this.props.onChange(e, data);
+    if (data.value >= this.minimumValue && data.value <= this.maximumValue) {
+      this.setState({
+        inputValue: Number.parseInt(data.value)
+      });
+      this.props.onChange(e, data);
+    } else if (data.value < this.minimumValue) {
+      this.toggleLeftArrowAnimationVisibility();
+    } else if (data.value > this.maximumValue) {
+      this.toggleRightArrowAnimationVisibility();
+    }
+
   }
 
   render() {

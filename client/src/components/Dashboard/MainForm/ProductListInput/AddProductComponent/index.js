@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Segment, Dropdown } from 'semantic-ui-react';
+import { Grid, Divider, Segment, Dropdown } from 'semantic-ui-react';
 import uuid from 'uuid';
 import * as actions from '../../../../../actions';
 import InputNumber from '../InputNumber';
@@ -78,7 +78,7 @@ class AddProductComponent extends Component {
           </Grid.Column>
           <Grid.Column width={ 6 }>
             <Segment color='red' style={ { width: '280px' } }>
-              <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } />
+              <InputNumber onChange={ this.onAmountChange.bind(this) } onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ this.state.amountValue } />
             </Segment>
           </Grid.Column>
         </Grid.Row>

@@ -16,7 +16,7 @@ class ProductListInput extends Component {
     const {products: lastProducts} = this.props.emailForm;
     const newProducts = lastProducts.concat({
       name: data.productValue,
-      amount: data.amountValue
+      amount: Number.parseInt(data.amountValue)
     });
     this.props.formDataActions.changeProducts(newProducts);
   }
@@ -60,7 +60,10 @@ class ProductListInput extends Component {
         <li key={ i }>
           <Grid>
             <Grid.Row>
-              <Grid.Column width={ 10 }>
+              <Grid.Column width={ 2 }>
+                <Header content={ productName.substring(0, 3) + ' ' + productName.substring(4, 8) } textAlign='center' size='large' block style={ { transform: 'rotate(-60deg)', webkitTransform: 'rotate(-60deg)', width: '64px' } } floated='left' />
+              </Grid.Column>
+              <Grid.Column width={ 8 }>
                 <Segment color='blue'>
                   <Dropdown key={ i } placeholder='Product' value={ productName } fluid search selection options={ productNames } size='big' />
                 </Segment>
@@ -72,6 +75,7 @@ class ProductListInput extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
+          <Divider />
         </li>
       );
     }

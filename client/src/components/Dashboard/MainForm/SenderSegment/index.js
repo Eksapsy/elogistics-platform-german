@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Dropdown, Header, Icon, Divider } from 'semantic-ui-react';
 import uuid from 'uuid';
+import * as actions from '../../../../actions';
 
 class SenderSegment extends Component {
+
+  senderChanged(e, data) {
+    this.props.formDataActions.changeSender(data.value);
+  }
 
   render() {
     const senderNames = this.props.dataBinded.senders.map((sender) => {
@@ -25,7 +31,7 @@ class SenderSegment extends Component {
           </Header>
         </Divider>
         <Grid.Column width={ 16 }>
-          <Dropdown placeholder='Sender' fluid search selection options={ senderNames } />
+          <Dropdown placeholder='Sender' fluid search selection options={ senderNames } onChange={ this.senderChanged.bind(this) } />
         </Grid.Column>
       </div>
       );
@@ -39,4 +45,10 @@ const mapStateToProps = ({dataBinded, emailForm}) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps, null)(SenderSegment));
+const mapActionsToProps = (dispatch) => {
+  return {
+    formDataActions: bindActionCreators(actions.formDataActions, dispatch)
+  };
+}
+
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(SenderSegment));
