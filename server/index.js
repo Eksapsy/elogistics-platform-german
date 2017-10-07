@@ -6,7 +6,6 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 require('./models/FormData');
 require('./models/Sender');
-require('./services/passport');
 
 
 const app = express();
