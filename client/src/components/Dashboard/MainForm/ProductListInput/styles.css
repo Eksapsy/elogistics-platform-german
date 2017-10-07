@@ -1,7 +1,7 @@
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-}
+} */
 
 .ui.search.dropdown {
   vertical-align: center;

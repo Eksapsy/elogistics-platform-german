@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://calm-harbor-75556.herokuapp.com/",
   "proxy": {
-    "/auth/google": {
+    "/auth/*": {
       "target": "http://localhost:5000"
     },
     "/api/*": {

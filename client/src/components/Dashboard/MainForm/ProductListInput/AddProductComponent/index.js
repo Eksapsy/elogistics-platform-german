@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Divider, Segment, Dropdown } from 'semantic-ui-react';
+import { Grid, Segment, Dropdown } from 'semantic-ui-react';
 import uuid from 'uuid';
 import * as actions from '../../../../../actions';
 import InputNumber from '../InputNumber';
@@ -29,9 +29,9 @@ class AddProductComponent extends Component {
     this.handleChange();
   }
 
-  onAmountChange(e, data) {
+  onAmountChange(e) {
     this.setState({
-      amountValue: data.value
+      amountValue: e.target.value
     });
   }
 

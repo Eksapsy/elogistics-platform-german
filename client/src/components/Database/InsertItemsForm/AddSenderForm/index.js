@@ -2,30 +2,17 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions'
-import { Segment, Form, Header, Divider, Input, Button } from 'semantic-ui-react';
+import { Segment, Form, Header, Divider, Button } from 'semantic-ui-react';
 
 class AddSenderForm extends Component {
-  state = {
-    senderName: '',
-    senderEmail: ''
-  };
 
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e, {name, value}) {
-    this.setState({
-      [name]: value
-    });
   }
 
   async handleSubmit() {
-    const {senderName, senderEmail} = this.state;
-    await this.props.dataActionsaddSender(senderName, senderEmail);
-    await window.location.reload();
+    window.location.replace('/auth/google');
   }
 
   render() {
@@ -35,12 +22,8 @@ class AddSenderForm extends Component {
           <Divider horizontal>
             <Header block content='ADD SENDER' as='h3' />
           </Divider>
-          <Form.Group widths='equal'>
-            <Form.Field control={ Input } label='Name' placeholder='Name' name='senderName' onChange={ this.handleChange } required />
-            <Form.Field control={ Input } label='Email' placeholder='Email' name='senderEmail' onChange={ this.handleChange } required />
-          </Form.Group>
           <center>
-            <Form.Field control={ Button } content='Add Sender' />
+            <Form.Field control={ Button } content='Login Google' color='orange' inverted/>
           </center>
         </Form>
       </Segment>

@@ -25,22 +25,24 @@ class DatabaseHeader extends Component {
 
 	async onDownloadExcelIconClick() {
 		const excelPath = axios.get('/api/export-excel');
-
-		window.open(excelPath);
 	}
 
 	render() {
 		const header = (
+
 		<Header block textAlign='center' as='h1' color='black'>
-    <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } />
+    <a href='/api/downloadexcel'>
+      <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } />
+    </a>
     <Header.Content>Modify Database</Header.Content>
   </Header>
+
 		);
 		return (
 			<div>
      <Divider hidden/>
      <Divider horizontal>
-       <Popup inverted trigger={ header } content='Click to download Excel' />
+       <Popup inverted trigger={ header } content='Click to download Excel' position='top left' pointing />
      </Divider>
      <Divider hidden/>
    </div>

@@ -6,11 +6,16 @@ class InputNumber extends Component {
   constructor(props) {
     super(props);
 
-    const value = this.props.value > this.props.minimumValue ? this.props.value : this.props.minimumValue;
+    let value = 0;
     this.minimumValue = typeof this.props.minimumValue === 'number' ? this.props.minimumValue : Number.MIN_SAFE_INTEGER;
     this.maximumValue = typeof this.props.maximumValue === 'number' ? this.props.maximumValue : Number.MAX_SAFE_INTEGER;
+    if (typeof this.props.value === 'number' && this.props.value >= this.minimumValue && this.props.value <= this.maximumValue) {
+      value = this.props.value;
+    } else if (this.props.minimumValue) {
+      value = this.props.minimumValue;
+    }
     this.state = {
-      inputValue: Number.parseInt(value),
+      inputValue: Number.parseInt(value, 10),
       leftArrowAnimationVisible: true,
       rightArrowAnimationVisible: true
     };
@@ -32,8 +37,7 @@ class InputNumber extends Component {
     const newValue = this.numberInput.props.value - 1;
     if (newValue >= this.minimumValue) {
       this.onChange(e, {
-        ...this.numberInput.props,
-        value: this.numberInput.props.value - 1
+        value: newValue
       });
     } else {
       this.toggleLeftArrowAnimationVisibility();
@@ -42,10 +46,9 @@ class InputNumber extends Component {
 
   increaseNumber(e) {
     const newValue = this.numberInput.props.value + 1;
-    if (newValue <= this.maximumValue) {
+    if (newValue >= this.minimumValue) {
       this.onChange(e, {
-        ...this.numberInput.props,
-        value: this.numberInput.props.value + 1
+        value: newValue
       });
     } else {
       this.toggleRightArrowAnimationVisibility();
@@ -53,14 +56,17 @@ class InputNumber extends Component {
   }
 
   onChange(e, data) {
-    if (data.value >= this.minimumValue && data.value <= this.maximumValue) {
+    console.log('event', e);
+    if (e.target.value >= this.minimumValue && e.target.value <= this.maximumValue) {
       this.setState({
-        inputValue: Number.parseInt(data.value)
+        inputValue: Number.parseInt(data.value, 10)
       });
-      this.props.onChange(e, data);
-    } else if (data.value < this.minimumValue) {
+      try {
+        this.props.onChange(e);
+      } catch (e) {}
+    } else if (e.target.value < this.minimumValue) {
       this.toggleLeftArrowAnimationVisibility();
-    } else if (data.value > this.maximumValue) {
+    } else if (e.target.value > this.maximumValue) {
       this.toggleRightArrowAnimationVisibility();
     }
 
@@ -85,10 +91,15 @@ class InputNumber extends Component {
     );
 
     return (
-      <Input type='number' value={ this.props.value } label={ amountArrowsLabel } labelPosition='right' placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
-        style={ { width: '128px' } } ref={ (input) => {
-                                             this.numberInput = input
-                                           } } />
+      // Enable this when amountArrowsLabel is fixed.
+      // <Input type='number' value={ this.state.inputValue } action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
+      //   style={ { width: '128px' } } ref={ (input) => {
+      //                                        this.numberInput = input
+      //                                      } } />
+      <Input type='number' value={ this.state.inputValue } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress } style={ { width: '256px' } }
+        ref={ (input) => {
+                this.numberInput = input
+              } } />
       );
   }
 }

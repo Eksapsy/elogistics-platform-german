@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import uuid from 'uuid';
-import { Form, Header, Grid, Dropdown, Modal, Button, Icon, Divider } from 'semantic-ui-react';
+import { Form, Header, Grid, Modal, Button, Icon, Divider } from 'semantic-ui-react';
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
 import ProductListInput from './ProductListInput';
+import axios from 'axios';
 
 class MainForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      courierValue: '',
       modalOpen: false
     };
-    this.receiverAdded = this.receiverAdded.bind(this);
-    this.courierChanged = this.courierChanged.bind(this);
+
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.submitEmail = this.submitEmail.bind(this);
@@ -34,30 +32,18 @@ class MainForm extends Component {
     });
   }
 
-  submitEmail() {}
-
-  courierChanged(e, data) {
-    this.setState({
-      courierValue: data.value
+  async submitEmail() {
+    await axios.post('/api/send-email', {
+      name: 'Aposoytlos?'
     });
-  }
-
-  receiverAdded(e, data) {
-    const receiver = this.props.dataBinded.receivers.find((receiver) => {
-      return receiver.name === data.value;
-    })
-
     this.setState({
-      courierValue: typeof receiver.courier === 'string' ? receiver.courier : this.refs.courierDropdown.value
+      modalOpen: false
     });
+    await window.location.reload();
   }
 
   render() {
-    const {courierValue, modalOpen} = this.state;
-
-
-
-
+    const {modalOpen} = this.state;
 
     return (
       <Form>
