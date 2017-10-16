@@ -1,14 +1,19 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
+// Email IS required. Reverse it immediately after product is done
 const Receiver = new Schema({
+	r_id: {
+		type: String,
+		required: true
+	},
 	name: {
 		type: String,
 		required: true
 	},
 	email: {
 		type: String,
-		required: true
+		required: false
 	},
 	courier: String
 });

@@ -24,7 +24,6 @@ class CourierSegment extends Component {
       <div>
         <Divider horizontal>
           <Header block textAlign='center' as='h3' color='blue'>
-            <Icon name='send' />
             <Header.Content>Courier</Header.Content>
           </Header>
         </Divider>

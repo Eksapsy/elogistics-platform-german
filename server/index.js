@@ -1,3 +1,9 @@
+/**
+ * Copyrights Claims Apostolis Anastasiou
+ * Email: Apostolos.Anastasiou.Alpha@gmail.com
+ * App Version: 0.7.0
+ */
+
 const express = require('express');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');

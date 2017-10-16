@@ -1,3 +1,9 @@
+/**
+ * Copyrights Claims Apostolis Anastasiou
+ * Email: Apostolos.Anastasiou.Alpha@gmail.com
+ * App Version: 0.7.0
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +12,10 @@ import configureStore from './store/storeConfigurations';
 
 const store = configureStore();
 
+const rootEl = document.getElementById('root');
+
 ReactDOM.render(<Provider store={ store }>
                   <App/>
-                </Provider>, document.getElementById('root'));
+                </Provider>,
+  rootEl);
+registerServiceWorker();

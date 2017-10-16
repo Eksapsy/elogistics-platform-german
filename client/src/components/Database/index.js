@@ -22,17 +22,15 @@ class Database extends Component {
 }
 
 class DatabaseHeader extends Component {
-
-	async onDownloadExcelIconClick() {
-		const excelPath = axios.get('/api/export-excel');
+	onDownloadExcelIconClick(e) {
+		axios.get('/api/downloadexcel');
 	}
-
 	render() {
 		const header = (
 
 		<Header block textAlign='center' as='h1' color='black'>
     <a href='/api/downloadexcel'>
-      <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } />
+      <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
     </a>
     <Header.Content>Modify Database</Header.Content>
   </Header>
@@ -42,7 +40,7 @@ class DatabaseHeader extends Component {
 			<div>
      <Divider hidden/>
      <Divider horizontal>
-       <Popup inverted trigger={ header } content='Click to download Excel' position='top left' pointing />
+       <Popup inverted trigger={ header } content='Click to download Excel' position='top left' />
      </Divider>
      <Divider hidden/>
    </div>

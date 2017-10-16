@@ -25,7 +25,6 @@ class ReceiverSegment extends Component {
       <div>
         <Divider horizontal>
           <Header block textAlign='center' as='h3' color='blue'>
-            <Icon name='home' />
             <Header.Content>Receiver</Header.Content>
           </Header>
         </Divider>

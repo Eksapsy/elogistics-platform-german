@@ -115,7 +115,7 @@ module.exports = (app) => {
 				receivers.push(data);
 			});
 
-			const couriers = [
+			let couriers = [
 				['NAME', 'PHONE', 'EMAIL']
 			];
 			let courierData = await Courier.find({});
@@ -124,7 +124,7 @@ module.exports = (app) => {
 				couriers.push(data);
 			});
 
-			const products = [
+			let products = [
 				['ID', 'NAME']
 			];
 			let productData = await Product.find({});

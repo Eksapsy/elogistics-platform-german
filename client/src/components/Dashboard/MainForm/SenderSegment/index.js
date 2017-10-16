@@ -26,12 +26,11 @@ class SenderSegment extends Component {
         <Divider/>
         <Divider horizontal>
           <Header block textAlign='center' as='h3' color='blue'>
-            <Icon name='mail forward' />
             <Header.Content>Sender</Header.Content>
           </Header>
         </Divider>
         <Grid.Column width={ 16 }>
-          <Dropdown placeholder='Sender' fluid search selection options={ senderNames } onChange={ this.senderChanged.bind(this) } />
+          <Header textAlign='center' as='h3' content='Γερμανός Ποιμενίδης <auto@gpsupplies.gr>' block/>
         </Grid.Column>
       </div>
       );

@@ -52,9 +52,7 @@ export default class ImportExcelComponent extends Component {
                 <Icon name='warning sign' /> DON'T USE THIS IF YOU'RE NOT ADVISED TO USE IT!
               </Header>
             </Message.Header>
-            <p><strong>
-                  								Importing excel should be done by an expert!
-                  							</strong></p>
+            <p><strong>Importing excel should be done by an expert!</strong></p>
           </center>
         </Message>
         <Message>
@@ -66,26 +64,27 @@ export default class ImportExcelComponent extends Component {
         </Message>
         <Divider/>
         <Message attached color='blue' size='large'>
-          <Grid columns={ 4 }>
+          <Grid columns={ 3 }>
             <Grid.Column>
-              <Divider vertical/>
-              <Header>Sender Sheet</Header>
-              <p>Senders</p>
+              <center>
+                <Divider vertical/>
+                <Header>Receiver Sheet</Header>
+                <p>Receivers</p>
+              </center>
             </Grid.Column>
             <Grid.Column>
-              <Divider vertical/>
-              <Header>Receiver Sheet</Header>
-              <p>Receivers</p>
+              <center>
+                <Divider vertical/>
+                <Header>Courier Sheet</Header>
+                <p>Couriers</p>
+              </center>
             </Grid.Column>
             <Grid.Column>
-              <Divider vertical/>
-              <Header>Courier Sheet</Header>
-              <p>Couriers</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Divider vertical/>
-              <Header>Product Sheet</Header>
-              <p>Products</p>
+              <center>
+                <Divider vertical/>
+                <Header>Product Sheet</Header>
+                <p>Products</p>
+              </center>
             </Grid.Column>
           </Grid>
         </Message>
@@ -96,7 +95,7 @@ export default class ImportExcelComponent extends Component {
           <Header as='h4' color='green' content='' />
         </center>
         <Message attached='bottom' color='blue' size='small'>
-          <Grid columns={ 4 }>
+          <Grid columns={ 3 }>
             <Grid.Row>
               <Grid.Column width={ 16 }>
                 <Header block as='h4' color='red' content='RED covered fields are REQUIRED in the sheet' />
@@ -106,17 +105,8 @@ export default class ImportExcelComponent extends Component {
               <Grid.Column>
                 <List as='ol'>
                   <List.Item as='li' value='➡'>
-                    <Header as='h5' color='red'>NAME</Header>
+                    <Header as='h5' color='red'>ID</Header>
                   </List.Item>
-                  <List.Item as='li' value='➡'>
-                    <Header as='h5' color='red'>EMAIL</Header>
-                  </List.Item>
-                </List>
-                <Divider vertical/>
-              </Grid.Column>
-              <Grid.Column>
-                <List as='ol'>
-                  <List.Item as='li' value='➡'>ID</List.Item>
                   <List.Item as='li' value='➡'>
                     <Header as='h5' color='red'>NAME</Header>
                   </List.Item>

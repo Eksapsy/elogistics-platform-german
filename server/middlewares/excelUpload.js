@@ -78,7 +78,7 @@ function getReceiverId(workbook) {
 	const ws_json = XLSX.utils.sheet_to_json(ws, {
 		header: 2
 	});
-	return _.map(ws_json, 'NAME');
+	return _.map(ws_json, 'ID');
 }
 
 function getReceiverNames(workbook) {

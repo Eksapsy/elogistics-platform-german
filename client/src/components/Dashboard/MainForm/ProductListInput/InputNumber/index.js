@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
 import { Icon, Input, Menu, Transition } from 'semantic-ui-react';
 
 class InputNumber extends Component {
   constructor(props) {
     super(props);
 
-    let value = 0;
-    this.minimumValue = typeof this.props.minimumValue === 'number' ? this.props.minimumValue : Number.MIN_SAFE_INTEGER;
-    this.maximumValue = typeof this.props.maximumValue === 'number' ? this.props.maximumValue : Number.MAX_SAFE_INTEGER;
-    if (typeof this.props.value === 'number' && this.props.value >= this.minimumValue && this.props.value <= this.maximumValue) {
-      value = this.props.value;
-    } else if (this.props.minimumValue) {
-      value = this.props.minimumValue;
-    }
+    const minimumValue = typeof this.props.minimumValue === 'number' ? this.props.minimumValue : Number.MIN_SAFE_INTEGER;
+    const maximumValue = typeof this.props.maximumValue === 'number' ? this.props.maximumValue : Number.MAX_SAFE_INTEGER;
+
     this.state = {
-      inputValue: Number.parseInt(value, 10),
+      minimumValue,
+      maximumValue,
       leftArrowAnimationVisible: true,
       rightArrowAnimationVisible: true
     };
@@ -33,40 +30,15 @@ class InputNumber extends Component {
     });
   }
 
-  decreaseNumber(e) {
-    const newValue = this.numberInput.props.value - 1;
-    if (newValue >= this.minimumValue) {
-      this.onChange(e, {
-        value: newValue
-      });
-    } else {
-      this.toggleLeftArrowAnimationVisibility();
-    }
-  }
-
-  increaseNumber(e) {
-    const newValue = this.numberInput.props.value + 1;
-    if (newValue >= this.minimumValue) {
-      this.onChange(e, {
-        value: newValue
-      });
-    } else {
-      this.toggleRightArrowAnimationVisibility();
-    }
-  }
-
   onChange(e, data) {
-    console.log('event', e);
-    if (e.target.value >= this.minimumValue && e.target.value <= this.maximumValue) {
-      this.setState({
-        inputValue: Number.parseInt(data.value, 10)
-      });
-      try {
-        this.props.onChange(e);
-      } catch (e) {}
-    } else if (e.target.value < this.minimumValue) {
+    const value = Number(data.value);
+    if ((value >= this.state.minimumValue && value <= this.state.maximumValue) || data.value === '') {
+      if (this.props.onChange) {
+        this.props.onChange(e, data);
+      }
+    } else if (value < this.state.minimumValue) {
       this.toggleLeftArrowAnimationVisibility();
-    } else if (e.target.value > this.maximumValue) {
+    } else if (value > this.state.maximumValue) {
       this.toggleRightArrowAnimationVisibility();
     }
 
@@ -77,12 +49,12 @@ class InputNumber extends Component {
 
     const amountArrowsLabel = (
     <Menu compact size='tiny'>
-      <Menu.Item as='a' onClick={ this.decreaseNumber.bind(this) }>
+      <Menu.Item as='a'>
         <Transition animation='bounce' duration={ 500 } visible={ leftArrowAnimationVisible }>
           <Icon name='chevron left' size='small' />
         </Transition>
       </Menu.Item>
-      <Menu.Item as='a' onClick={ this.increaseNumber.bind(this) }>
+      <Menu.Item as='a'>
         <Transition animation='bounce' duration={ 500 } visible={ rightArrowAnimationVisible }>
           <Icon name='chevron right' size='small' />
         </Transition>
@@ -92,16 +64,12 @@ class InputNumber extends Component {
 
     return (
       // Enable this when amountArrowsLabel is fixed.
-      // <Input type='number' value={ this.state.inputValue } action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
-      //   style={ { width: '128px' } } ref={ (input) => {
-      //                                        this.numberInput = input
-      //                                      } } />
-      <Input type='number' value={ this.state.inputValue } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress } style={ { width: '256px' } }
-        ref={ (input) => {
-                this.numberInput = input
-              } } />
+      <Input type='number' value={ this.props.value } action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
+        style={ { width: '128px' } } />
+      // <Input type='number' value={ this.props.value } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress } style={ { width: '256px' } }
+      // />
       );
   }
 }
 
-export default withRouter(InputNumber);
+export default InputNumber;

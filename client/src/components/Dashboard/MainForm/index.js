@@ -33,13 +33,28 @@ class MainForm extends Component {
   }
 
   async submitEmail() {
-    await axios.post('/api/send-email', {
-      name: 'Aposoytlos?'
-    });
-    this.setState({
-      modalOpen: false
-    });
-    await window.location.reload();
+    try {
+      window.location.reload();
+      await axios.post('/api/send-email', {
+        receiver: this.props.emailForm.receiver,
+        courier: this.props.emailForm.courier,
+        products: this.props.emailForm.products.map((product) => {
+          return {
+            id: product.name.slice(0, 8),
+            name: product.name.slice(9),
+            amount: product.amount
+          }
+        })
+      });
+
+    } catch (e) {
+      console.log('Something went wrong, check for any undefined inputs');
+      console.error('Exception: ', e);
+    } finally {
+      this.setState({
+        modalOpen: false
+      });
+    }
   }
 
   render() {
@@ -73,8 +88,8 @@ class MainForm extends Component {
         <Modal basic size='small' dimmer='blurring' open={ modalOpen } onClose={ this.closeModal }>
           <Header icon='mail' content='Send Order Email' />
           <Modal.Content>
-            <p>Do you really want to send the Order Emails?</p>
-            <p>After this confirmation an Email informing about the order is gonna be sent to both the Sender & the Receiver.</p>
+            <p><strong>Θέλετε πραγματικά να στείλετε Email στο Λογιστήριο;</strong></p>
+            <p>Μετά την επιβεβαίωση, Email θα σταλθεί στο <strong>auto@gpsupplies.gr</strong> και στο <strong>λογιστήριο</strong> σχετικά με την περιγραφή της παραγγελίας.</p>
           </Modal.Content>
           <Modal.Actions>
             <Button basic color='red' inverted onClick={ this.closeModal }>

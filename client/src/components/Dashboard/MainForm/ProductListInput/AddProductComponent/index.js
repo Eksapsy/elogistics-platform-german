@@ -50,7 +50,7 @@ class AddProductComponent extends Component {
   onKeyPress(e, data) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (this.state.productValue) {
+      if (typeof this.state.productValue === 'number') {
         this.props.onKeyPress(e, {
           ...this.state
         });
