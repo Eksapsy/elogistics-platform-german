@@ -5,7 +5,7 @@ import { Form, Header, Grid, Modal, Button, Icon, Divider } from 'semantic-ui-re
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
-import ProductListInput from './ProductListInput';
+import ProductListSegment from './ProductListSegment';
 import axios from 'axios';
 
 class MainForm extends Component {
@@ -77,7 +77,7 @@ class MainForm extends Component {
               <CourierSegment/>
             </Grid.Row>
             <Grid.Row>
-              <ProductListInput/>
+              <ProductListSegment/>
             </Grid.Row>
           </Grid.Column>
         </Grid>
