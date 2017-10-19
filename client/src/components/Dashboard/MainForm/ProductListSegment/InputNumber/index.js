@@ -30,16 +30,31 @@ class InputNumber extends Component {
     });
   }
 
+  increaseAmount(e, data) {
+    this.onChange(e, {
+      value: Number(this.props.input.value) + 1
+    });
+  }
+
+  decreaseAmount(e, data) {
+    this.onChange(e, {
+      value: Number(this.props.input.value) - 1
+    });
+  }
+
   onChange(e, data) {
     const value = Number(data.value);
     if ((value >= this.state.minimumValue && value <= this.state.maximumValue) || data.value === '') {
+      this.props.input.onChange(value);
       if (this.props.onChange) {
         this.props.onChange(e, data);
       }
     } else if (value < this.state.minimumValue) {
       this.toggleLeftArrowAnimationVisibility();
+      this.props.input.onChange(this.state.minimumValue);
     } else if (value > this.state.maximumValue) {
       this.toggleRightArrowAnimationVisibility();
+      this.props.input.onChange(this.state.maximumValue);
     }
 
   }
@@ -49,12 +64,12 @@ class InputNumber extends Component {
 
     const amountArrowsLabel = (
     <Menu compact size='tiny'>
-      <Menu.Item as='a'>
+      <Menu.Item as='a' onClick={ this.decreaseAmount.bind(this) }>
         <Transition animation='bounce' duration={ 500 } visible={ leftArrowAnimationVisible }>
           <Icon name='chevron left' size='small' />
         </Transition>
       </Menu.Item>
-      <Menu.Item as='a'>
+      <Menu.Item as='a' onClick={ this.increaseAmount.bind(this) }>
         <Transition animation='bounce' duration={ 500 } visible={ rightArrowAnimationVisible }>
           <Icon name='chevron right' size='small' />
         </Transition>
@@ -63,11 +78,8 @@ class InputNumber extends Component {
     );
 
     return (
-      // Enable this when amountArrowsLabel is fixed.
-      <Input type='number' value={ this.props.value } action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress }
-        style={ { width: '128px' } } />
-      // <Input type='number' value={ this.props.value } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } onKeyPress={ this.props.onKeyPress } style={ { width: '256px' } }
-      // />
+      <Input {...this.props.input} type='number' action={ amountArrowsLabel } placeholder='Amount' size='tiny' onKeyPress={ this.props.onKeyPress } onChange={ this.onChange.bind(this) }
+        style={ { width: '60%' } } />
       );
   }
 }
