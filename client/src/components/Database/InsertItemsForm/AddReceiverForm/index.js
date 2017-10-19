@@ -41,6 +41,11 @@ class AddReceiverForm extends Component {
             <Form.Field control={ Input } label='Email' placeholder='Email' name='receiverEmail' onChange={ this.handleChange } required />
             <Form.Field control={ Input } label='Favourite Courier' placeholder='Courier' name='receiverCourier' onChange={ this.handleChange } />
           </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Field control={ Input } label='VAT Number' placeholder='Email' name='receiverEmail' onChange={ this.handleChange } />
+            <Form.Field control={ Input } label='Phone #1' placeholder='Email' name='receiverEmail' onChange={ this.handleChange } />
+            <Form.Field control={ Input } label='Phone #2' placeholder='Email' name='receiverEmail' onChange={ this.handleChange } />
+          </Form.Group>
           <center>
             <Form.Field control={ Button } content='Add Receiver' />
           </center>
