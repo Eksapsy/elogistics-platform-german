@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Header, Grid, Modal, Button, Icon, Divider } from 'semantic-ui-react';
+import { formValueSelector } from 'redux-form';
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
@@ -38,7 +39,7 @@ class MainForm extends Component {
       await axios.post('/api/send-email', {
         receiver: this.props.emailForm.receiver,
         courier: this.props.emailForm.courier,
-        products: this.props.emailForm.products.map((product) => {
+        products: this.props.products.map((product) => {
           return {
             id: product.name.slice(0, 8),
             name: product.name.slice(9),
@@ -104,11 +105,13 @@ class MainForm extends Component {
       );
   }
 }
-
-const mapStateToProps = ({dataBinded, emailForm}) => {
+const selector = formValueSelector('productListSegment');
+const mapStateToProps = (state) => {
+  const {dataBinded, emailForm} = state;
   return {
     dataBinded,
     emailForm,
+    products: selector(state, 'productList')
   }
 };
 

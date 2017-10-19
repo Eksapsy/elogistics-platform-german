@@ -78,8 +78,8 @@ class InputNumber extends Component {
     );
 
     return (
-      <Input {...this.props.input} type='number' action={ amountArrowsLabel } placeholder='Amount' size='tiny' onKeyPress={ this.props.onKeyPress } onChange={ this.onChange.bind(this) }
-        style={ { width: '60%' } } />
+      <Input {...this.props.input} type='number' action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } style={ { width: '50%' } }
+      />
       );
   }
 }

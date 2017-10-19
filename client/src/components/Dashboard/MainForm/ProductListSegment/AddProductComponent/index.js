@@ -60,12 +60,12 @@ class AddProductComponent extends Component {
         <Grid.Row width={ 16 }>
           <Grid.Column mobile={ 16 } computer={ 8 }>
             <Segment color='red'>
-              <Field name='addComponent.productSelection' placeholder='Product' data={ productNames } component={ DropdownField } />
+              <Field name='addProductComponent.productSelection' placeholder='Product' data={ productNames } component={ DropdownField } />
             </Segment>
           </Grid.Column>
           <Grid.Column mobile={ 16 } computer={ 6 }>
             <Segment color='red'>
-              <Field name='addComponent.productAmount' onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } component={ InputNumber } />
+              <Field name='addProductComponent.productAmount' onKeyPress={ this.onKeyPress.bind(this) } minimumValue={ 1 } component={ InputNumber } />
             </Segment>
           </Grid.Column>
           <Grid.Column mobile={ 16 } computer={ 2 } verticalAlign='middle'>
@@ -83,8 +83,8 @@ const selector = formValueSelector('productListSegment');
 const mapStateToProps = (state) => {
   return {
     dataBinded: state.dataBinded,
-    productName: selector(state, 'addComponent.productSelection'),
-    productAmount: selector(state, 'addComponent.productAmount'),
+    productName: selector(state, 'addProductComponent.productSelection'),
+    productAmount: selector(state, 'addProductComponent.productAmount'),
     productList: selector(state, 'productList')
   }
 };

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { Grid, Segment, Divider, Header, Icon, Dropdown } from 'semantic-ui-react';
+import { Grid, Segment, Divider, Header, Icon, Dropdown, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import * as actions from '../../../../actions';
 import uuid from 'uuid';
@@ -58,7 +58,8 @@ class ProductList extends Component {
         { this.props.fields.map((product, index) => {
             return (
               <li key={ uuid() }>
-                <ProductItem namePrefix={ product } index={ index } formProducts={ formProducts } dataProducts={ dataProducts } />
+                <ProductItem namePrefix={ product } index={ index } formProducts={ formProducts } dataProducts={ dataProducts } fields={ this.props.fields }
+                />
               </li>
               );
           }) }
@@ -78,15 +79,22 @@ class ProductItem extends Component {
             <Grid.Column mobile={ 16 } computer={ 2 }>
               <ProductLabel productName={ productName } />
             </Grid.Column>
-            <Grid.Column mobile={ 16 } computer={ 10 }>
+            <Grid.Column mobile={ 16 } computer={ 8 }>
               <Segment color='blue'>
                 <Field name={ `${namePrefix}.name` } type='text' placeholder='Product' data={ dataProducts } component={ DropdownField } />
               </Segment>
             </Grid.Column>
             <Grid.Column mobile={ 16 } computer={ 4 }>
               <Segment color='blue'>
-                <Field name={ `${namePrefix}.amount` } type='text' placeholder='Amount' component={ InputNumber } />
+                <Field name={ `${namePrefix}.amount` } type='text' placeholder='Amount' minimumValue={ 1 } component={ InputNumber } />
               </Segment>
+            </Grid.Column>
+            <Grid.Column mobile={ 16 } computer={ 2 } verticalAlign='middle'>
+              <Button negative style={ { width: '100%' } } onClick={ () => {
+                                                                       this.props.fields.remove(index)
+                                                                     } }>
+                <Icon name='minus' size='large' style={ { margin: 'auto' } } />
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -106,9 +114,10 @@ class ProductLabel extends Component {
 
   render() {
     const {productName} = this.props;
+    const content = productName ? productName.substring(0, 3) + ' ' + productName.substring(4, 8) : '';
     return (
       <div>
-        <Header content={ productName.substring(0, 3) + ' ' + productName.substring(4, 8) } textAlign='center' size='large' block style={ this.itemHeaderStyle } floated='left' />
+        <Header content={ content } textAlign='center' size='large' block style={ this.itemHeaderStyle } floated='left' />
       </div>
       );
   }
@@ -118,7 +127,8 @@ const selector = formValueSelector('productListSegment');
 const mapStateToProps = (state) => {
   return {
     dataBinded: state.dataBinded,
-    formProducts: selector(state, 'productList')
+    formProducts: selector(state, 'productList'),
+    productAmount: selector(state, 'productAmount')
   }
 };
 

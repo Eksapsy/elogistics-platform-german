@@ -30,7 +30,7 @@ class SenderSegment extends Component {
           </Header>
         </Divider>
         <Grid.Column width={ 16 }>
-          <Header textAlign='center' as='h3' content='Γερμανός Ποιμενίδης <auto@gpsupplies.gr>' block/>
+          <Header textAlign='center' as='h3' content='<auto@gpsupplies.gr>' block/>
         </Grid.Column>
       </div>
       );

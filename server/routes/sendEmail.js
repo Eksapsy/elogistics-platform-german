@@ -5,11 +5,6 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = (app) => {
-  app.post('/api/post-order-excel', (req, res) => {
-
-
-  });
-
   app.post('/api/send-email', async (req, res) => {
     console.log('Preparing to send email ...');
     var transporter = nodemailer.createTransport({
