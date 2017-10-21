@@ -10,3 +10,4 @@ export const CHANGE_SENDER = 'change_sender';
 export const CHANGE_RECEIVER = 'change_receiver';
 export const CHANGE_COURIER = 'change_courier';
 export const CHANGE_PRODUCTS = 'change_products';
+export const TOGGLE_LOADER = 'toggle_loader'

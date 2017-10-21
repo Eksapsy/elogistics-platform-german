@@ -15,6 +15,30 @@ const Receiver = new Schema({
 		type: String,
 		required: false
 	},
+	vat_number: {
+		type: String,
+		required: true
+	},
+	phone_1: {
+		type: String,
+		required: false
+	},
+	phone_2: {
+		type: String,
+		required: false
+	},
+	address: {
+		type: String,
+		required: false
+	},
+	location: {
+		type: String,
+		required: false
+	},
+	zip: {
+		type: String,
+		required: false
+	},
 	courier: String
 });
 

@@ -1,4 +1,4 @@
-import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS } from './types';
+import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, TOGGLE_LOADER } from './types';
 
 export const changeSender = (sender) => async dispatch => {
 	dispatch(
@@ -34,4 +34,11 @@ export const changeProducts = (products) => async dispatch => {
 			products
 		}
 	);
+};
+
+export const toggleLoader = (loading = undefined) => async dispatch => {
+	dispatch({
+		type: TOGGLE_LOADER,
+		loading
+	})
 };

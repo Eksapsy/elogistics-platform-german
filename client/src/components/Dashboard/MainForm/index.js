@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Header, Grid, Modal, Button, Icon, Divider } from 'semantic-ui-react';
+import { Form, Header, Grid, Message, Modal, Button, Icon, Divider } from 'semantic-ui-react';
 import { formValueSelector } from 'redux-form';
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
 import ProductListSegment from './ProductListSegment';
 import axios from 'axios';
+import _ from 'lodash';
 
 class MainForm extends Component {
   constructor(props) {
@@ -37,7 +38,9 @@ class MainForm extends Component {
     try {
       window.location.reload();
       await axios.post('/api/send-email', {
-        receiver: this.props.emailForm.receiver,
+        receiver: _.find(this.props.dataBinded.receivers, {
+          name: this.props.emailForm.receiver.name
+        }),
         courier: this.props.emailForm.courier,
         products: this.props.products.map((product) => {
           return {
@@ -66,6 +69,17 @@ class MainForm extends Component {
         <Divider horizontal hidden/>
         <Grid centered>
           <Grid.Column width={ 12 }>
+            <Grid.Row>
+              <Message info>
+                <Message.Header>
+                  Email
+                </Message.Header>
+                <Message.Content>
+                  <center>Email is sent by</center>
+                  <Header textAlign='center' as='h4' content='<auto@gpsupplies.gr>' block/>
+                </Message.Content>
+              </Message>
+            </Grid.Row>
             <Grid.Row>
               <SenderSegment/>
             </Grid.Row>

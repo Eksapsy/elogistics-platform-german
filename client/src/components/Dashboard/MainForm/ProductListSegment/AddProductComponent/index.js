@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Icon, Segment, Dropdown, Button } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import uuid from 'uuid';
 import * as actions from '../../../../../actions';

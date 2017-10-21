@@ -37,9 +37,16 @@ module.exports = (app) => {
 		'/api/postreceiver',
 		(req, res) => {
 			const receiver = new Receiver({
+				r_id: req.body.r_id,
 				name: req.body.name,
 				email: req.body.email,
-				courier: req.body.courier || ""
+				courier: req.body.courier,
+				vat_number: req.body.vat_number,
+				phone_1: req.body.phone_1,
+				phone_2: req.body.phone_2,
+				address: req.body.address,
+				location: req.body.location,
+				zip: req.body.zip
 			}).save();
 
 			res.send(receiver);

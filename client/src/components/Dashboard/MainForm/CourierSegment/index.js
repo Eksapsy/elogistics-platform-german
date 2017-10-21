@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Header, Icon, Dropdown, Divider } from 'semantic-ui-react';
+import { Grid, Header, Dropdown, Divider } from 'semantic-ui-react';
 import uuid from 'uuid';
 import * as actions from '../../../../actions';
 

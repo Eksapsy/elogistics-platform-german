@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import { Form, Divider, Header, Message, Grid, List, Checkbox, Icon } from 'semantic-ui-react';
+import * as actions from '../../../actions';
 
-export default class ImportExcelComponent extends Component {
+class ImportExcelComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,13 +33,21 @@ export default class ImportExcelComponent extends Component {
     }
   }
 
-  onDrop(files) {
-    superagent.post('/api/upload')
+  async onDrop(files) {
+    this.openLoading();
+    await superagent.post('/api/upload')
       .attach('file', files[0])
-      .field('replaceOldDatabase', this.state.replaceOldDatabase)
-      .end((err, res) => {
-        if (err) console.log(err);
-      });
+      .field('replaceOldDatabase', this.state.replaceOldDatabase);
+    this.closeLoading();
+    await window.location.reload();
+  }
+
+  closeLoading() {
+    this.props.formDataActions.toggleLoader(false);
+  }
+
+  openLoading() {
+    this.props.formDataActions.toggleLoader(true);
   }
 
   render() {
@@ -153,3 +164,9 @@ export default class ImportExcelComponent extends Component {
       );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  formDataActions: bindActionCreators(actions.formDataActions, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(ImportExcelComponent);

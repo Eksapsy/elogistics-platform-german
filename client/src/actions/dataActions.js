@@ -16,11 +16,18 @@ export const addSender = (name, email) => async dispatch => {
 	});
 };
 
-export const addReceiver = (name, email, courier) => async dispatch => {
+export const addReceiver = (receiver) => async dispatch => {
 	await axios.post('/api/postreceiver', {
-		name,
-		email,
-		courier
+		r_id: receiver.r_id,
+		name: receiver.name,
+		email: receiver.email,
+		courier: receiver.courier,
+		vat_number: receiver.vat_number,
+		phone_1: receiver.phone_1,
+		phone_2: receiver.phone_2,
+		address: receiver.address,
+		location: receiver.location,
+		zip: receiver.zip
 	});
 
 	// Reloading the store with the new data

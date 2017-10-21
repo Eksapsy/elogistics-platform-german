@@ -3,6 +3,7 @@ import { Divider, Header } from 'semantic-ui-react';
 import AddReceiverForm from './AddReceiverForm';
 import AddCourierForm from './AddCourierForm';
 import AddProductForm from './AddProductForm';
+import AddSenderForm from './AddSenderForm';
 
 class InsertItemsForm extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class InsertItemsForm extends Component {
         <Divider horizontal>
           <Header block as='h2' content='Insert Items' />
         </Divider>
+        <AddSenderForm/>
+        <Divider horizontal section/>
         <AddReceiverForm/>
         <Divider horizontal section/>
         <AddCourierForm/>

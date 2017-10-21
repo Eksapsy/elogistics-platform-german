@@ -23,23 +23,18 @@ module.exports = (app) => {
     });
 
     /* HTML MESSAGE */
-    const {receiver, courier, products} = req.body;
+    const {sender, receiver, courier, products, cost} = req.body;
     const scripts = '<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">';
     const hr = '<hr>';
     const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - ORDER</h1>";
+    const senderHeader = `${sender ? `<h1>${sender}</h1>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
+    const receiverHeader = `<h2>RECEIVER</h2><table><tr><th>Name</th><th>VAT</th><th>Location</th><th>Phone #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.location}</td><td>${receiver.phone_1}</td></tr></table>`
     let courierName = '';
-    let receiverName = '';
     try {
       courierName = courier.toUpperCase();
     } catch (e) {
       courierName = 'NONE'
     };
-    try {
-      receiverName = receiver.toUpperCase();
-    } catch (e) {
-      receiverName = 'NONE'
-    };
-    const receiverHeader = '<h2>RECEIVER<h2/><h3>' + receiverName + '</h3>'
     const courierHeader = '<h2>COURIER</h2><h3>' + courierName + '</h3>';
     const productHeader = '<h2>PRODUCTS</h2>'
 
@@ -58,14 +53,18 @@ module.exports = (app) => {
     const productsTable_END = '</table>'
 
     const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
-    const fullHtml = scripts + header + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + footer;
+    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + footer;
 
     /* Attachment Buffer  */
-    console.log('Preparing Excel File for Form Data ...');
+    let data = [];
+
     const receiverData = [
-      ['Receiver', 'Courier'],
-      [receiver, courier]
+      ['Receiver', 'Courier', 'VAT Number', 'Phone #1', 'Phone #2', 'ZIP Code', 'Location', 'Address'],
+      [receiver.name, courier, receiver.vat_number, receiver.phone_1, receiver.phone_2, receiver.zip, receiver.location, receiver.address]
     ];
+
+    data = data.concat(receiverData);
+    console.log('data with receiver:', data);
     let productsData = [
       ['Product ID', 'Product Name', 'Product Amount'],
     ];
@@ -74,12 +73,26 @@ module.exports = (app) => {
       return [product.id, product.name, product.amount];
     }));
 
-    console.log('Writing workbook ...');
+    data = productsData.map((productsRow, index) => {
+      let dataRow = data[index];
+      dataRow = dataRow ? dataRow : []; // Converting to array if undefined
+      dataRow = dataRow.concat(','.repeat(receiverData[0].length - dataRow.length).split(',')); // Filling spaces where the field is not filled
+
+      let row = dataRow;
+      row.splice(receiverData[0].length, 0, ...productsRow);
+      return row;
+    });
+
+    const costIndex = data[0].length - 1;
+    data[0][costIndex] = 'Total Cost';
+    const costString = cost ? String(cost) : '0';
+    data[1][costIndex] = costString + '€';
+
+    console.log('Writing workbook ...', data);
     const workbook = await {
-      SheetNames: ['ReceiverData', 'ProductsData'],
+      SheetNames: ['Data'],
       Sheets: {
-        ReceiverData: XLSX.utils.aoa_to_sheet(receiverData),
-        ProductsData: XLSX.utils.aoa_to_sheet(productsData)
+        Data: XLSX.utils.aoa_to_sheet(data)
       }
     };
     XLSX.writeFile(workbook, path.resolve(__dirname, '../files/formData.xlsx'));

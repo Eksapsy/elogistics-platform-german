@@ -1,10 +1,11 @@
-import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS } from '../actions/types';
+import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, TOGGLE_LOADER } from '../actions/types';
 
 const initialState = {
 	sender: '',
-	receiver: '',
+	receiver: {},
 	courier: '',
-	products: []
+	products: [],
+	loading: false
 };
 
 export default (state = initialState, action = {}) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action = {}) => {
 			return {
 				...state,
 				products: action.products
+			};
+		case TOGGLE_LOADER:
+			return {
+				...state,
+				loading: action.loading ? action.loading : !state.loading
 			};
 
 		default:

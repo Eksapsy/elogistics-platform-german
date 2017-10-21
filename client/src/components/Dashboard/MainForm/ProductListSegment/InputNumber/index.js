@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
 import { Icon, Input, Menu, Transition } from 'semantic-ui-react';
 
 class InputNumber extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Header, Icon, Divider, Dropdown } from 'semantic-ui-react';
+import { Grid, Header, Divider, Dropdown } from 'semantic-ui-react';
 import uuid from 'uuid';
 import * as actions from '../../../../actions';
 
@@ -10,7 +10,9 @@ import * as actions from '../../../../actions';
 class ReceiverSegment extends Component {
 
   receiverChanged(e, data) {
-    this.props.formDataActions.changeReceiver(data.value);
+    this.props.formDataActions.changeReceiver({
+      name: data.value
+    });
   }
 
   render() {
