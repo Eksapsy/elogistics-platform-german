@@ -76,7 +76,7 @@ class MainForm extends Component {
                 </Message.Header>
                 <Message.Content>
                   <center>Email is sent by</center>
-                  <Header textAlign='center' as='h4' content='<auto@gpsupplies.gr>' block/>
+                  <Header textAlign='center' as='h4' content='auto@gpsupplies.gr' block/>
                 </Message.Content>
               </Message>
             </Grid.Row>
