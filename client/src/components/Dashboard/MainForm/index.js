@@ -6,6 +6,7 @@ import { formValueSelector } from 'redux-form';
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
+import CostSegment from './CostSegment';
 import ProductListSegment from './ProductListSegment';
 import axios from 'axios';
 import _ from 'lodash';
@@ -48,7 +49,8 @@ class MainForm extends Component {
             name: product.name.slice(9),
             amount: product.amount
           }
-        })
+        }),
+        cost: this.props.emailForm.cost
       });
 
     } catch (e) {
@@ -90,6 +92,9 @@ class MainForm extends Component {
             </Grid.Row>
             <Grid.Row>
               <CourierSegment/>
+            </Grid.Row>
+            <Grid.Row>
+              <CostSegment/>
             </Grid.Row>
             <Grid.Row>
               <ProductListSegment/>

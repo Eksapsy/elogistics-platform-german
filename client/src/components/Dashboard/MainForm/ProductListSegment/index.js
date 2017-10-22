@@ -8,7 +8,7 @@ import * as actions from '../../../../actions';
 import uuid from 'uuid';
 import AddProductComponent from './AddProductComponent';
 import DropdownField from './DropdownField';
-import InputNumber from './InputNumber';
+import InputNumber from '../InputNumber';
 import './styles.css'
 
 class ProductListInput extends Component {

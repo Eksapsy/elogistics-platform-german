@@ -6,7 +6,7 @@ import { Grid, Icon, Segment, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import uuid from 'uuid';
 import * as actions from '../../../../../actions';
-import InputNumber from '../InputNumber';
+import InputNumber from '../../InputNumber';
 import DropdownField from '../DropdownField';
 
 class AddProductComponent extends Component {

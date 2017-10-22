@@ -52,8 +52,10 @@ module.exports = (app) => {
 
     const productsTable_END = '</table>'
 
+    const costHeader = `<h3>Total Cost:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
+
     const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
-    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + footer;
+    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + footer;
 
     /* Attachment Buffer  */
     let data = [];

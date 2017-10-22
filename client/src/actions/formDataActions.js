@@ -1,4 +1,4 @@
-import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, TOGGLE_LOADER } from './types';
+import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, CHANGE_COST, TOGGLE_LOADER } from './types';
 
 export const changeSender = (sender) => async dispatch => {
 	dispatch(
@@ -35,6 +35,15 @@ export const changeProducts = (products) => async dispatch => {
 		}
 	);
 };
+
+export const changeCost = (cost) => async dispatch => {
+	dispatch(
+		{
+			type: CHANGE_COST,
+			cost
+		}
+	)
+}
 
 export const toggleLoader = (loading = undefined) => async dispatch => {
 	dispatch({

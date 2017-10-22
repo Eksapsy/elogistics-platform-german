@@ -1,10 +1,11 @@
-import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, TOGGLE_LOADER } from '../actions/types';
+import { CHANGE_SENDER, CHANGE_RECEIVER, CHANGE_COURIER, CHANGE_PRODUCTS, CHANGE_COST, TOGGLE_LOADER } from '../actions/types';
 
 const initialState = {
 	sender: '',
 	receiver: {},
 	courier: '',
 	products: [],
+	cost: '',
 	loading: false
 };
 
@@ -30,6 +31,11 @@ export default (state = initialState, action = {}) => {
 				...state,
 				products: action.products
 			};
+		case CHANGE_COST:
+			return {
+				...state,
+				cost: action.cost
+			}
 		case TOGGLE_LOADER:
 			return {
 				...state,
