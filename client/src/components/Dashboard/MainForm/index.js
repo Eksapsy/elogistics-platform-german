@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Header, Grid, Message, Modal, Button, Icon, Divider } from 'semantic-ui-react';
-import { formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
+// import validation from './validation'
 import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
@@ -40,21 +41,21 @@ class MainForm extends Component {
       window.location.reload();
       await axios.post('/api/send-email', {
         receiver: _.find(this.props.dataBinded.receivers, {
-          name: this.props.emailForm.receiver.name
+          name: this.props.receiver
         }),
-        courier: this.props.emailForm.courier,
-        products: this.props.products.map((product) => {
+        courier: this.props.courier,
+        products: this.props.productList.map((product) => {
           return {
             id: product.name.slice(0, 8),
             name: product.name.slice(9),
             amount: product.amount
           }
         }),
-        cost: this.props.emailForm.cost
+        cost: this.props.cost
       });
 
     } catch (e) {
-      console.log('Something went wrong, check for any undefined inputs');
+      console.error('Something went wrong, check for any undefined inputs');
       console.error('Exception: ', e);
     } finally {
       this.setState({
@@ -65,9 +66,10 @@ class MainForm extends Component {
 
   render() {
     const {modalOpen} = this.state;
-
+    const {pristine, submitting} = this.props;
+    
     return (
-      <Form>
+      <Form onSubmit={ this.showModal }>
         <Divider horizontal hidden/>
         <Grid centered>
           <Grid.Column width={ 12 }>
@@ -103,7 +105,7 @@ class MainForm extends Component {
         </Grid>
         <Divider hidden/>
         <center>
-          <Button inverted color='blue' size='large' onClick={ this.showModal }>Submit</Button>
+          <Form.Button type='submit' inverted color='blue' size='large' disabled={ pristine || submitting }>Submit</Form.Button>
         </center>
         <Modal basic size='small' dimmer='blurring' open={ modalOpen } onClose={ this.closeModal }>
           <Header icon='mail' content='Send Order Email' />
@@ -112,10 +114,10 @@ class MainForm extends Component {
             <p>Μετά την επιβεβαίωση, Email θα σταλθεί στο <strong>auto@gpsupplies.gr</strong> και στο <strong>λογιστήριο</strong> σχετικά με την περιγραφή της παραγγελίας.</p>
           </Modal.Content>
           <Modal.Actions>
-            <Button basic color='red' inverted onClick={ this.closeModal }>
+            <Button type='button' basic color='red' inverted onClick={ this.closeModal }>
               <Icon name='remove' />No
             </Button>
-            <Button basic color='green' inverted onClick={ this.submitEmail }>
+            <Button type='button' basic color='green' inverted onClick={ this.submitEmail }>
               <Icon name='checkmark' />Yes
             </Button>
           </Modal.Actions>
@@ -124,14 +126,18 @@ class MainForm extends Component {
       );
   }
 }
-const selector = formValueSelector('productListSegment');
+const orderFormSelector = formValueSelector('orderForm');
 const mapStateToProps = (state) => {
-  const {dataBinded, emailForm} = state;
+  const {dataBinded} = state;
   return {
     dataBinded,
-    emailForm,
-    products: selector(state, 'productList')
+    receiver: orderFormSelector(state, 'receiverName'),
+    courier: orderFormSelector(state, 'courierName'),
+    cost: orderFormSelector(state, 'costValue'),
+    productList: orderFormSelector(state, 'productList')
   }
 };
 
-export default withRouter(connect(mapStateToProps)(MainForm));
+export default reduxForm({
+  form: 'orderForm'
+})(withRouter(connect(mapStateToProps)(MainForm)));

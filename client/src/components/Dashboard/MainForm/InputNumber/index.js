@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Input, Menu, Transition } from 'semantic-ui-react';
+import './styles.css';
 
 class InputNumber extends Component {
   constructor(props) {
@@ -43,10 +44,10 @@ class InputNumber extends Component {
   onChange(e, data) {
     const value = Number(data.value);
     if ((value >= this.state.minimumValue && value <= this.state.maximumValue) || data.value === '') {
-      this.props.input.onChange(value);
       if (this.props.onChange) {
         this.props.onChange(e, data);
       }
+      this.props.input.onChange(value);
     } else if (value < this.state.minimumValue) {
       this.toggleLeftArrowAnimationVisibility();
       this.props.input.onChange(this.state.minimumValue);
@@ -76,8 +77,10 @@ class InputNumber extends Component {
     );
 
     return (
-      <Input {...this.props.input} type='number' action={ amountArrowsLabel } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } style={ { width: '50%' } }
-      />
+      <div className='input-number'>
+        <Input type='number' action={ amountArrowsLabel } label={ this.props.label } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } style={ { width: '50%' } }
+          {...this.props.input}/>
+      </div>
       );
   }
 }

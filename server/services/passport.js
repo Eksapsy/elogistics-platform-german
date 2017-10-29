@@ -1,7 +1,8 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const Strategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
+const userdb = require('../etc/userdb');
 
 const Sender = mongoose.model('senders');
 
@@ -10,34 +11,25 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  Sender.findById(id)
-    .then(user => {
-      done(null, user);
-    })
+  userdb.findById(id, (err, user) => {
+    if (err) { return done(err); }
+    done(null, user);
+  });
 });
 
 passport.use(
-  new GoogleStrategy({
-    clientID: keys.googleClientId,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback',
-    proxy: true
-  },
-    async (accessToken, refreshToken, profile, done) => {
-      console.log('profile');
-      const existingUser = await Sender.findOne({
-        googleID: profile.id
-      });
-
-      if (existingUser) {
-        return done(null, existingUser);
+  new Strategy((username, password, cb) => {
+    userdb.findByUsername(username, (err, user) => {
+      if (err) {
+        return cb(err);
       }
-
-      const user = await new Sender({
-        googleID: profile.id,
-        displayName: profile.displayName
-      }).save();
-      done(null, user);
-    }
-  )
+      if (!user) {
+        return cb(null, false);
+      }
+      if (user.password != password) {
+        return cb(null, false);
+      }
+      return cb(null, user);
+    });
+  })
 );

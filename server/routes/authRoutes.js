@@ -2,19 +2,21 @@ const passport = require('passport');
 
 module.exports = (app) => {
   app.get(
-    '/auth/google',
-    passport.authenticate('google', {
-      scope: ['profile', 'email']
-    })
-  );
-
-  app.get(
-    '/auth/google/callback',
-    passport.authenticate('google'),
-    (res, req) => {
-      res.redirect('/');
+    '/api/login',
+    (req, res) => {
+      res.render('login');
     }
   );
+
+  app.post(
+    '/api/login',
+    passport.authenticate('local', {
+      failureRedirect: '/api/login'
+    }),
+    (req, res) => {
+      res.redirect('/');
+    }
+  )
 
   app.get(
     '/api/logout',
@@ -25,9 +27,12 @@ module.exports = (app) => {
   );
 
   app.get(
-    '/api/current_sender',
+    '/api/profile',
+    require('connect-ensure-login').ensureLoggedIn(),
     (req, res) => {
-      res.send(req.user);
+      res.send('profile', {
+        user: req.user
+      });
     }
   )
 };

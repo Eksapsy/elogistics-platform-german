@@ -1,54 +1,45 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { dataActions } from '../actions'
-import MenuHeader from './MenuHeader';
-import Dashboard from './Dashboard';
-import Database from './Database';
-import NotFound from './NotFound';
-import Footer from './Footer';
-import { Container, Segment, Dimmer, Loader } from 'semantic-ui-react';
+import * as actions from '../actions';
+import MainScene from './MainScene';
 import 'semantic-ui-css/semantic.min.css';
 import './styles.css';
+import axios from 'axios';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.loggedIn = this.loggedIn.bind(this);
+  }
   componentDidMount() {
     // Update dataBinded in Redux Store by Fetching data from the API
-    this.props.fetchFormData();
+    this.props.dataActions.fetchFormData();
   }
+
+  loggedIn() {
+    return this.props.webData.isLoggedIn; // Returns either null, true of false
+  }
+
   render() {
+
     return (
-      <Dimmer.Dimmable as='div' dimmed={ this.props.emailForm.loading }>
-        <Dimmer active={ this.props.emailForm.loading }>
-          <Loader content='Loading ... do not reload the page' />
-        </Dimmer>
-        <Container textAlign='justified' style={ { marginTop: '3em', marginBottom: '2em' } }>
-          <BrowserRouter>
-            <div>
-              <MenuHeader/>
-              <Segment>
-                <Switch>
-                  <Redirect exact from='/' to='/dashboard' />
-                  <Redirect exact from='/database' to='/database/insert-items' />
-                  <Route path='/dashboard' component={ Dashboard } />
-                  <Route path='/database/insert-items' component={ Database } />
-                  <Route path='/database/import-by-excel' component={ Database } />
-                  <Route path='*' component={ NotFound } />
-                </Switch>
-              </Segment>
-            </div>
-          </BrowserRouter>
-          <Footer/>
-        </Container>
-      </Dimmer.Dimmable>
+      <div>
+        <BrowserRouter>
+          <MainScene isAuth={ this.loggedIn() } />
+        </BrowserRouter>
+      </div>
       );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
+const mapStateToProps = ({webData}) => ({
+  webData
+});
 
-export default connect(mapStateToProps, dataActions)(App);
+const mapDispatchToProps = (dispatch) => ({
+  dataActions: bindActionCreators(actions.dataActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

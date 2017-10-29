@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Header, Divider } from 'semantic-ui-react';
 import uuid from 'uuid';
-import * as actions from '../../../../actions';
 
 class SenderSegment extends Component {
 
@@ -52,17 +50,10 @@ class SenderSegment extends Component {
   }
 }
 
-const mapStateToProps = ({dataBinded, emailForm}) => {
+const mapStateToProps = ({dataBinded}) => {
   return {
     dataBinded,
-    emailForm,
   }
 };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    formDataActions: bindActionCreators(actions.formDataActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(SenderSegment));
+export default withRouter(connect(mapStateToProps)(SenderSegment));

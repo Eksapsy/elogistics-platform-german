@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Header, Dropdown, Divider } from 'semantic-ui-react';
+import { Field } from 'redux-form';
+import { Grid, Header, Divider } from 'semantic-ui-react';
+import DropdownField from '../DropdownField';
 import uuid from 'uuid';
-import * as actions from '../../../../actions';
 
 class CourierSegment extends Component {
-
-  courierChanged(e, data) {
-    this.props.formDataActions.changeCourier(data.value);
-  }
-
   render() {
     const courierNames = this.props.dataBinded.couriers.map((courier) => {
       return {
@@ -29,10 +24,11 @@ class CourierSegment extends Component {
         </Divider>
         <Grid.Row>
           <Grid.Column width={ 16 }>
-            <Dropdown ref='courierDropdown' placeholder='Courier' fluid search selection options={ courierNames } onChange={ this.courierChanged.bind(this) } />
+            <Field name='courierName' component={ DropdownField } placeholder='Courier' data={ courierNames } />
           </Grid.Column>
         </Grid.Row>
       </div>
+
       );
   }
 }
@@ -40,14 +36,7 @@ class CourierSegment extends Component {
 const mapStateToProps = ({dataBinded, emailForm}) => {
   return {
     dataBinded,
-    emailForm,
   }
 };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    formDataActions: bindActionCreators(actions.formDataActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(CourierSegment));
+export default withRouter(connect(mapStateToProps)(CourierSegment));

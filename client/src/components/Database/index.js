@@ -5,17 +5,19 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import ImportExcelComponent from './ImportExcelComponent/index';
 import InsertItemsForm from './InsertItemsForm/index';
-import { Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
+import { Segment, Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
 import axios from 'axios';
 
 class Database extends Component {
 	render() {
 		return (
 			<div>
-     <DatabaseHeader/>
-     <DatabaseMenu {...this.props}/>
-     <Route path='/database/insert-items' component={ InsertItemsForm } />
-     <Route path='/database/import-by-excel' component={ ImportExcelComponent } />
+     <Segment color='yellow'>
+       <DatabaseHeader/>
+       <DatabaseMenu {...this.props}/>
+       <Route path='/database/insert-items' component={ InsertItemsForm } />
+       <Route path='/database/import-by-excel' component={ ImportExcelComponent } />
+     </Segment>
    </div>
 			);
 	}
@@ -51,10 +53,28 @@ class DatabaseHeader extends Component {
 class DatabaseMenu extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			activeItem: 'Insert Single Items'
-		};
 		this.handleMenuClick = this.handleMenuClick.bind(this);
+	}
+
+	componentWillMount() {
+		switch (this.props.location.pathname) {
+			case '/database/insert-items':
+				this.state = {
+					activeItem: 'Insert Single Items'
+				};
+				break;
+			case '/database/import-by-excel':
+				this.state = {
+					activeItem: 'Import Excel'
+				};
+				break;
+			default:
+				this.props.history.push('/database/insert-items');
+				this.state = {
+					activeItem: 'Insert Single Items'
+				};
+				break;
+		}
 	}
 
 	handleMenuClick(e, {name}) {

@@ -1,5 +1,5 @@
 import * as data_actions from './dataActions';
-import * as form_data_actions from './formDataActions'
+import * as web_actions from './webActions'
 
 export const dataActions = data_actions;
-export const formDataActions = form_data_actions;
+export const webActions = web_actions;

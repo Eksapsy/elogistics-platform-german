@@ -43,11 +43,11 @@ class ImportExcelComponent extends Component {
   }
 
   closeLoading() {
-    this.props.formDataActions.toggleLoader(false);
+    this.props.webActions.toggleLoader(false);
   }
 
   openLoading() {
-    this.props.formDataActions.toggleLoader(true);
+    this.props.webActions.toggleLoader(true);
   }
 
   render() {
@@ -166,7 +166,7 @@ class ImportExcelComponent extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  formDataActions: bindActionCreators(actions.formDataActions, dispatch)
+  webActions: bindActionCreators(actions.webActions, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(ImportExcelComponent);

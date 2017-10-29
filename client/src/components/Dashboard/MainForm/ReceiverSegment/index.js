@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Header, Divider, Dropdown } from 'semantic-ui-react';
+import { Field } from 'redux-form'
+import { Grid, Header, Divider } from 'semantic-ui-react';
+import DropdownField from '../DropdownField';
 import uuid from 'uuid';
-import * as actions from '../../../../actions';
-
 
 class ReceiverSegment extends Component {
-
-  receiverChanged(e, data) {
-    this.props.formDataActions.changeReceiver({
-      name: data.value
-    });
-  }
 
   render() {
     const receiverNames = this.props.dataBinded.receivers.map((receiver) => {
@@ -32,7 +25,7 @@ class ReceiverSegment extends Component {
         </Divider>
         <Grid.Row>
           <Grid.Column width={ 16 }>
-            <Dropdown placeholder='Receiver' fluid search selection options={ receiverNames } onChange={ this.receiverChanged.bind(this) } />
+            <Field name='receiverName' component={ DropdownField } placeholder='Receiver' data={ receiverNames } />
           </Grid.Column>
         </Grid.Row>
         <Divider hidden/>
@@ -42,17 +35,10 @@ class ReceiverSegment extends Component {
   }
 }
 
-const mapStateToProps = ({dataBinded, emailForm}) => {
+const mapStateToProps = ({dataBinded}) => {
   return {
     dataBinded,
-    emailForm,
   }
 };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    formDataActions: bindActionCreators(actions.formDataActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(ReceiverSegment));
+export default withRouter(connect(mapStateToProps)(ReceiverSegment));
