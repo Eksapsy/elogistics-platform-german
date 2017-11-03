@@ -61,8 +61,8 @@ module.exports = (app) => {
     let data = [];
 
     const receiverData = [
-      ['Receiver', 'Courier', 'VAT Number', 'Phone #1', 'Phone #2', 'ZIP Code', 'Location', 'Address'],
-      [receiver.name, courier, receiver.vat_number, receiver.phone_1, receiver.phone_2, receiver.zip, receiver.location, receiver.address]
+      ['Παραλήπτης', 'Courier', 'Α.Φ.Μ.', 'Δ.Ο.Υ.', 'Τηλ. #1', 'Τηλ. #2', 'Τ.Κ.', 'Περιοχή', 'Διεύθυνση'],
+      [receiver.name, courier, receiver.vat_number, receiver.doy_number, receiver.phone_1, receiver.phone_2, receiver.zip, receiver.location, receiver.address]
     ];
 
     data = data.concat(receiverData);

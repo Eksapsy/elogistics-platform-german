@@ -34,6 +34,7 @@ module.exports = async (req, res, next) => {
 	const receiver_emails = await getReceiverEmails(workbook);
 	const receiver_couriers = await getReceiverCourier(workbook);
 	const receiver_vat_numbers = await getReceiverVAT(workbook);
+	const receiver_doy_numbres = await getReceiverDOY(workbook);
 	const receiver_phones_1 = await getReceiverPhone_1(workbook);
 	const receiver_phones_2 = await getReceiverPhone_2(workbook);
 	const receiver_zip_numbers = await getReceiverZIP(workbook);
@@ -47,6 +48,7 @@ module.exports = async (req, res, next) => {
 			email: receiver_emails[i],
 			courier: receiver_couriers[i],
 			vat_number: receiver_vat_numbers[i],
+			doy_number: receiver_doy_numbres[i],
 			phone_1: receiver_phones_1[i],
 			phone_2: receiver_phones_2[i],
 			address: receiver_addresses[i],
@@ -131,6 +133,16 @@ function getReceiverVAT(workbook) {
 		header: 2
 	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'VAT NUMBER');
+}
+
+function getReceiverDOY(workbook) {
+	if (!workbook) return;
+
+	const ws = workbook.Sheets['Receivers'];
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	return _.map(ws_json, 'DOY NUMBER');
 }
 
 function getReceiverAddress(workbook) {

@@ -18,6 +18,7 @@ module.exports = (app) => {
 				email: req.body.email,
 				courier: req.body.courier,
 				vat_number: req.body.vat_number,
+				doy_number: req.body.doy_number,
 				phone_1: req.body.phone_1,
 				phone_2: req.body.phone_2,
 				address: req.body.address,

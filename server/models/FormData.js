@@ -19,6 +19,10 @@ const Receiver = new Schema({
 		type: String,
 		required: true
 	},
+	doy_number: {
+		type: String,
+		required: false
+	},
 	phone_1: {
 		type: String,
 		required: false
