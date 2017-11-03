@@ -40,6 +40,7 @@ class MainForm extends Component {
     try {
       window.location.reload();
       await axios.post('/api/send-email', {
+        sender: this.props.webData.profile.displayName,
         receiver: _.find(this.props.dataBinded.receivers, {
           name: this.props.receiver
         }),
@@ -67,7 +68,7 @@ class MainForm extends Component {
   render() {
     const {modalOpen} = this.state;
     const {pristine, submitting} = this.props;
-    
+
     return (
       <Form onSubmit={ this.showModal }>
         <Divider horizontal hidden/>
@@ -128,9 +129,10 @@ class MainForm extends Component {
 }
 const orderFormSelector = formValueSelector('orderForm');
 const mapStateToProps = (state) => {
-  const {dataBinded} = state;
+  const {dataBinded, webData} = state;
   return {
     dataBinded,
+    webData,
     receiver: orderFormSelector(state, 'receiverName'),
     courier: orderFormSelector(state, 'courierName'),
     cost: orderFormSelector(state, 'costValue'),

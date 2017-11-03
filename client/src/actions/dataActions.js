@@ -8,6 +8,7 @@ export const addReceiver = (receiver) => async dispatch => {
 		email: receiver.email,
 		courier: receiver.courier,
 		vat_number: receiver.vat_number,
+		doy_number: receiver.doy_number,
 		phone_1: receiver.phone_1,
 		phone_2: receiver.phone_2,
 		address: receiver.address,
