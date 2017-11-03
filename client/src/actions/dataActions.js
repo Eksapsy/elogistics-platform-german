@@ -1,20 +1,5 @@
 import axios from 'axios';
-import { FETCH_FORM_DATA, POST_SENDER, POST_RECEIVER, POST_COURIER, POST_PRODUCT } from './types';
-
-export const addSender = (name, email) => async dispatch => {
-	await axios.post('/api/postsender', {
-		name,
-		email
-	});
-
-	// Reloading the store with the new data
-	const res = await axios.get('/api/getsenders');
-
-	dispatch({
-		type: POST_SENDER,
-		senders: res.data
-	});
-};
+import { FETCH_FORM_DATA, POST_RECEIVER, POST_COURIER, POST_PRODUCT } from './types';
 
 export const addReceiver = (receiver) => async dispatch => {
 	await axios.post('/api/postreceiver', {
@@ -69,7 +54,6 @@ export const addProduct = (id, name) => async dispatch => {
 };
 
 export const fetchFormData = () => async dispatch => {
-	const res_senders = await axios.get('/api/getsenders');
 	const res_receivers = await axios.get('/api/getreceivers');
 	const res_couriers = await axios.get('/api/getcouriers');
 	const res_products = await axios.get('/api/getproducts');
@@ -77,7 +61,6 @@ export const fetchFormData = () => async dispatch => {
 	dispatch({
 		type: FETCH_FORM_DATA,
 		payload: {
-			senders: res_senders.data,
 			receivers: res_receivers.data,
 			couriers: res_couriers.data,
 			products: res_products.data

@@ -1,4 +1,4 @@
-import { TOGGLE_LOADER, LOGIN } from './types';
+import { TOGGLE_LOADER, LOGIN, FETCH_USER } from './types';
 import axios from 'axios';
 
 export const toggleLoader = (loading = undefined) => async dispatch => {
@@ -13,10 +13,23 @@ export const login = (username, password) => async dispatch => {
     username,
     password
   });
-  const isLoggedIn = await loginPromise;
-  await console.log('isLoggedIn', isLoggedIn);
+  const res = await axios.get('/api/profile')
+    .catch((err) => {
+      console.error(err);
+    });
   dispatch({
     type: LOGIN,
-    isLoggedIn
+    profile: res.data
   });
 };
+
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get('/api/profile')
+    .catch((err) => {
+      console.error(err);
+    });
+  dispatch({
+    type: FETCH_USER,
+    profile: res.data || false
+  });
+}

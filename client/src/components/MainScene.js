@@ -11,6 +11,7 @@ import Footer from './Footer';
 
 class MainScene extends Component {
   render() {
+    console.log('isAuth:', this.props.isAuth);
     return (
     this.props.isAuth
       ? <div className='main-scene'>

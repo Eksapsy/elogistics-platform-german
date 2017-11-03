@@ -1,8 +1,9 @@
-import { TOGGLE_LOADER, LOGIN } from '../actions/types';
+import { TOGGLE_LOADER, LOGIN, FETCH_USER } from '../actions/types';
+import axios from 'axios';
 
 const initialReducer = {
   loading: false,
-  isLoggedIn: false
+  profile: false
 };
 export default (state = initialReducer, action = {}) => {
   switch (action.type) {
@@ -14,7 +15,12 @@ export default (state = initialReducer, action = {}) => {
     case LOGIN:
       return {
         ...state,
-        isLoggedIn: action.isLoggedIn
+        profile: action.profile.user || false
+      }
+    case FETCH_USER:
+      return {
+        ...state,
+        profile: action.profile.user || false
       }
     default:
       return state;

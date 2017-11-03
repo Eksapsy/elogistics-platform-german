@@ -18,12 +18,19 @@ require('./services/passport');
 const app = express();
 mongoose.connect(keys.mongoURI);
 
-app.use(
-	cookieSession({
-		maxAge: 30 * 24 * 60 * 60 * 1000,
-		keys: [keys.cookieKey]
-	})
-);
+// app.use(
+// 	cookieSession({
+// 		maxAge: 30 * 24 * 60 * 60 * 1000,
+// 		keys: [keys.cookieKey]
+// 	})
+// );
+
+app.use(require('cookie-parser')());
+app.use(require('express-session')({
+	secret: 'keyboard cat',
+	resave: false,
+	saveUninitialized: false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());

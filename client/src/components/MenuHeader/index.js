@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Segment, Menu, Header, Icon } from 'semantic-ui-react';
+import { Segment, Menu, Header, Button, Icon } from 'semantic-ui-react';
+import axios from 'axios';
 
 class MenuHeader extends Component {
 	constructor(props) {
@@ -47,6 +48,14 @@ class MenuHeader extends Component {
        ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ
        <Header.Subheader content='Electronic Business - Product Form' />
      </Header>
+     <center>
+       <Button negative onClick={ () => {
+                                  	axios.get('/api/logout');
+                                  	window.location.reload();
+                                  } }>
+         Logout
+       </Button>
+     </center>
      <Menu stackable pointing secondary color='blue' size='massive' widths={ 3 }>
        <Menu.Item content='Form' name='form' active={ activeItem === 'form' } onClick={ this.handleItemClick } />
        <Menu.Item content='Database' name='database' active={ activeItem === 'database' } onClick={ this.handleItemClick } />

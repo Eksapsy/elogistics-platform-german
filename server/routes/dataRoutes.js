@@ -8,30 +8,6 @@ const Courier = mongoose.model('couriers');
 const Product = mongoose.model('products');
 
 module.exports = (app) => {
-	/* Sender Routes */
-	app.post(
-		'/api/postsender',
-		(req, res) => {
-			const sender = new Sender({
-				name: req.body.name,
-				email: req.body.email
-			}).save();
-
-			res.send(sender);
-		}
-	);
-
-	app.get(
-		'/api/getsenders',
-		(req, res) => {
-			let products = {};
-			Sender.find({}, (err, data) => {
-				res.send(data);
-			});
-		}
-	);
-
-
 	/* Receiver Routes */
 	app.post(
 		'/api/postreceiver',

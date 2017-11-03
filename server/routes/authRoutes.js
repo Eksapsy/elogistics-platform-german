@@ -4,7 +4,7 @@ module.exports = (app) => {
   app.get(
     '/api/login',
     (req, res) => {
-      res.render('login');
+      res.send(false);
     }
   );
 
@@ -28,9 +28,9 @@ module.exports = (app) => {
 
   app.get(
     '/api/profile',
-    require('connect-ensure-login').ensureLoggedIn(),
+    require('connect-ensure-login').ensureLoggedIn('/api/login'),
     (req, res) => {
-      res.send('profile', {
+      res.send({
         user: req.user
       });
     }

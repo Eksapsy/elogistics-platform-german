@@ -5,20 +5,6 @@ import { Grid, Header, Divider } from 'semantic-ui-react';
 import uuid from 'uuid';
 
 class SenderSegment extends Component {
-
-  senders =[
-    {
-      key: uuid(),
-      value: 'Γερμανός Ποιμενίδης',
-      text: 'Γερμανός Ποιμενίδης'
-    },
-    {
-      key: uuid(),
-      value: 'Θεσσαλονίκη Supplies',
-      text: 'Θεσσαλονίκη Supplies'
-    }
-  ];
-
   senderChanged(e, data) {
     this.props.formDataActions.changeSender(data.value);
   }
@@ -31,6 +17,7 @@ class SenderSegment extends Component {
     //     text: sender.name
     //   };
     // });
+    const {displayName} = this.props.webData.profile;
     return (
       <div>
         <Divider hidden/>
@@ -42,7 +29,7 @@ class SenderSegment extends Component {
         </Divider>
         <Grid.Column width={ 16 }>
           <center>
-            <Header as='h3' content='Γερμανός Ποιμενίδης' block/>
+            <Header as='h3' content={ displayName } block/>
           </center>
         </Grid.Column>
       </div>
@@ -50,8 +37,9 @@ class SenderSegment extends Component {
   }
 }
 
-const mapStateToProps = ({dataBinded}) => {
+const mapStateToProps = ({dataBinded, webData}) => {
   return {
+    webData,
     dataBinded,
   }
 };

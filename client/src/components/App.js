@@ -16,10 +16,13 @@ class App extends Component {
   componentDidMount() {
     // Update dataBinded in Redux Store by Fetching data from the API
     this.props.dataActions.fetchFormData();
+    this.props.webActions.fetchUser();
   }
 
   loggedIn() {
-    return this.props.webData.isLoggedIn; // Returns either null, true of false
+    const profile = this.props.webData.profile;
+    console.log('logged profile:', profile);
+    return profile; // Returns either null, true of false
   }
 
   render() {
@@ -39,6 +42,7 @@ const mapStateToProps = ({webData}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  webActions: bindActionCreators(actions.webActions, dispatch),
   dataActions: bindActionCreators(actions.dataActions, dispatch)
 });
 
