@@ -28,7 +28,7 @@ module.exports = (app) => {
     const hr = '<hr>';
     const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - ORDER</h1>";
     const senderHeader = `${sender ? `<h1>${sender}</h1>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
-    const receiverHeader = `<h2>RECEIVER</h2><table><tr><th>Name</th><th>VAT</th><th>Location</th><th>Phone #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.location}</td><td>${receiver.phone_1}</td></tr></table>`
+    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.location}</td><td>${receiver.phone_1}</td></tr></table>`
     let courierName = '';
     try {
       courierName = courier.toUpperCase();
@@ -36,10 +36,10 @@ module.exports = (app) => {
       courierName = 'NONE'
     };
     const courierHeader = '<h2>COURIER</h2><h3>' + courierName + '</h3>';
-    const productHeader = '<h2>PRODUCTS</h2>'
+    const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>'
 
     const productsTable_START = '<table width=\'60%\' >';
-    const productsTable_HEADERS = '<tr><th align=\'left\'>PRODUCT ID</th><th align=\'left\'>PRODUCT NAME</th><th align=\'right\'>PRODUCT AMOUNT</th></tr>'
+    const productsTable_HEADERS = '<tr><th align=\'left\'>ΚΩΔΙΚΟΣ</th><th align=\'left\'>ΟΝΟΜΑ</th><th align=\'right\'>ΠΟΣΟΤΗΤΑ</th></tr>'
     let productsTable_PRODUCTS = '';
 
     try {
@@ -52,7 +52,7 @@ module.exports = (app) => {
 
     const productsTable_END = '</table>'
 
-    const costHeader = `<h3>Total Cost:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
+    const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 
     const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
     const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + footer;
@@ -68,7 +68,7 @@ module.exports = (app) => {
     data = data.concat(receiverData);
     console.log('data with receiver:', data);
     let productsData = [
-      ['Product ID', 'Product Name', 'Product Amount'],
+      ['ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ', 'ΟΝΟΜΑ ΠΡΟΙΟΝΤΟΣ', 'ΠΟΣΟΤΗΤΑ ΠΡΟΙΟΝΤΟΣ'],
     ];
 
     productsData = await productsData.concat(products.map((product) => {
