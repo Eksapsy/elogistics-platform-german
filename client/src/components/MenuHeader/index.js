@@ -18,6 +18,18 @@ class MenuHeader extends Component {
 		this.handleItemClick = this.handleItemClick.bind(this);
 	}
 
+	componentWillReceiveProps() {
+		console.log('HEADER RECEIVED PROPS LOL XD');
+		const {pathname} = this.props.history.location;
+		const activeItem = pathname === '/' || pathname === '/dashboard' ? 'form'
+			: pathname === '/database/insert-items' || pathname === '/database/import-by-excel' ? 'database'
+				: '';
+
+		this.setState({
+			activeItem
+		});
+	}
+
 	handleItemClick(e, {name}) {
 		this.setState({
 			activeItem: name
