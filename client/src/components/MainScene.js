@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 
 class MainScene extends Component {
   requireAuth(nextState, replace) {
-    console.log('isAuth:', this.props.isAuth);
     if (!this.props.isAuth) {
       replace({
         pathname: '/login'

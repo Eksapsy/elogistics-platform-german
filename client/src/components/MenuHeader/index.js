@@ -19,7 +19,6 @@ class MenuHeader extends Component {
 	}
 
 	componentWillReceiveProps() {
-		console.log('HEADER RECEIVED PROPS LOL XD');
 		const {pathname} = this.props.history.location;
 		const activeItem = pathname === '/' || pathname === '/dashboard' ? 'form'
 			: pathname === '/database/insert-items' || pathname === '/database/import-by-excel' ? 'database'
@@ -60,7 +59,7 @@ class MenuHeader extends Component {
            <Icon circular style={ { paddingTop: '-10px' } } corner name='mail' />
          </Icon.Group>
          ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ
-         <Header.Subheader content='Electronic Business - Product Form' />
+         <Header.Subheader content='Electronic Business - Logistics Services' />
        </Header>
        <center>
          <Button inverted color='red' onClick={ () => {

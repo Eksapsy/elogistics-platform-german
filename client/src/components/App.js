@@ -20,9 +20,7 @@ class App extends Component {
   }
 
   loggedIn() {
-    const profile = this.props.webData.profile;
-    console.log('logged profile:', profile);
-    return profile; // Returns either null, true of false
+    return this.props.webData.profile; // Returns either null, true of false
   }
 
   render() {

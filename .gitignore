@@ -1,3 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
+
+# Private|Privacy Keys and Local Configs
 /config/dev.js
+
+# local files
+/server/files
