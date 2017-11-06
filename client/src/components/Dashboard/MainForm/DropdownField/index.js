@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Header } from 'semantic-ui-react';
 
 class DropdownField extends Component {
   handleChange(e, {value}) {
@@ -10,9 +10,13 @@ class DropdownField extends Component {
   }
 
   render() {
+    const {touched, error, warning} = this.props.meta;
     return (
       <div>
         <Dropdown {...this.props.input} placeholder={ this.props.placeholder } fluid search selection options={ this.props.data } size='big' onChange={ this.handleChange.bind(this) } />
+        { touched && ((error && <Header as='h5' color='red'>
+                                  { error }
+                                </Header>) || (warning && <span>{ warning }</span>)) }
       </div>
       );
   }

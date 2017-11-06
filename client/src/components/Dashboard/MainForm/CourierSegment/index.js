@@ -6,6 +6,7 @@ import { Grid, Header, Divider } from 'semantic-ui-react';
 import DropdownField from '../DropdownField';
 import uuid from 'uuid';
 
+const required = value => value ? undefined : 'Required'
 class CourierSegment extends Component {
   render() {
     const courierNames = this.props.dataBinded.couriers.map((courier) => {
@@ -24,7 +25,7 @@ class CourierSegment extends Component {
         </Divider>
         <Grid.Row>
           <Grid.Column width={ 16 }>
-            <Field name='courierName' component={ DropdownField } placeholder='Courier' data={ courierNames } />
+            <Field name='courierName' component={ DropdownField } placeholder='Courier' data={ courierNames } validate={ [required] } />
           </Grid.Column>
         </Grid.Row>
       </div>

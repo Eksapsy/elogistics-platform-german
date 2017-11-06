@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Segment, Grid, Form, Header } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -40,7 +41,8 @@ class LoginForm extends Component {
           { `
           body > div,
           body > div > div,
-          body > div > div > div.login-form {
+          body > div > div > div,
+          body > div > div > div > div.login-form {
             height: 100%;
           }
           body {
@@ -50,9 +52,9 @@ class LoginForm extends Component {
         </style>
         <Grid textAlign='center' style={ { height: '100%' } } verticalAlign='middle'>
           <Grid.Column style={ { maxWidth: 450 } }>
-          <Header as='h2' inverted textAlign='center'>
-          { '  ' }eLogistics Poimenidis
-        </Header>
+            <Header as='h2' inverted textAlign='center'>
+              { '  ' }eLogistics Poimenidis
+            </Header>
             <Form size='large' onSubmit={ this.onSubmit }>
               <Segment stacked>
                 <Form.Input value={ username } fluid icon='user' iconPosition='left' placeholder='Username' required onChange={ this.usernameChanged } />
@@ -74,4 +76,4 @@ const mapDispatchToProps = (dispatch) => ({
   webActions: bindActionCreators(actions.webActions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginForm));

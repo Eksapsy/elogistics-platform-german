@@ -5,20 +5,22 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import ImportExcelComponent from './ImportExcelComponent/index';
 import InsertItemsForm from './InsertItemsForm/index';
-import { Segment, Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
+import { Container, Segment, Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
 import axios from 'axios';
 
 class Database extends Component {
 	render() {
 		return (
-			<div>
-     <Segment color='yellow'>
-       <DatabaseHeader/>
-       <DatabaseMenu {...this.props}/>
-       <Route path='/database/insert-items' component={ InsertItemsForm } />
-       <Route path='/database/import-by-excel' component={ ImportExcelComponent } />
-     </Segment>
-   </div>
+			<Container textAlign='justified' style={ { marginTop: '3em', marginBottom: '2em' } }>
+     <div>
+       <Segment color='yellow'>
+         <DatabaseHeader/>
+         <DatabaseMenu {...this.props}/>
+         <Route path='/database/insert-items' component={ InsertItemsForm } />
+         <Route path='/database/import-by-excel' component={ ImportExcelComponent } />
+       </Segment>
+     </div>
+   </Container>
 			);
 	}
 }

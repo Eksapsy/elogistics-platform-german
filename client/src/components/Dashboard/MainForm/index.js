@@ -65,6 +65,10 @@ class MainForm extends Component {
     }
   }
 
+  allFieldsFilled() {
+    return this.props.receiver && this.props.courier && this.props.cost && this.props.productList;
+  }
+
   render() {
     const {modalOpen} = this.state;
     const {pristine, submitting} = this.props;
@@ -106,7 +110,7 @@ class MainForm extends Component {
         </Grid>
         <Divider hidden/>
         <center>
-          <Form.Button type='submit' inverted color='blue' size='large' disabled={ pristine || submitting }>Submit</Form.Button>
+          <Form.Button type='submit' inverted color='blue' size='large' disabled={ pristine || submitting || !this.allFieldsFilled() }>Submit</Form.Button>
         </center>
         <Modal basic size='small' dimmer='blurring' open={ modalOpen } onClose={ this.closeModal }>
           <Header icon='mail' content='Send Order Email' />

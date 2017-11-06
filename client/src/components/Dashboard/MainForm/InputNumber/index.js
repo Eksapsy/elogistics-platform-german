@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Input, Menu, Transition } from 'semantic-ui-react';
+import { Icon, Header, Input, Menu, Transition } from 'semantic-ui-react';
 import './styles.css';
 
 class InputNumber extends Component {
@@ -60,6 +60,7 @@ class InputNumber extends Component {
 
   render() {
     const {leftArrowAnimationVisible, rightArrowAnimationVisible} = this.state;
+    const {touched, error, warning} = this.props.meta;
 
     const amountArrowsLabel = (
     <Menu compact size='tiny'>
@@ -80,6 +81,9 @@ class InputNumber extends Component {
       <div className='input-number'>
         <Input type='number' action={ amountArrowsLabel } label={ this.props.label } placeholder='Amount' size='tiny' onChange={ this.onChange.bind(this) } style={ { width: '50%' } }
           {...this.props.input}/>
+        { touched && ((error && <Header as='h5' color='red'>
+                                  { error }
+                                </Header>) || (warning && <span>{ warning }</span>)) }
       </div>
       );
   }

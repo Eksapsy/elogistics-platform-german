@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Segment, Menu, Header, Button, Icon } from 'semantic-ui-react';
+import { Container, Segment, Menu, Header, Button, Icon } from 'semantic-ui-react';
 import axios from 'axios';
 
 class MenuHeader extends Component {
@@ -10,7 +10,7 @@ class MenuHeader extends Component {
 		const {pathname} = this.props.history.location;
 		const activeItem = pathname === '/' || pathname === '/dashboard' ? 'form'
 			: pathname === '/database/insert-items' || pathname === '/database/import-by-excel' ? 'database'
-				: '';
+				: 'form';
 
 		this.state = {
 			activeItem
@@ -39,29 +39,33 @@ class MenuHeader extends Component {
 	render() {
 		const {activeItem} = this.state;
 		return (
-			<Segment>
-     <Header as='h2' textAlign='center'>
-       <Icon.Group size='large'>
-         <Icon circular name='shop' />
-         <Icon circular style={ { paddingTop: '-10px' } } corner name='mail' />
-       </Icon.Group>
-       ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ
-       <Header.Subheader content='Electronic Business - Product Form' />
-     </Header>
-     <center>
-       <Button negative onClick={ () => {
-                                  	axios.get('/api/logout');
-                                  	window.location.reload();
-                                  } }>
-         Logout
-       </Button>
-     </center>
-     <Menu stackable pointing secondary color='blue' size='massive' widths={ 3 }>
-       <Menu.Item content='Form' name='form' active={ activeItem === 'form' } onClick={ this.handleItemClick } />
-       <Menu.Item content='Database' name='database' active={ activeItem === 'database' } onClick={ this.handleItemClick } />
-     </Menu>
-   </Segment>
-			);
+		this.props.isAuth ?
+			<Container textAlign='justified' style={ { marginTop: '3em', marginBottom: '2em' } }>
+     <Segment>
+       <Header as='h2' textAlign='center'>
+         <Icon.Group size='large'>
+           <Icon circular name='shop' />
+           <Icon circular style={ { paddingTop: '-10px' } } corner name='mail' />
+         </Icon.Group>
+         ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ
+         <Header.Subheader content='Electronic Business - Product Form' />
+       </Header>
+       <center>
+         <Button inverted color='red' onClick={ () => {
+                                                	axios.get('/api/logout');
+                                                	window.location.reload();
+                                                } }>
+           Logout
+         </Button>
+       </center>
+       <Menu stackable pointing secondary color='blue' size='massive' widths={ 3 }>
+         <Menu.Item content='Form' name='form' active={ activeItem === 'form' } onClick={ this.handleItemClick } />
+         <Menu.Item content='Database' name='database' active={ activeItem === 'database' } onClick={ this.handleItemClick } />
+       </Menu>
+     </Segment>
+   </Container>
+			: <div></div>
+		);
 	}
 }
 

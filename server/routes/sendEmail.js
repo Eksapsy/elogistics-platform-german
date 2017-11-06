@@ -26,8 +26,8 @@ module.exports = (app) => {
     const {sender, receiver, courier, products, cost} = req.body;
     const scripts = '<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">';
     const hr = '<hr>';
-    const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - ORDER</h1>";
-    const senderHeader = `${sender ? `<h1>${sender}</h1>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
+    const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>eLogistics Poimenidis Services</h1>";
+    const senderHeader = `${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
     const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.location}</td><td>${receiver.phone_1}</td></tr></table>`
     let courierName = '';
     try {

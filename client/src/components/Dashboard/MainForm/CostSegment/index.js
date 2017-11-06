@@ -3,6 +3,9 @@ import { Field } from 'redux-form';
 import { Segment, Divider, Form, Header } from 'semantic-ui-react';
 import InputNumber from '../InputNumber';
 
+
+const required = value => value ? undefined : 'Required!';
+
 class CostSegment extends Component {
   render() {
     return (
@@ -12,7 +15,8 @@ class CostSegment extends Component {
             <Header as='h3' content='Cost' color='blue' block/>
           </Divider>
           <Segment color='blue' style={ { width: '18em', margin: 'auto' } }>
-            <Field name='costValue' component={ InputNumber } placeholder='Total Cost' fluid label='€' labelPosition='left' minimumValue={ 0 } />
+            <Field name='costValue' component={ InputNumber } placeholder='Total Cost' fluid label='€' labelPosition='left' minimumValue={ 0 } validate={ [required] }
+            />
           </Segment>
         </div>
       </Form.Field>
