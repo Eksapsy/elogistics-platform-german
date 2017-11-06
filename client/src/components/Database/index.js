@@ -27,6 +27,7 @@ class Database extends Component {
 
 class DatabaseHeader extends Component {
 	onDownloadExcelIconClick(e) {
+		e.preventDefault();
 		axios.get('/api/downloadexcel');
 	}
 	render() {
