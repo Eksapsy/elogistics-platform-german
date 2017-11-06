@@ -10,7 +10,7 @@ class MenuHeader extends Component {
 		const {pathname} = this.props.history.location;
 		const activeItem = pathname === '/' || pathname === '/dashboard' ? 'form'
 			: pathname === '/database/insert-items' || pathname === '/database/import-by-excel' ? 'database'
-				: 'form';
+				: '';
 
 		this.state = {
 			activeItem
@@ -59,7 +59,7 @@ class MenuHeader extends Component {
          </Button>
        </center>
        <Menu stackable pointing secondary color='blue' size='massive' widths={ 3 }>
-         <Menu.Item content='Form' name='form' active={ activeItem === 'form' } onClick={ this.handleItemClick } />
+         <Menu.Item content='Form' name='form' active={ activeItem === 'form' || !activeItem } onClick={ this.handleItemClick } />
          <Menu.Item content='Database' name='database' active={ activeItem === 'database' } onClick={ this.handleItemClick } />
        </Menu>
      </Segment>

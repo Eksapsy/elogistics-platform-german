@@ -7,6 +7,7 @@ import ImportExcelComponent from './ImportExcelComponent/index';
 import InsertItemsForm from './InsertItemsForm/index';
 import { Container, Segment, Menu, Popup, Divider, Icon, Header } from 'semantic-ui-react';
 import axios from 'axios';
+import FileDownload from 'react-file-download';
 
 class Database extends Component {
 	render() {
@@ -28,14 +29,16 @@ class Database extends Component {
 class DatabaseHeader extends Component {
 	onDownloadExcelIconClick(e) {
 		e.preventDefault();
-		axios.get('/api/downloadexcel');
+		axios.get('/api/downloadexcel').then(response => {
+			FileDownload(response.data, 'elogisticsExport.xlsx');
+		});
 	}
 	render() {
 		const header = (
 
 		<Header block textAlign='center' as='h1' color='black'>
-    <a href='/api/downloadexcel'>
-      <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
+    <a href='/api/downloadexcel' onClick={ this.onDownloadExcelIconClick.bind(this) }>
+      <Icon link name='database' style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
     </a>
     <Header.Content>Modify Database</Header.Content>
   </Header>
