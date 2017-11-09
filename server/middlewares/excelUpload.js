@@ -59,6 +59,8 @@ module.exports = async (req, res, next) => {
 
 	/* Saving Couriers */
 	const courier_names = await getCourierNames(workbook);
+	const courier_locations = await getCourierLocations(workbook);
+	const courier_phones = await getCourierPhones(workbook);
 
 	for (i = 0; i < courier_names.length; i++) {
 		const courier = await new Courier({
@@ -206,6 +208,26 @@ function getCourierNames(workbook) {
 		header: 2
 	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
 	return _.map(ws_json, 'NAME');
+}
+
+function getCourierLocations(workbook) {
+	if (!workbook) return;
+
+	const ws = workbook.Sheets['Couriers'];
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	return _.map(ws_json, 'LOCATION');
+}
+
+function getCourierPhones(workbook) {
+	if (!workbook) return;
+
+	const ws = workbook.Sheets['Couriers'];
+	const ws_json = XLSX.utils.sheet_to_json(ws, {
+		header: 2
+	}); // 3D Array, Header-Named Cells (eg. {NAME: "APOSTOLIS"})
+	return _.map(ws_json, 'PHONE');
 }
 /*------------*/
 

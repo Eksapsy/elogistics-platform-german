@@ -102,11 +102,11 @@ module.exports = (app) => {
 			});
 
 			let couriers = [
-				['NAME', 'PHONE', 'EMAIL']
+				['NAME', 'LOCATION', 'PHONE']
 			];
 			let courierData = await Courier.find({});
 			await courierData.forEach((courier) => {
-				const data = [courier.name, courier.phone, courier.email];
+				const data = [courier.name, courier.location, courier.phone];
 				couriers.push(data);
 			});
 

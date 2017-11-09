@@ -37,8 +37,8 @@ class DatabaseHeader extends Component {
 		const header = (
 
 		<Header block textAlign='center' as='h1' color='black'>
-    <a href='#'>
-      <Icon link name='database' onClick={ this.onDownloadExcelIconClick.bind(this) } style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
+    <a href='/api/downloadexcel'>
+      <Icon link name='database' style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
     </a>
     <Header.Content>Modify Database</Header.Content>
   </Header>

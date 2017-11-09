@@ -4,13 +4,13 @@ var records = [
   {
     id: 1,
     username: 'local',
-    password: 'tqnGvduWezXNS2WH',
+    password: keys.password1 || 'tqnGvduWezXNS2WH',
     displayName: 'Germanos Poimenidis',
   },
   {
     id: 2,
     username: 'thessSupplies',
-    password: 'qe4zkbfU3x9w5Q6G',
+    password: keys.password2 || 'qe4zkbfU3x9w5Q6G',
     displayName: 'Thessaloniki Supplies',
   },
   {

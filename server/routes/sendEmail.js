@@ -3,6 +3,7 @@ const axios = require('axios');
 const XLSX = require('xlsx');
 const path = require('path');
 const fs = require('fs');
+const keys = require('../config/keys');
 
 module.exports = (app) => {
   app.post('/api/send-email', async (req, res) => {
@@ -30,7 +31,7 @@ module.exports = (app) => {
     const senderHeader = `${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
     const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
 
-    const courierHeader = `<h2>COURIER</h2><table><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th>th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
+    const courierHeader = `<h2>COURIER</h2><table><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
 
     const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>'
 
@@ -100,7 +101,7 @@ module.exports = (app) => {
 
     const mailOptions = await {
       from: 'auto@gpsupplies.gr',
-      to: 'michael.tolis@gmail.com', // FIX: Change to Logistic's Email
+      to: keys.officeEmail,
       subject: 'ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - eLogistics',
       html: fullHtml,
       attachments: [
