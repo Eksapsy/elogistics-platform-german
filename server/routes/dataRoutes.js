@@ -46,7 +46,9 @@ module.exports = (app) => {
 		'/api/postcourier',
 		(req, res) => {
 			const courier = new Courier({
-				name: req.body.name
+				name: req.body.name,
+				location: req.body.location,
+				phone: req.body.phone
 			}).save();
 
 			res.send(courier);

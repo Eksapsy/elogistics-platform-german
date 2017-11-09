@@ -25,9 +25,11 @@ export const addReceiver = (receiver) => async dispatch => {
 	});
 };
 
-export const addCourier = (name) => async dispatch => {
+export const addCourier = (courier) => async dispatch => {
 	await axios.post('/api/postcourier', {
-		name
+		name: courier.name,
+		location: courier.location,
+		phone: courier.phone
 	});
 
 	// Reloading the store with the new data

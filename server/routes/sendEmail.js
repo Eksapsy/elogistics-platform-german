@@ -28,14 +28,16 @@ module.exports = (app) => {
     const hr = '<hr>';
     const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>eLogistics Poimenidis Services</h1>";
     const senderHeader = `${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
-    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.location}</td><td>${receiver.phone_1}</td></tr></table>`
+    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
     let courierName = '';
     try {
-      courierName = courier.toUpperCase();
+      courierName = courier.name.toUpperCase();
     } catch (e) {
       courierName = 'NONE'
     };
-    const courierHeader = '<h2>COURIER</h2><h3>' + courierName + '</h3>';
+
+    const courierHeader = `<h2>COURIER</h2><table><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th>th>ΤΗΛ.</th></tr><tr><td>${courierName}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
+
     const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>'
 
     const productsTable_START = '<table width=\'60%\' >';
@@ -61,8 +63,8 @@ module.exports = (app) => {
     let data = [];
 
     const receiverData = [
-      ['Παραλήπτης', 'Courier', 'Α.Φ.Μ.', 'Δ.Ο.Υ.', 'Τηλ. #1', 'Τηλ. #2', 'Τ.Κ.', 'Περιοχή', 'Διεύθυνση'],
-      [receiver.name, courier, receiver.vat_number, receiver.doy_number, receiver.phone_1, receiver.phone_2, receiver.zip, receiver.location, receiver.address]
+      ['Παραλήπτης', 'Α.Φ.Μ.', 'Δ.Ο.Υ.', 'Τηλ. #1', 'Τηλ. #2', 'Τ.Κ.', 'Περιοχή', 'Διεύθυνση', 'Ονομα Courier', 'Περιοχή Courier', 'Τηλ. Courier'],
+      [receiver.name, receiver.vat_number, receiver.doy_number, receiver.phone_1, receiver.phone_2, receiver.zip, receiver.location, receiver.address, courier.name, courier.location, courier.phone]
     ];
 
     data = data.concat(receiverData);
@@ -105,7 +107,7 @@ module.exports = (app) => {
     const mailOptions = await {
       from: 'auto@gpsupplies.gr',
       to: 'michael.tolis@gmail.com', // FIX: Change to Logistic's Email
-      subject: 'ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - ORDER',
+      subject: 'ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - eLogistics',
       html: fullHtml,
       attachments: [
         {

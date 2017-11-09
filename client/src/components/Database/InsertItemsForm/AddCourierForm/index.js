@@ -6,7 +6,9 @@ import { Segment, Form, Header, Divider, Input, Button } from 'semantic-ui-react
 
 class AddCourierForm extends Component {
   state = {
-    courierName: ''
+    courierName: '',
+    courierLocation: '',
+    courierPhone: ''
   }
 
   constructor(props) {
@@ -23,8 +25,12 @@ class AddCourierForm extends Component {
   }
 
   async handleSubmit() {
-    const {courierName} = this.state;
-    await this.props.dataActions.addCourier(courierName);
+    const {courierName, courierLocation, courierPhone} = this.state;
+    await this.props.dataActions.addCourier({
+      name: courierName,
+      location: courierLocation,
+      phone: courierPhone
+    });
     await window.location.reload();
   }
 
@@ -37,6 +43,8 @@ class AddCourierForm extends Component {
           </Divider>
           <Form.Group widths='equal'>
             <Form.Field control={ Input } label='Name' placeholder='Name' name='courierName' onChange={ this.handleChange } required />
+            <Form.Field control={ Input } label='Location' placeholder='Location' name='courierLocation' onChange={ this.handleChange } required />
+            <Form.Field control={ Input } label='Phone' placeholder='Phone' name='courierPhone' onChange={ this.handleChange } required />
           </Form.Group>
           <center>
             <Form.Field control={ Button } content='Add Courier' />

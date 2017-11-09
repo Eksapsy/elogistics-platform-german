@@ -1,3 +1,4 @@
+var keys = require('../config/keys');
 
 var records = [
   {
@@ -5,29 +6,24 @@ var records = [
     username: 'local',
     password: 'tqnGvduWezXNS2WH',
     displayName: 'Germanos Poimenidis',
-    emails: [{
-      value: 'info@gpsupplies.gr'
-    }]
   },
   {
     id: 2,
     username: 'thessSupplies',
     password: 'qe4zkbfU3x9w5Q6G',
     displayName: 'Thessaloniki Supplies',
-    emails: [{
-      value: 'info@gpsupplies.gr'
-    }]
   },
   {
     id: 3,
     username: 'jack',
     password: 'secret',
     displayName: 'Jack',
-    emails: [{
-      value: 'info@gpsupplies.gr'
-    }]
   }
 ];
+
+function getRecords() {
+
+}
 
 exports.findById = function(id, cb) {
   process.nextTick(() => {

@@ -44,7 +44,9 @@ class MainForm extends Component {
         receiver: _.find(this.props.dataBinded.receivers, {
           name: this.props.receiver
         }),
-        courier: this.props.courier,
+        courier: _.find(this.props.dataBinded.couriers, {
+          name: this.props.courier
+        }),
         products: this.props.productList.map((product) => {
           return {
             id: product.name.slice(0, 8),
