@@ -24,7 +24,7 @@ module.exports = (app) => {
     });
 
     /* HTML MESSAGE */
-    const {sender, receiver, courier, products, cost} = req.body;
+    const {sender, receiver, courier, products, cost, notes} = req.body;
     const scripts = '<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">';
     const hr = '<hr>';
     const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>eLogistics Poimenidis Services</h1>";
@@ -51,8 +51,10 @@ module.exports = (app) => {
 
     const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 
+    const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3>${notes}`;
+
     const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
-    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + footer;
+    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + notesHeader + footer;
 
     /* Attachment Buffer  */
     let data = [];

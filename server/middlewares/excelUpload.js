@@ -8,16 +8,9 @@ const Courier = mongoose.model('couriers');
 const Product = mongoose.model('products');
 
 module.exports = async (req, res, next) => {
-	// if (err) {
-	// 	console.error('Error Occured on File Uploading.');
-	// 	console.error(err);
-	// 	return res.status(500).send(err);
-	// }
-	console.log(req.body);
 	const workbook = XLSX.readFile(
 		path.resolve(__dirname, '../files', 'uploadedFile.xlsx')
 	);
-	console.log(req.body);
 	if (req.body.replaceOldDatabase) {
 		console.log('Removing old database.');
 		await Receiver.remove((err, receiver) => {

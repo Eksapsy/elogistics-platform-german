@@ -43,7 +43,10 @@ const Receiver = new Schema({
 		type: String,
 		required: false
 	},
-	courier: String
+	courier: {
+		type: String,
+		required: false
+	}
 });
 
 const Courier = new Schema({

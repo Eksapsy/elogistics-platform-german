@@ -14,6 +14,8 @@ export const addReceiver = (receiver) => async dispatch => {
 		address: receiver.address,
 		location: receiver.location,
 		zip: receiver.zip
+	}).catch(err => {
+		console.log(err);
 	});
 
 	// Reloading the store with the new data

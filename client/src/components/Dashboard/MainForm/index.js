@@ -8,6 +8,7 @@ import SenderSegment from './SenderSegment';
 import ReceiverSegment from './ReceiverSegment';
 import CourierSegment from './CourierSegment';
 import CostSegment from './CostSegment';
+import NotesSegment from './NotesSegment';
 import ProductListSegment from './ProductListSegment';
 import axios from 'axios';
 import _ from 'lodash';
@@ -54,7 +55,8 @@ class MainForm extends Component {
             amount: product.amount
           }
         }),
-        cost: this.props.cost
+        cost: this.props.cost,
+        notes: this.props.notes
       });
 
     } catch (e) {
@@ -106,6 +108,9 @@ class MainForm extends Component {
               <CostSegment/>
             </Grid.Row>
             <Grid.Row>
+              <NotesSegment/>
+            </Grid.Row>
+            <Grid.Row>
               <ProductListSegment/>
             </Grid.Row>
           </Grid.Column>
@@ -142,6 +147,7 @@ const mapStateToProps = (state) => {
     receiver: orderFormSelector(state, 'receiverName'),
     courier: orderFormSelector(state, 'courierName'),
     cost: orderFormSelector(state, 'costValue'),
+    notes: orderFormSelector(state, 'notes'),
     productList: orderFormSelector(state, 'productList')
   }
 };

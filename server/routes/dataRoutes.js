@@ -24,7 +24,10 @@ module.exports = (app) => {
 				address: req.body.address,
 				location: req.body.location,
 				zip: req.body.zip
-			}).save();
+			}).save().catch(err => {
+				console.err('Error while Saving new Receiver');
+				console.err(err);
+			});
 
 			res.send(receiver);
 		}
@@ -49,7 +52,10 @@ module.exports = (app) => {
 				name: req.body.name,
 				location: req.body.location,
 				phone: req.body.phone
-			}).save();
+			}).save().catch(err => {
+				console.err('Error while Saving new Courier');
+				console.err(err);
+			});
 
 			res.send(courier);
 		}
@@ -73,7 +79,10 @@ module.exports = (app) => {
 			const product = new Product({
 				id: req.body.id,
 				name: req.body.name
-			}).save();
+			}).save().catch(err => {
+				console.err('Error while Saving new Product');
+				console.err(err);
+			});
 
 			res.send(product);
 		}
