@@ -9,8 +9,8 @@ import './styles.css';
 class Dashboard extends Component {
   render() {
     return (
-      <Container textAlign='justified' style={ { marginTop: '3em', marginBottom: '2em' } }>
-        <div>
+      <Container textAlign='justified' style={ { marginTop: '3em', marginBottom: '2em', zIndex: '9999' } }>
+        <div className='dashboard-segment'>
           <Segment color='teal'>
             <Divider hidden/>
             <Divider horizontal>

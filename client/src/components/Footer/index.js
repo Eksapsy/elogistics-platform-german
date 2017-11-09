@@ -10,18 +10,19 @@ export default class Footer extends Component {
           <Divider horizontal>
             <Header as='h3' inverted>GERMANOS POIMENIDIS</Header>
           </Divider>
-          <p>
-            <center>The use of this application is to provide the ability for the user to send an e-mail to the Logistic Team, providing an xlsx attachment informing about the
-              order details.
-            </center>
-          </p>
-          <p>
-            <center>
+          <center>
+            <p>
+              The use of this application is to provide the ability for the user to send an e-mail to the Logistic Team, providing an xlsx attachment informing about the order
+              details.
+            </p>
+          </center>
+          <center>
+            <p>
               Contact with the developer
               <br/>
               <strong>apostolis.anastasiou.alpha@gmail.com</strong>
-            </center>
-          </p>
+            </p>
+          </center>
         </Segment>
       </Container>
       : <div></div>

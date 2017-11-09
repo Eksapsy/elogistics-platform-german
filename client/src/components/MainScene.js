@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader, Modal, Button } from 'semantic-ui-react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MenuHeader from './MenuHeader';
 import LoginForm from './LoginForm';
@@ -9,6 +10,7 @@ import Database from './Database';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
+import * as actions from '../actions'
 
 class MainScene extends Component {
   requireAuth(nextState, replace) {
@@ -32,6 +34,28 @@ class MainScene extends Component {
       <Dimmer.Dimmable as='div' dimmed={ this.props.webData.loading } blurring style={ { height: '100%' } }>
         <Dimmer active={ this.props.webData.loading }>
           <Loader content='Loading ... do not reload the page' />
+        </Dimmer>
+        <Dimmer active={ this.props.webData.error.show }>
+          <Modal open={ this.props.webData.error.show }>
+            <Modal.Header color='red'>Error Occured</Modal.Header>
+            <Modal.Content>
+              <p>
+                { this.props.webData.error.message }
+              </p>
+            </Modal.Content>
+            <Modal.Actions>
+              { this.props.webData.error.reload ?
+                <Button onClick={ () => {
+                                    this.props.webActions.cleanError();
+                                    window.location.reload();
+                                  } }>Reload Page</Button>
+                : <Button onClick={ () => {
+                                    this.props.webActions.cleanError();
+                                  } }>
+                    Close
+                  </Button> }}}
+            </Modal.Actions>
+          </Modal>
         </Dimmer>
         <MenuHeader isAuth={ this.props.isAuth } />
         <Switch>
@@ -95,9 +119,12 @@ class PrivateRoute extends Route {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  webActions: bindActionCreators(actions.webActions, dispatch)
+});
 
 const mapStateToProps = ({webData}) => ({
   webData
 });
 
-export default withRouter(connect(mapStateToProps)(MainScene));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainScene));

@@ -8,3 +8,5 @@ export const FETCH_FORM_DATA = 'update_form_data';
 export const TOGGLE_LOADER = 'toggle_loader';
 export const LOGIN = 'login';
 export const FETCH_USER = 'fetch_user';
+export const ERROR = 'error';
+export const CLEAN_ERROR = 'clean_error';

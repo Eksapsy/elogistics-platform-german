@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
-import superagent from 'superagent';
+import axios from 'superagent';
 import { Form, Divider, Header, Message, Grid, List, Checkbox, Icon } from 'semantic-ui-react';
 import * as actions from '../../../actions';
 
@@ -34,12 +34,27 @@ class ImportExcelComponent extends Component {
   }
 
   async onDrop(files) {
-    this.openLoading();
-    await superagent.post('/api/upload')
-      .attach('file', files[0])
-      .field('replaceOldDatabase', this.state.replaceOldDatabase);
-    this.closeLoading();
-    await window.location.reload();
+    if (files.length > 0) {
+      console.log(files);
+      this.openLoading();
+      var formData = new FormData();
+      formData.append('file', files[0]);
+
+      await axios.post('/api/upload', {
+        formData,
+        replaceOldDatabase: this.state.replaceOldDatabase
+      })
+        .catch(err => {
+          this.props.webActions.error('Error occured while uploading Excel.' + err, true);
+        }).then(() => {
+        this.closeLoading();
+        window.location.reload();
+      }, (err) => {
+        this.props.webActions.error('Error occured while uploading Excel.', err);
+      });
+    } else {
+      this.props.webActions.error('Invalid File!', false);
+    }
   }
 
   closeLoading() {
@@ -100,7 +115,7 @@ class ImportExcelComponent extends Component {
           </Grid>
         </Message>
         <center>
-          <Dropzone name='file' multiple={ false } accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' onDrop={ this.onDrop }>
+          <Dropzone name='file' multiple={ false } onDrop={ this.onDrop }>
             Drop Excel Files here
           </Dropzone>
           <Header as='h4' color='green' content='' />
@@ -139,7 +154,7 @@ class ImportExcelComponent extends Component {
                   <List.Item as='li' value='➡'>
                     <Header as='h5' color='red'>NAME</Header>
                   </List.Item>
-                  <List.Item as='li' value='➡'>EMAIL</List.Item>
+                  <List.Item as='li' value='➡'>LOCATION</List.Item>
                   <List.Item as='li' value='➡'>PHONE</List.Item>
                 </List>
                 <Divider vertical/>

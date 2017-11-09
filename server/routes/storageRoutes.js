@@ -7,7 +7,7 @@ const multer = require('multer'),
 			cb(null, 'server/files/');
 		},
 		filename: function(req, file, cb) {
-			cb(null, 'diakritiko.xlsx');
+			cb(null, 'uploadedFile.xlsx');
 		}
 	}),
 	upload = multer({

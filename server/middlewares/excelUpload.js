@@ -8,10 +8,16 @@ const Courier = mongoose.model('couriers');
 const Product = mongoose.model('products');
 
 module.exports = async (req, res, next) => {
+	// if (err) {
+	// 	console.error('Error Occured on File Uploading.');
+	// 	console.error(err);
+	// 	return res.status(500).send(err);
+	// }
+	console.log(req.body);
 	const workbook = XLSX.readFile(
-		path.resolve(__dirname, '../uploads', 'diakritiko.xlsx')
+		path.resolve(__dirname, '../files', 'uploadedFile.xlsx')
 	);
-
+	console.log(req.body);
 	if (req.body.replaceOldDatabase) {
 		console.log('Removing old database.');
 		await Receiver.remove((err, receiver) => {
@@ -34,7 +40,7 @@ module.exports = async (req, res, next) => {
 	const receiver_emails = await getReceiverEmails(workbook);
 	const receiver_couriers = await getReceiverCourier(workbook);
 	const receiver_vat_numbers = await getReceiverVAT(workbook);
-	const receiver_doy_numbres = await getReceiverDOY(workbook);
+	const receiver_doy_numbers = await getReceiverDOY(workbook);
 	const receiver_phones_1 = await getReceiverPhone_1(workbook);
 	const receiver_phones_2 = await getReceiverPhone_2(workbook);
 	const receiver_zip_numbers = await getReceiverZIP(workbook);
@@ -48,14 +54,20 @@ module.exports = async (req, res, next) => {
 			email: receiver_emails[i],
 			courier: receiver_couriers[i],
 			vat_number: receiver_vat_numbers[i],
-			doy_number: receiver_doy_numbres[i],
+			doy_number: receiver_doy_numbers[i],
 			phone_1: receiver_phones_1[i],
 			phone_2: receiver_phones_2[i],
 			address: receiver_addresses[i],
 			location: receiver_locations[i],
 			zip: receiver_zip_numbers[i]
-		}).save();
+		}).save().catch(err => {
+			console.error('An error occured while trying to store receivers in the database');
+			console.error(err);
+			return res.status(500).send(err);
+		});
 	}
+
+	console.log('Receivers are stored now in the database!')
 
 	/* Saving Couriers */
 	const courier_names = await getCourierNames(workbook);
@@ -65,8 +77,16 @@ module.exports = async (req, res, next) => {
 	for (i = 0; i < courier_names.length; i++) {
 		const courier = await new Courier({
 			name: courier_names[i],
-		}).save();
+			location: courier_locations[i],
+			phone: courier_phones[i]
+		}).save().catch(err => {
+			console.error('An error occured while trying to store couriers in the database');
+			console.error(err);
+			return res.status(500).send(err);
+		});
 	}
+
+	console.log('Couriers are stored now in the database!')
 
 	/* Saving Products */
 	const product_id_array = await getProductIdArray(workbook);
@@ -76,10 +96,16 @@ module.exports = async (req, res, next) => {
 		const product = await new Product({
 			id: product_id_array[i],
 			name: product_names[i]
-		}).save();
+		}).save().catch(err => {
+			console.error('An error occured while trying to store products in the database');
+			console.error(err);
+			return res.status(500).send(err);
+		});
 	}
 
-	await console.log('DATA SAVED IN DATABASE');
+	console.log('Products are stored now in the database!')
+
+	await console.log('DATA STORED IN DATABASE');
 
 
 	next();
