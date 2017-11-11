@@ -37,7 +37,7 @@ class DatabaseHeader extends Component {
 		const header = (
 
 		<Header block textAlign='center' as='h1' color='black'>
-    <a target='_blank' href='/api/downloadexcel'>
+    <a target='_blank' href='/api/downloadexcel' onclick="return false;">
       <Icon link name='database' style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
     </a>
     <Header.Content>Modify Database</Header.Content>
