@@ -30,9 +30,14 @@ mongoose.connect(keys.mongoURI, {
 
 app.use(require('cookie-parser')());
 app.use(require('express-session')({
+	cookie: {
+		secure: true,
+		maxAge: 60000
+	},
+
 	secret: 'keyboard cat',
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: true
 }));
 
 app.use(passport.initialize());
