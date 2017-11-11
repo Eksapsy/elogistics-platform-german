@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const enforceHttpsMiddleware = require('./middlewares/enforceHttpsMiddleware');
+var secure = require('express-force-https');
 require('./models/FormData');
 require('./models/Sender');
 require('./services/passport');
@@ -33,7 +33,7 @@ mongoose.connect(keys.mongoURI, {
 // );
 
 
-app.use(enforceHttpsMiddleware());
+app.use(secure);
 app.use(require('cookie-parser')());
 app.use(require('express-session')({
 	cookie: {
