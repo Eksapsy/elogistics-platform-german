@@ -25,17 +25,24 @@ module.exports = (app) => {
 
     /* HTML MESSAGE */
     const {sender, receiver, courier, products, cost, notes} = req.body;
-    const scripts = '<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">';
-    const hr = '<hr>';
-    const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>GPSupplies eLogistics Services</h1>";
-    const senderHeader = `${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
-    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
+    const scripts = '<style type="text/css">@media screen {@font-face {font-family: \'Lato\';font-style: normal;font-weight: 400;src: local(\'Lato Regular\'), local(\'Lato-Regular\'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format(\'woff\');}body {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;}</style>';
 
-    const courierHeader = `<h2>COURIER</h2><table><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
+    const bodyDiv = '<div style=\'background-color: rgba(149,165,166 ,0.7);\'>';
+    const messageDiv = '<div style=\'background-color: rgba(250,250,250 ,1); width: 64%; border: 0px solid; border-radius: 8px; margin: 0 auto;\'>';
+    const divBordered = '<div style=\'border: 2px solid rgba(222,222,222 ,1); background-color: rgba(236,240,241 ,1);border-radius: 5px; margin-left: 16px; margin-right: 16px; padding: 8px;\'>';
+    const endDiv = '</div>';
+    const hr = '<br/>';
+
+    const logo = '<center><a href="#"><img src=\'http://gpsupplies.gr/wp-content/uploads/2017/05/NEW-LOGO2b.png\' style=\'height: 128px; width: 128px;\'/></href></center>';
+    const header = '<center><h2 style=\'font-family: \'Lobster\', cursive;\'>eLogistics Services</h2></center>';
+    const senderHeader = `<center>${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}</center>`;
+    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
+
+    const courierHeader = `<h2>COURIER</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
 
     const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>'
 
-    const productsTable_START = '<table width=\'60%\' >';
+    const productsTable_START = '<table  style=\'padding-left: 32px; width: 60%;\'>';
     const productsTable_HEADERS = '<tr><th align=\'left\'>ΚΩΔΙΚΟΣ</th><th align=\'left\'>ΟΝΟΜΑ</th><th align=\'right\'>ΠΟΣΟΤΗΤΑ</th></tr>'
     let productsTable_PRODUCTS = '';
 
@@ -49,12 +56,12 @@ module.exports = (app) => {
 
     const productsTable_END = '</table>'
 
-    const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
+    const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong style=\'padding-left: 32px\'>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 
-    const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3>${notes ? notes : ''}`;
+    const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3><div style=\'padding-left: 32px\'>${notes ? notes : ''}</div>`;
 
-    const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
-    const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + notesHeader + footer;
+    const footer = '<div style=\'margin-left: 16px;\'><br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p></div>'
+    const fullHtml = scripts + bodyDiv + logo + header + messageDiv + hr + senderHeader + hr + divBordered + receiverHeader + endDiv + hr + divBordered + courierHeader + endDiv + hr + divBordered + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + endDiv + hr + divBordered + costHeader + endDiv + hr + divBordered + notesHeader + endDiv + footer + hr + endDiv + hr + endDiv;
 
     /* Attachment Buffer  */
     let data = [];

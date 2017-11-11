@@ -21,24 +21,24 @@ mongoose.connect(keys.mongoURI, {
 	useMongoClient: true
 });
 
-// app.use(
-// 	cookieSession({
-// 		maxAge: 30 * 24 * 60 * 60 * 1000,
-// 		keys: [keys.cookieKey]
-// 	})
-// );
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKey]
+	})
+);
 
 app.use(require('cookie-parser')());
-app.use(require('express-session')({
-	cookie: {
-		secure: true,
-		maxAge: 60000
-	},
+// app.use(require('express-session')({
+// 	cookie: {
+// 		secure: true,
+// 		maxAge: 60000
+// 	},
 
-	secret: 'keyboard cat',
-	resave: false,
-	saveUninitialized: true
-}));
+// 	secret: 'keyboard cat',
+// 	resave: false,
+// 	saveUninitialized: true
+// }));
 
 app.use(passport.initialize());
 app.use(passport.session());

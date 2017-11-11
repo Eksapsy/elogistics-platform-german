@@ -6,5 +6,6 @@ module.exports = {
 	display1: 'Germanos Poimenidis',
 	display2: 'Thessaloniki Supplies',
 	password1: 'tqnGvduWezXNS2WH',
-	password2: 'qe4zkbfU3x9w5Q6G'
+	password2: 'qe4zkbfU3x9w5Q6G',
+	cookieKey: '[p231234$_aDASdasacLF-saasd'
 };
