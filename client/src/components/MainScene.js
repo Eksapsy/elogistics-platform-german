@@ -9,7 +9,6 @@ import Dashboard from './Dashboard';
 import Database from './Database';
 import NotFound from './NotFound';
 import Footer from './Footer';
-import PropTypes from 'prop-types';
 import * as actions from '../actions'
 
 class MainScene extends Component {

@@ -26,7 +26,7 @@ app.use(
 		name: 'session',
 		maxAge: 30 * 24 * 60 * 60 * 1000,
 		keys: [keys.cookieKey],
-		secure: true,
+		secure: false,
 		proxy: true
 	})
 );
