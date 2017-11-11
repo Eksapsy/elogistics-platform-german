@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Grid, Header, Divider } from 'semantic-ui-react';
-import uuid from 'uuid';
 
 class SenderSegment extends Component {
   senderChanged(e, data) {

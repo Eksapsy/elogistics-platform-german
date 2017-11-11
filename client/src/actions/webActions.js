@@ -9,7 +9,7 @@ export const toggleLoader = (loading = undefined) => async dispatch => {
 };
 
 export const login = (username, password) => async dispatch => {
-  const loginPromise = await axios.post('/api/login', {
+  await axios.post('/api/login', {
     username,
     password
   });

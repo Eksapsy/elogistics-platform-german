@@ -1,5 +1,4 @@
 import { TOGGLE_LOADER, LOGIN, FETCH_USER, ERROR, CLEAN_ERROR } from '../actions/types';
-import axios from 'axios';
 
 const initialReducer = {
   loading: false,

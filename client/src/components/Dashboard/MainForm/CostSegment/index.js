@@ -15,8 +15,8 @@ class CostSegment extends Component {
             <Header as='h3' content='Cost' color='blue' block/>
           </Divider>
           <Segment color='blue' style={ { width: '18em', margin: 'auto' } }>
-            <Field name='costValue' component={ InputNumber } placeholder='Total Cost' fluid label='€' labelPosition='left' minimumValue={ 0 } validate={ [required] }
-            />
+            <Field name='costValue' value={ 0 } component={ InputNumber } placeholder='Total Cost' fluid label='€' labelPosition='left' minimumValue={ 0 }
+              validate={ [required] } />
           </Segment>
         </div>
       </Form.Field>

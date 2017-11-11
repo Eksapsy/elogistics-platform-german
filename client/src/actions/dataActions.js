@@ -2,6 +2,10 @@ import axios from 'axios';
 import { FETCH_FORM_DATA, POST_RECEIVER, POST_COURIER, POST_PRODUCT } from './types';
 
 export const addReceiver = (receiver) => async dispatch => {
+	console.log('====================================');
+	console.log('Addind Receiver');
+	console.log(receiver);
+	console.log('====================================');
 	await axios.post('/api/postreceiver', {
 		r_id: receiver.r_id,
 		name: receiver.name,

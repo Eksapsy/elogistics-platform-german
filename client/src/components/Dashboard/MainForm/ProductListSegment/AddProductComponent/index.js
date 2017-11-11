@@ -14,7 +14,8 @@ class AddProductComponent extends Component {
     const {dataBinded, productName, productAmount, productList} = this.props;
     return (
       <Grid centered stackable>
-        <ProductFields productAmount={ productAmount } dataBinded={ dataBinded } productName={ productName } productList={productList} fields={this.props.fields} dispatch={this.props.dispatch}/>      
+        <ProductFields productAmount={ productAmount } dataBinded={ dataBinded } productName={ productName } productList={ productList } fields={ this.props.fields }
+          dispatch={ this.props.dispatch } />
       </Grid>
       );
   }
@@ -37,7 +38,7 @@ class ProductFields extends Component {
     return (
       <Grid.Row width={ 16 }>
         <Grid.Column mobile={ 16 } computer={ 8 }>
-          <ProductNameField dataBinded={ dataBinded } productList={productList}/>
+          <ProductNameField dataBinded={ dataBinded } productList={ productList } />
         </Grid.Column>
         <Grid.Column mobile={ 16 } computer={ 6 }>
           <ProductAmountField />
@@ -59,9 +60,11 @@ class ProductNameField extends Component {
   // TOFIX: 
   filterProducts(products) {
     const {productList} = this.props;
-    
+
     return _.filter(products, (product) => {
-      return !_.find(productList, {name: product.text});
+      return !_.find(productList, {
+        name: product.text
+      });
     });
   }
 
@@ -91,7 +94,7 @@ class ProductAmountField extends Component {
   render() {
     return (
       <Segment color='red'>
-        <Field name='productAmount' minimumValue={ 1 } component={ this.inputNumber } />
+        <Field name='productAmount' minimumValue={ 1 } placeholder='Amount' component={ this.inputNumber } />
       </Segment>
       );
   }

@@ -27,7 +27,7 @@ module.exports = (app) => {
     const {sender, receiver, courier, products, cost, notes} = req.body;
     const scripts = '<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">';
     const hr = '<hr>';
-    const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>eLogistics Poimenidis Services</h1>";
+    const header = "<i class=\"fa fa-shopping-cart fa-5x\" aria-hidden=\"true\"></i><h1>GPSupplies eLogistics Services</h1>";
     const senderHeader = `${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}`;
     const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
 
@@ -51,7 +51,7 @@ module.exports = (app) => {
 
     const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 
-    const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3>${notes}`;
+    const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3>${notes ? notes : ''}`;
 
     const footer = '<br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ ΓΙΑ ΛΟΓΙΣΤΗΡΙΟ</strong><p font-size=\'6px\'>Services apostolis.anastasiou.alpha@gmail.com Apostolis Anastasiou</p>'
     const fullHtml = scripts + header + senderHeader + hr + receiverHeader + hr + courierHeader + hr + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + costHeader + notesHeader + footer;
@@ -104,7 +104,7 @@ module.exports = (app) => {
     const mailOptions = await {
       from: 'auto@gpsupplies.gr',
       to: keys.officeEmail,
-      subject: 'ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ - eLogistics',
+      subject: 'GPSupplies - eLogistics',
       html: fullHtml,
       attachments: [
         {

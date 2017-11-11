@@ -153,5 +153,8 @@ const mapStateToProps = (state) => {
 };
 
 export default reduxForm({
-  form: 'orderForm'
+  form: 'orderForm',
+  initialValues: {
+    costValue: '0'
+  }
 })(withRouter(connect(mapStateToProps)(MainForm)));

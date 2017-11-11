@@ -1,17 +1,18 @@
 var keys = require('../config/keys');
+var bcrypt = require('bcrypt');
 
 var records = [
   {
     id: 1,
-    username: 'local',
-    password: keys.password1 || 'tqnGvduWezXNS2WH',
-    displayName: 'Germanos Poimenidis',
+    username: keys.username1,
+    password: keys.password1,
+    displayName: keys.display1,
   },
   {
     id: 2,
-    username: 'thessSupplies',
-    password: keys.password2 || 'qe4zkbfU3x9w5Q6G',
-    displayName: 'Thessaloniki Supplies',
+    username: keys.username2,
+    password: keys.password2,
+    displayName: keys.display2,
   },
   {
     id: 3,
@@ -20,10 +21,6 @@ var records = [
     displayName: 'Jack',
   }
 ];
-
-function getRecords() {
-
-}
 
 exports.findById = function(id, cb) {
   process.nextTick(() => {

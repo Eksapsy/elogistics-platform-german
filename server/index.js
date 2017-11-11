@@ -16,7 +16,10 @@ require('./services/passport');
 
 
 const app = express();
-mongoose.connect(keys.mongoURI);
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI, {
+	useMongoClient: true
+});
 
 // app.use(
 // 	cookieSession({
@@ -38,7 +41,9 @@ app.use(passport.session());
 app.use(express.static('./uploads'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 require('./routes/dataRoutes')(app);
 require('./routes/storageRoutes')(app);

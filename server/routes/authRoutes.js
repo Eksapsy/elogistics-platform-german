@@ -31,7 +31,11 @@ module.exports = (app) => {
     require('connect-ensure-login').ensureLoggedIn('/api/login'),
     (req, res) => {
       res.send({
-        user: req.user
+        user: {
+          id: req.user.id,
+          displayName: req.user.displayName,
+          username: req.user.username
+        }
       });
     }
   )

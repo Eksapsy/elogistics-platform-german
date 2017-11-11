@@ -58,7 +58,7 @@ class MenuHeader extends Component {
            <Icon circular name='shop' />
            <Icon circular style={ { paddingTop: '-10px' } } corner name='mail' />
          </Icon.Group>
-         ΓΕΡΜΑΝΟΣ ΠΟΙΜΕΝΙΔΗΣ
+         GPSupplies
          <Header.Subheader content='Electronic Business - Logistics Services' />
        </Header>
        <center>

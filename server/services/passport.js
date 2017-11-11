@@ -3,6 +3,7 @@ const Strategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 const userdb = require('../etc/userdb');
+const bcrypt = require('bcrypt');
 
 const Sender = mongoose.model('senders');
 
@@ -12,7 +13,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   userdb.findById(id, (err, user) => {
-    if (err) { return done(err); }
+    if (err) {
+      return done(err);
+    }
     done(null, user);
   });
 });

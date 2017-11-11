@@ -6,7 +6,6 @@ import * as actions from '../actions';
 import MainScene from './MainScene';
 import 'semantic-ui-css/semantic.min.css';
 import './styles.css';
-import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
