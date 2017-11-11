@@ -35,7 +35,7 @@ app.use(require('cookie-parser')());
 app.use(require('express-session')({
 	cookie: {
 		secure: false,
-		maxAge: 60000
+		maxAge: 1000 * 60 * 60
 	},
 
 	secret: 'keyboard cat',
