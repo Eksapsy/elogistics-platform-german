@@ -2,13 +2,12 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://calm-harbor-75556.herokuapp.com/",
   "proxy": {
     "/auth/*": {
-      "target": "http://localhost:5000"
+      "target": "https://localhost:5000"
     },
     "/api/*": {
-      "target": "http://localhost:5000"
+      "target": "https://localhost:5000"
     }
   },
   "dependencies": {
