@@ -1,5 +1,5 @@
 module.exports = {
-	mongoURI: process.env.MONGO_URI,
+	mongoURI: process.env.mongoURI,
 	officeEmail: process.env.officeEmail,
 	username1: process.env.username1,
 	username2: process.env.username2,
