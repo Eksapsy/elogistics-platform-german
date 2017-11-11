@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -37,7 +37,7 @@ class DatabaseHeader extends Component {
 		const header = (
 
 		<Header block textAlign='center' as='h1' color='black'>
-    <a href='/api/downloadexcel' onClick={ () => e.preventDefault() }>
+    <a href='/api/downloadexcel' onClick={ (e) => e.preventDefault() }>
       <Icon link name='database' style={ { textShadow: '1px 1px 1px rgba(120,120,120,0.6)' } } />
     </a>
     <Header.Content>Modify Database</Header.Content>
