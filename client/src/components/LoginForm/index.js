@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Segment, Grid, Form, Header } from 'semantic-ui-react';
+import { Segment, Grid, Form, Image, Header } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -53,7 +53,7 @@ class LoginForm extends Component {
         <Grid textAlign='center' style={ { height: '100%' } } verticalAlign='middle'>
           <Grid.Column style={ { maxWidth: 450 } }>
             <Header as='h2' inverted textAlign='center'>
-              { '  ' }eLogistics Poimenidis
+              { '  ' }GPSupplies eLogistics
             </Header>
             <Form size='large' onSubmit={ this.onSubmit }>
               <Segment stacked>

@@ -14,7 +14,6 @@ class App extends Component {
   }
   componentDidMount() {
     // Update dataBinded in Redux Store by Fetching data from the API
-    this.props.dataActions.fetchFormData();
     this.props.webActions.fetchUser();
   }
 

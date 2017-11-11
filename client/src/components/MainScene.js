@@ -21,11 +21,9 @@ class MainScene extends Component {
     }
   }
 
-  isLoggedOn(nextState, replace) {
+  componentWillUpdate() {
     if (this.props.isAuth) {
-      replace({
-        pathname: '/dashboard'
-      });
+      this.props.dataActions.fetchFormData();
     }
   }
 
@@ -85,27 +83,6 @@ class MainScene extends Component {
   }
 }
 
-class ConditionRedirect extends Route {
-  render() {
-    if (this.props.condition) {
-      return (
-        <Redirect exact path={ this.props.from } to={ this.props.to } />
-        );
-    }
-    return (
-    this.props.else ?
-      <Redirect exact path={ this.props.from } to={ { pathname: this.props.else, } } />
-      : <div></div>
-    );
-  }
-}
-
-ConditionRedirect.propTypes = {
-  else: PropTypes.string,
-  from: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-}
-
 class PrivateRoute extends Route {
   render() {
     if (this.props.isAuth) {
@@ -120,7 +97,8 @@ class PrivateRoute extends Route {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  webActions: bindActionCreators(actions.webActions, dispatch)
+  webActions: bindActionCreators(actions.webActions, dispatch),
+  dataActions: bindActionCreators(actions.dataActions, dispatch)
 });
 
 const mapStateToProps = ({webData}) => ({
