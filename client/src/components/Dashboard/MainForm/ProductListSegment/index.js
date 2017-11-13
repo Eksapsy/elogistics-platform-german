@@ -20,7 +20,7 @@ class ProductListSegment extends PureComponent {
             </Divider>
           </Grid.Row>
           <Grid.Row width={ 16 }>
-            <FieldArray name='productList' component={ ProductList }/>
+            <FieldArray name='productList' component={ ProductList } />
           </Grid.Row>
         </Grid>
       </div>

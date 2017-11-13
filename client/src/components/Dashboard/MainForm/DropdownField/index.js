@@ -8,7 +8,7 @@ class DropdownField extends PureComponent {
       this.props.onChange(e, value);
     }
   }
-  
+
   render() {
     const {touched, error, warning} = this.props.meta;
     return (
