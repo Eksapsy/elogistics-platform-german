@@ -13,12 +13,6 @@ var records = [
     username: keys.username2,
     password: keys.password2,
     displayName: keys.display2,
-  },
-  {
-    id: 3,
-    username: 'jack',
-    password: 'secret',
-    displayName: 'Jack',
   }
 ];
 

@@ -35,7 +35,6 @@ class ImportExcelComponent extends Component {
 
   async onDrop(files) {
     if (files.length > 0) {
-      console.log(files);
       this.openLoading();
       var formData = new FormData();
       formData.append('file', files[0]);

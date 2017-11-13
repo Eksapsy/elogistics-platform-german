@@ -2,10 +2,6 @@ import axios from 'axios';
 import { FETCH_FORM_DATA, POST_RECEIVER, POST_COURIER, POST_PRODUCT, ERROR } from './types';
 
 export const addReceiver = (receiver) => async dispatch => {
-	console.log('====================================');
-	console.log('Addind Receiver');
-	console.log(receiver);
-	console.log('====================================');
 	await axios.post('/api/postreceiver', {
 		r_id: receiver.r_id,
 		name: receiver.name,
@@ -18,8 +14,10 @@ export const addReceiver = (receiver) => async dispatch => {
 		address: receiver.address,
 		location: receiver.location,
 		zip: receiver.zip
-	}).catch(err => {
-		console.log(err);
+	})
+	.catch(err => {
+		console.error('Error received while trying to post receiver.');
+		console.error(err);
 		dispatch({
 			type: ERROR,
 			error: err,
