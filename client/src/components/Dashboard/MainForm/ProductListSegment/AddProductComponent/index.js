@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { formValueSelector, change, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Grid, Icon, Segment, Button } from 'semantic-ui-react';
@@ -7,7 +7,7 @@ import uuid from 'uuid';
 import InputNumber from '../../InputNumber';
 import DropdownField from '../../DropdownField';
 
-class AddProductComponent extends Component {
+class AddProductComponent extends PureComponent {
 
 
   render() {
@@ -21,7 +21,7 @@ class AddProductComponent extends Component {
   }
 }
 
-class ProductFields extends Component {
+class ProductFields extends PureComponent {
   addProduct(e, data) {
     const {productName, productAmount} = this.props;
     if (productName && productAmount) {
@@ -53,7 +53,7 @@ class ProductFields extends Component {
   }
 }
 
-class ProductNameField extends Component {
+class ProductNameField extends PureComponent {
   getProductFullname(product) {
     return product.id + '-' + product.name;
   }
@@ -86,7 +86,7 @@ class ProductNameField extends Component {
   }
 }
 
-class ProductAmountField extends Component {
+class ProductAmountField extends PureComponent {
   inputNumber = (props) => (
     <InputNumber {...props}/>
   );

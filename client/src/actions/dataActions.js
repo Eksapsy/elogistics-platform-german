@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_FORM_DATA, POST_RECEIVER, POST_COURIER, POST_PRODUCT } from './types';
+import { FETCH_FORM_DATA, POST_RECEIVER, POST_COURIER, POST_PRODUCT, ERROR } from './types';
 
 export const addReceiver = (receiver) => async dispatch => {
 	console.log('====================================');
@@ -20,10 +20,24 @@ export const addReceiver = (receiver) => async dispatch => {
 		zip: receiver.zip
 	}).catch(err => {
 		console.log(err);
+		dispatch({
+			type: ERROR,
+			error: err,
+			reload: true
+		});
 	});
 
 	// Reloading the store with the new data
-	const res = await axios.get('/api/getreceivers');
+	const res = await axios.get('/api/getreceivers')
+		.catch(err => {
+			console.error('Error received while trying to fetch receivers.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
 
 	dispatch({
 		type: POST_RECEIVER,
@@ -36,10 +50,29 @@ export const addCourier = (courier) => async dispatch => {
 		name: courier.name,
 		location: courier.location,
 		phone: courier.phone
-	});
+	})
+		.catch(err => {
+			console.error('Error received while trying to posting courier.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
 
 	// Reloading the store with the new data
-	const res = await axios.get('/api/getcouriers');
+	const res = await axios.get('/api/getcouriers')
+		.catch(err => {
+			console.error('Error received while trying to fetch couriers.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+	;
 
 	dispatch({
 		type: POST_COURIER,
@@ -51,10 +84,30 @@ export const addProduct = (id, name) => async dispatch => {
 	await axios.post('/api/postproduct', {
 		id,
 		name
-	});
+	})
+		.catch(err => {
+			console.error('Error received while posting a product.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+
 
 	// Reloading the store with the new data
-	const res = await axios.get('/api/getproducts');
+	const res = await axios.get('/api/getproducts')
+		.catch(err => {
+			console.error('Error received while trying to fetch products.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+	;
 
 	dispatch({
 		type: POST_PRODUCT,
@@ -63,9 +116,39 @@ export const addProduct = (id, name) => async dispatch => {
 };
 
 export const fetchFormData = () => async dispatch => {
-	const res_receivers = await axios.get('/api/getreceivers');
-	const res_couriers = await axios.get('/api/getcouriers');
-	const res_products = await axios.get('/api/getproducts');
+	const res_receivers = await axios.get('/api/getreceivers')
+		.catch(err => {
+			console.error('Error received while trying to fetch 1 of 3: receivers.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+	;
+	const res_couriers = await axios.get('/api/getcouriers')
+		.catch(err => {
+			console.error('Error received while trying to fetch 1 of 3: couriers.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+	;
+	const res_products = await axios.get('/api/getproducts')
+		.catch(err => {
+			console.error('Error received while trying to fetch 1 of 3: products.');
+			console.error(err);
+			dispatch({
+				type: ERROR,
+				error: err,
+				reload: true
+			});
+		});
+	;
 
 	dispatch({
 		type: FETCH_FORM_DATA,

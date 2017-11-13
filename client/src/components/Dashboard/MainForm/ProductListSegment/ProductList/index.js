@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import ProductItem from './ProductItem';
 import AddProductComponent from '../AddProductComponent';
 
-class ProductList extends Component {
+class ProductList extends PureComponent {
   render() {
     
     return (

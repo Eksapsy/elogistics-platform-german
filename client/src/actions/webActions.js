@@ -12,10 +12,26 @@ export const login = (username, password) => async dispatch => {
   await axios.post('/api/login', {
     username,
     password
-  });
-  const res = await axios.get('/api/profile')
-    .catch((err) => {
+  })
+    .catch(err => {
+      console.error('Error received while trying to login.');
       console.error(err);
+      dispatch({
+        type: ERROR,
+        error: err,
+        reload: true
+      });
+    });
+
+  const res = await axios.get('/api/profile')
+    .catch(err => {
+      console.error('Error received while fetching profile.');
+      console.error(err);
+      dispatch({
+        type: ERROR,
+        error: err,
+        reload: true
+      });
     });
   dispatch({
     type: LOGIN,
@@ -25,8 +41,14 @@ export const login = (username, password) => async dispatch => {
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/profile')
-    .catch((err) => {
+    .catch(err => {
+      console.error('Error received while fetching user.');
       console.error(err);
+      dispatch({
+        type: ERROR,
+        error: err,
+        reload: true
+      });
     });
   dispatch({
     type: FETCH_USER,

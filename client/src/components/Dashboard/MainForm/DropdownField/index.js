@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Dropdown, Header } from 'semantic-ui-react';
 
-class DropdownField extends Component {
+class DropdownField extends PureComponent {
   handleChange(e, {value}) {
     this.props.input.onChange(value);
     if (this.props.onChange) {
       this.props.onChange(e, value);
     }
+  }
+
+  componentDidUpdate() {
+    console.log(`Dropdown ${this.props.input.name} rerendered`);
   }
 
   render() {

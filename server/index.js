@@ -32,8 +32,8 @@ mongoose.connect(keys.mongoURI, {
 // 	})
 // );
 
-
-app.use(secure);
+// We won't use Secure HTTPS redirect, until the Download Reloading issue in the front end is solved
+// app.use(secure);
 app.use(require('cookie-parser')());
 app.use(require('express-session')({
 	cookie: {

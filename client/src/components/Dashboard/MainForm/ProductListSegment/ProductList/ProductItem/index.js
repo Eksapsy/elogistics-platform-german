@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { Grid, Segment, Button, Icon, Header } from 'semantic-ui-react';
@@ -7,7 +7,7 @@ import DropdownField from '../../../DropdownField';
 import InputNumber from '../../../InputNumber';
 
 
-class ProductItem extends Component {
+class ProductItem extends PureComponent {
   getProductFullname(product) {
     return product.id + '-' + product.name;
   }
@@ -51,7 +51,7 @@ class ProductItem extends Component {
   }
 }
 
-class ProductLabel extends Component {
+class ProductLabel extends PureComponent {
   itemHeaderStyle = {
     transform: 'rotate(-60deg)',
     WebkitTransform: 'rotate(0deg)',

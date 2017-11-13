@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FieldArray } from 'redux-form';
 import { Grid, Divider, Header } from 'semantic-ui-react';
 import ProductList from './ProductList';
 import './styles.css'
 
-class ProductListSegment extends Component {
+class ProductListSegment extends PureComponent {
 
   render() {
     return (

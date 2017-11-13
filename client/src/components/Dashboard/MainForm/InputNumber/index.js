@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Icon, Header, Input, Menu, Transition } from 'semantic-ui-react';
 import './styles.css';
 
-class InputNumber extends Component {
+class InputNumber extends PureComponent {
   constructor(props) {
     super(props);
 
