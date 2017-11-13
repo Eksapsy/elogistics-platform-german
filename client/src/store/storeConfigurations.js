@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import combinedReducers from '../reducers';
 export default () => {
   if (process.env.NODE_ENV === "production") {
-    return createStore(combinedReducers, {});
+    return createStore(combinedReducers, applyMiddleware(thunk));
   } else {
     // Redux Chrome Tool - Middleware
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
