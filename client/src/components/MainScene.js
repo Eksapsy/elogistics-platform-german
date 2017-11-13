@@ -50,7 +50,7 @@ class MainScene extends Component {
                                     this.props.webActions.cleanError();
                                   } }>
                     Close
-                  </Button> }}}
+                  </Button> }
             </Modal.Actions>
           </Modal>
         </Dimmer>
