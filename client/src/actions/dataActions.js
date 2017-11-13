@@ -20,7 +20,7 @@ export const addReceiver = (receiver) => async dispatch => {
 		console.error(err);
 		dispatch({
 			type: ERROR,
-			error: err,
+			error: err.message,
 			reload: true
 		});
 	});
@@ -32,7 +32,7 @@ export const addReceiver = (receiver) => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -54,7 +54,7 @@ export const addCourier = (courier) => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -66,7 +66,7 @@ export const addCourier = (courier) => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -88,7 +88,7 @@ export const addProduct = (id, name) => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -120,7 +120,7 @@ export const fetchFormData = () => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -131,7 +131,7 @@ export const fetchFormData = () => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});
@@ -142,7 +142,7 @@ export const fetchFormData = () => async dispatch => {
 			console.error(err);
 			dispatch({
 				type: ERROR,
-				error: err,
+				error: err.message,
 				reload: true
 			});
 		});

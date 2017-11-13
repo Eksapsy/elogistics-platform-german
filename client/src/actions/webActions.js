@@ -18,7 +18,7 @@ export const login = (username, password) => async dispatch => {
       console.error(err);
       dispatch({
         type: ERROR,
-        error: err,
+        error: err.message,
         reload: true
       });
     });
@@ -29,7 +29,7 @@ export const login = (username, password) => async dispatch => {
       console.error(err);
       dispatch({
         type: ERROR,
-        error: err,
+        error: err.message,
         reload: true
       });
     });
@@ -46,7 +46,7 @@ export const fetchUser = () => async dispatch => {
       console.error(err);
       dispatch({
         type: ERROR,
-        error: err,
+        error: err.message,
         reload: true
       });
     });
