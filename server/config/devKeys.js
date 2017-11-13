@@ -1,6 +1,7 @@
 module.exports = {
 	mongoURI: 'mongodb://eksapsy:PI427233897n+3@ds121534.mlab.com:21534/german-emaily',
-	officeEmail: 'michael.tolis@gmail.com',
+	officeEmail_1: 'michael.tolis@gmail.com',
+	officeEmail_2: 'apanpie.antan@gmail.com',
 	username1: 'local',
 	username2: 'remote',
 	display1: 'Germanos Poimenidis',

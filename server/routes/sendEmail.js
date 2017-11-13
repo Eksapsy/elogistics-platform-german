@@ -108,9 +108,15 @@ module.exports = (app) => {
     const buffers = await fs.readFileSync(path.resolve(__dirname, '../files/formData.xlsx'));
 
 
-    const mailOptions = await {
+    const mailList = [
+      keys.officeEmail_1,
+      keys.officeEmail_2
+    ];
+
+    // Configurable for the 'to' property, since we want to send the same context to 2-3 different emails
+    let mailOptions = await {
       from: 'auto@gpsupplies.gr',
-      to: keys.officeEmail,
+      // to: keys.officeEmail,
       subject: 'GPSupplies - eLogistics',
       html: fullHtml,
       attachments: [
@@ -124,21 +130,26 @@ module.exports = (app) => {
     console.log('Mail options configurured.');
     console.log('Sending email...');
 
-    let mailResponse = '';
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-        res.json({
-          message: 'error'
-        });
-      } else {
-        console.log('Message sent: ' + info.response);
-        res.json({
-          message: info.response
-        });
-        mailResponse = error || info.response;
-      }
+    mailList.forEach( (to, i, array) => {
+      mailOptions.to = to;
+
+      let mailResponse = '';
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          res.json({
+            message: 'error'
+          });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({
+            message: info.response
+          });
+          mailResponse = error || info.response;
+        }
+      });
+      console.log(`Email Sending to ${to} Completed.`);
+      console.log(`Response:${mailResponse}`);
     });
-    console.log('Process Completed.', mailResponse);
   });
 };
