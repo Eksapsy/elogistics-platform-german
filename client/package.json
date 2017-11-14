@@ -28,7 +28,8 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.72.0",
     "superagent": "^3.6.0",
-    "typeface-roboto": "0.0.35"
+    "typeface-roboto": "0.0.35",
+    "xlsx-style": "^0.8.13"
   },
   "scripts": {
     "start": "react-scripts start",

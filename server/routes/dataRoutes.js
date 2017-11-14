@@ -240,11 +240,12 @@ module.exports = (app) => {
 				SheetNames: ['Receivers', 'Couriers', 'Products'],
 				Sheets
 			};
+
 			await XLSX.writeFile(workbook, path.resolve(__dirname, '../files/elogisticsExport.xlsx'));
 
 			res.setHeader('Content-disposition', 'attachment; filename=data.xlsx');
 			res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			await res.download(path.resolve(__dirname, '../files/elogisticsExport.xlsx'), 'elogisticsExport.xlsx');
+			await res.download(path.resolve(__dirname, '../files/elogisticsExport.xlsx'), 'elogisticsExport.xlsx')
 		}
 	);
 };
