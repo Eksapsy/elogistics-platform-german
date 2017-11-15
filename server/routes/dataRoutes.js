@@ -205,11 +205,11 @@ module.exports = (app) => {
 		'/api/downloadexcel',
 		async (req, res) => {
 			let receivers = [
-				['ID', 'NAME', 'EMAIL', 'VAT NUMBER', 'DOY NUMBER', 'ADDRESS', 'ZIP CODE', 'LOCATION', 'PHONE #1', 'PHONE #2']
+				['ID', 'NAME', 'EMAIL', 'VAT NUMBER', 'DOY NUMBER', 'ADDRESS', 'ZIP CODE', 'LOCATION', 'PHONE #1', 'PHONE #2', 'COURIER']
 			];
 			let receiverData = await Receiver.find({});
 			await receiverData.forEach((receiver) => {
-				const data = [receiver.r_id, receiver.name, receiver.email, receiver.vat_number, receiver.doy_number, receiver.address, receiver.zip, receiver.location, receiver.phone_1, receiver.phone_2];
+				const data = [receiver.r_id, receiver.name, receiver.email, receiver.vat_number, receiver.doy_number, receiver.address, receiver.zip, receiver.location, receiver.phone_1, receiver.phone_2, receiver.courier];
 				receivers.push(data);
 			});
 

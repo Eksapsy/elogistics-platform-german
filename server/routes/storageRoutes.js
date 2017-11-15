@@ -4,7 +4,7 @@ const XLSX = require('xlsx');
 const multer = require('multer'),
 	storage = multer.diskStorage({
 		destination: function(req, file, cb) {
-			cb(null, 'server/files/');
+			cb(null, path.resolve(__dirname, '../files'));
 		},
 		filename: function(req, file, cb) {
 			cb(null, 'uploadedFile.xlsx');

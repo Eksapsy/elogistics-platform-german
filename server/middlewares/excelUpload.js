@@ -8,7 +8,7 @@ const Courier = mongoose.model('couriers');
 const Product = mongoose.model('products');
 
 module.exports = async (req, res, next) => {
-	const workbook = XLSX.readFile(
+	const workbook = await XLSX.readFile(
 		path.resolve(__dirname, '../files', 'uploadedFile.xlsx')
 	);
 	if (req.body.replaceOldDatabase) {
@@ -26,6 +26,7 @@ module.exports = async (req, res, next) => {
 	}
 
 	await console.log('Workbook Parsed!');
+	await console.log('data', req.body);
 
 	/* Saving Receivers */
 	const receiver_ids = await getReceiverId(workbook);

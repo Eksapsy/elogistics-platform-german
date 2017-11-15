@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
-import axios from 'superagent';
+import superagent from 'superagent';
 import { Form, Divider, Header, Message, Grid, List, Checkbox, Icon } from 'semantic-ui-react';
 import * as actions from '../../../actions';
 
@@ -39,17 +39,26 @@ class ImportExcelComponent extends Component {
       var formData = new FormData();
       formData.append('file', files[0]);
 
-      await axios.post('/api/upload', {
-        formData,
-        replaceOldDatabase: this.state.replaceOldDatabase
-      })
+      // await axios.post('/api/upload', {
+      //   formData,
+      //   replaceOldDatabase: this.state.replaceOldDatabase
+      // })
+      //   .catch(err => {
+      //     this.props.webActions.error('Error occured while uploading Excel.' + err, true);
+      //   }).then(() => {
+      // this.closeLoading();
+      // window.location.reload();
+      // }, (err) => {
+      //   this.props.webActions.error('Error occured while uploading Excel.', err);
+      // });
+
+      await superagent.post('/api/upload')
+        .attach('file', files[0])
+        .field('replaceOldDatabase', this.state.replaceOldDatabase)
         .catch(err => {
-          this.props.webActions.error('Error occured while uploading Excel.' + err, true);
         }).then(() => {
         this.closeLoading();
         window.location.reload();
-      }, (err) => {
-        this.props.webActions.error('Error occured while uploading Excel.', err);
       });
     } else {
       this.props.webActions.error('Invalid File!', false);
