@@ -36,26 +36,13 @@ class ImportExcelComponent extends Component {
   async onDrop(files) {
     if (files.length > 0) {
       this.openLoading();
-      var formData = new FormData();
-      formData.append('file', files[0]);
-
-      // await axios.post('/api/upload', {
-      //   formData,
-      //   replaceOldDatabase: this.state.replaceOldDatabase
-      // })
-      //   .catch(err => {
-      //     this.props.webActions.error('Error occured while uploading Excel.' + err, true);
-      //   }).then(() => {
-      // this.closeLoading();
-      // window.location.reload();
-      // }, (err) => {
-      //   this.props.webActions.error('Error occured while uploading Excel.', err);
-      // });
 
       await superagent.post('/api/upload')
         .attach('file', files[0])
         .field('replaceOldDatabase', this.state.replaceOldDatabase)
         .catch(err => {
+          console.error('Error on attempt to upload xlsx file');
+          console.error(err);
         }).then(() => {
         this.closeLoading();
         window.location.reload();
