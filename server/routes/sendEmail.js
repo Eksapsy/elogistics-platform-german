@@ -22,7 +22,6 @@ module.exports = (app) => {
         rejectUnauthorized: false
       }
     });
-    console.log('created transport');
 
     /* HTML MESSAGE */
     const {sender, receiver, courier, products, cost, notes} = req.body;
@@ -37,14 +36,14 @@ module.exports = (app) => {
     const logo = '<center><a href="#"><img src=\'http://gpsupplies.gr/wp-content/uploads/2017/05/NEW-LOGO2b.png\' style=\'height: 128px; width: 128px;\'/></href></center>';
     const header = '<center><h2 style=\'font-family: \'Lobster\', cursive;\'>eLogistics Services</h2></center>';
     const senderHeader = `<center>${sender ? `<h2>Αποστάλθηκε από ${sender}</h2>` : '<h1>No User Recorded</h1><p>If you think it\'s a problem report this. Recording sender is necessary in case someone messes up with an order.</p>'}</center>`;
-    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`
+    const receiverHeader = `<h2>ΠΑΡΑΛΗΠΤΗΣ</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>Α.Φ.Μ.</th><th>Δ.Ο.Υ.</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΔΙΕΥΘΥΝΣΗ</th><th>Τ.Κ.</th><th>ΤΗΛ. #1</th></tr><tr><td>${receiver.name}</td><td>${receiver.vat_number}</td><td>${receiver.doy_number}</td><td>${receiver.location}</td><td>${receiver.address}</td><td>${receiver.zip}</td><td>${receiver.phone_1}</td></tr></table>`;
 
-    const courierHeader = `<h2>COURIER</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`
+    const courierHeader = `<h2>COURIER</h2><table style=\'padding-left: 32px\'><tr><th>ΟΝΟΜΑ</th><th>ΤΟΠΟΘΕΣΙΑ</th><th>ΤΗΛ.</th></tr><tr><td>${courier.name.toUpperCase()}</td><td>${courier.location}</td><td>${courier.phone}</td></tr></table>`;
 
-    const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>'
+    const productHeader = '<h2>ΠΡΟΙΟΝΤΑ</h2>';
 
     const productsTable_START = '<table  style=\'padding-left: 32px; width: 60%;\'>';
-    const productsTable_HEADERS = '<tr><th align=\'left\'>ΚΩΔΙΚΟΣ</th><th align=\'left\'>ΟΝΟΜΑ</th><th align=\'right\'>ΠΟΣΟΤΗΤΑ</th></tr>'
+    const productsTable_HEADERS = '<tr><th align=\'left\'>ΚΩΔΙΚΟΣ</th><th align=\'left\'>ΟΝΟΜΑ</th><th align=\'right\'>ΠΟΣΟΤΗΤΑ</th></tr>';
     let productsTable_PRODUCTS = '';
 
     try {
@@ -52,10 +51,10 @@ module.exports = (app) => {
         productsTable_PRODUCTS += `<tr><td align=left'>${product.id || 'NULL' }</td><td align=\'left\'>${product.name || 'NULL'}</td><td align=\'right\'>${product.amount || 'NaN'}</td></tr>`;
       });
     } catch (e) {
-      productsTable_PRODUCTS = '<tr><td align=\'left\'>NULL</td><td align=\'left\'>NULL</td><td align=\'right\'>NaN</td></tr>'
+      productsTable_PRODUCTS = '<tr><td align=\'left\'>NULL</td><td align=\'left\'>NULL</td><td align=\'right\'>NaN</td></tr>';
     }
 
-    const productsTable_END = '</table>'
+    const productsTable_END = '</table>';
 
     const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong style=\'padding-left: 32px\'>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 

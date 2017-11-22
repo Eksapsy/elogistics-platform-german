@@ -73,8 +73,8 @@ class AddReceiverForm extends Component {
               onChange={ this.handleChange } />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Field control={ Input } label='VAT Number' placeholder='VAT Number' name='receiverVAT' onChange={ this.handleChange } required/>
-            <Form.Field control={ Input } label='DOY Number' placeholder='DOY Number' name='receiverDOY' onChange={ this.handleChange } required/>
+            <Form.Field control={ Input } label='VAT Number' placeholder='VAT Number' name='receiverVAT' onChange={ this.handleChange } />
+            <Form.Field control={ Input } label='DOY Number' placeholder='DOY Number' name='receiverDOY' onChange={ this.handleChange } />
             <Form.Field control={ Input } label='Phone #1' placeholder='Phone #1' name='receiverPhone_1' onChange={ this.handleChange } required/>
             <Form.Field control={ Input } label='Email' placeholder='Email' name='receiverEmail' onChange={ this.handleChange } />
           </Form.Group>

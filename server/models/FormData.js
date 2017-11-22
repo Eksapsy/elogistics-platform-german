@@ -17,7 +17,7 @@ const Receiver = new Schema({
 	},
 	vat_number: {
 		type: String,
-		required: true
+		required: false
 	},
 	doy_number: {
 		type: String,

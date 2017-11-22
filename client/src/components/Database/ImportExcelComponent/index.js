@@ -131,15 +131,16 @@ class ImportExcelComponent extends Component {
                   <List.Item as='li' value='➡'>
                     <Header as='h5' color='red'>NAME</Header>
                   </List.Item>
-                  <List.Item as='li' value='➡'>
-                    <Header as='h5' color='red'>EMAIL</Header>
-                  </List.Item>
+                  <List.Item as='li' value='➡'>EMAIL</List.Item>
                   <List.Item as='li' value='➡'>COURIER</List.Item>
                   <List.Item as='li' value='➡'>VAT NUMBER</List.Item>
+                  <List.Item as='li' value='➡'>DOY NUMBER</List.Item>
                   <List.Item as='li' value='➡'>ADDRESS</List.Item>
                   <List.Item as='li' value='➡'>ZIP CODE</List.Item>
                   <List.Item as='li' value='➡'>LOCATION</List.Item>
-                  <List.Item as='li' value='➡'>PHONE #1</List.Item>
+                  <List.Item as='li' value='➡'>
+                    <Header as='h5' color='red'>PHONE #1</Header>
+                  </List.Item>
                   <List.Item as='li' value='➡'>PHONE #2</List.Item>
                 </List>
                 <Divider vertical/>
@@ -162,8 +163,6 @@ class ImportExcelComponent extends Component {
                   <List.Item as='li' value='➡'>
                     <Header as='h5' color='red'>NAME</Header>
                   </List.Item>
-                  <List.Item as='li' value='➡'>RETAIL PRICE</List.Item>
-                  <List.Item as='li' value='➡'>WHOLE PRICE</List.Item>
                 </List>
                 <Divider vertical/>
               </Grid.Column>
