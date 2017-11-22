@@ -22,6 +22,7 @@ module.exports = (app) => {
         rejectUnauthorized: false
       }
     });
+    console.log('created transport');
 
     /* HTML MESSAGE */
     const {sender, receiver, courier, products, cost, notes} = req.body;
@@ -59,8 +60,8 @@ module.exports = (app) => {
     const costHeader = `<h3>ΚΟΣΤΟΣ:</h3><strong style=\'padding-left: 32px\'>${cost ? String(cost + ' €') : '0 €'}</strong>`;
 
     const notesHeader = `<h3>ΣΗΜΕΙΩΣΕΙΣ:</h3><div style=\'padding-left: 32px\'>${notes ? notes : ''}</div>`;
-    Η
-    const footer = '<div style=\'margin-left: 16px;\'><br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ</strong></div>'
+
+    const footer = '<div style=\'margin-left: 16px;\'><br/><hr><br/><strong>ΗΛΕΚΤΡΟΝΙΚΟ ΕΝΤΥΠΟ ΠΑΡΑΓΓΕΛΙΑΣ</strong></div>';
     const fullHtml = scripts + bodyDiv + logo + header + messageDiv + hr + senderHeader + hr + divBordered + receiverHeader + endDiv + hr + divBordered + courierHeader + endDiv + hr + divBordered + productHeader + productsTable_START + productsTable_HEADERS + productsTable_PRODUCTS + productsTable_END + endDiv + hr + divBordered + costHeader + endDiv + hr + divBordered + notesHeader + endDiv + footer + hr + endDiv + hr + endDiv;
 
     /* Attachment Buffer  */
