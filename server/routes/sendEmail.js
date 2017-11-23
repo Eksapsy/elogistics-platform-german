@@ -13,18 +13,19 @@ module.exports = (app) => {
       // If you are using @gmail.com address, then you don't
       // even have to define the service name
       host: 'mail.gpsupplies.gr',
-      port: 587,
+      port: 465,
       auth: {
         user: 'auto@gpsupplies.gr',
         pass: '-[HL1LoD3TFm'
       },
+      secure: true,
       tls: {
+        // do not fail on invalid certs
         rejectUnauthorized: false
       },
-      secure: true,
       dkim: {
         domainName: 'gpsupplies.gr',
-        keySelector: '2017',
+        keySelector: '1511439821',
         privateKey: `-----BEGIN RSA PRIVATE KEY-----
         MIICXQIBAAKBgQC1VHW1Z1ITEz6Pzwq1zINVxNcGwzBA47JndxRYGAbcDt1J/R8r
         QDLCLZDrosf9fxIVVx+XLB65cbX+VFbG0n1SY6P9ELY5S5Hjn2/a8JyiboVmf058
