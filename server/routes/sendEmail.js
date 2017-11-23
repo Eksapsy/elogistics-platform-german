@@ -20,6 +20,25 @@ module.exports = (app) => {
       },
       tls: {
         rejectUnauthorized: false
+      },
+      dkim: {
+        domainName: 'gpsupplies.gr',
+        keySelector: '2017',
+        privateKey: `-----BEGIN RSA PRIVATE KEY-----
+        MIICXQIBAAKBgQC1VHW1Z1ITEz6Pzwq1zINVxNcGwzBA47JndxRYGAbcDt1J/R8r
+        QDLCLZDrosf9fxIVVx+XLB65cbX+VFbG0n1SY6P9ELY5S5Hjn2/a8JyiboVmf058
+        o6/4uOb2ZVFTmrMPke52SYAqzRT9bHV+T2xuhYaLM67xLowsHaIKWoKyywIDAQAB
+        AoGAHbUdp7+qqadge40PEyPTbIzYMapu0GK9isfulFQzY4An7wRCRAK7jiaK9J/x
+        pe1YmBhy+4Bl9DnV+Dn3EZHQqBT8kKfqigG6U1H2Oqe6Y6BVYOtNAWHMJAodyn/l
+        HROz8GG4cVoh2IlAcXdBOJdeOnefLME7fmzUumzx37L/C6ECQQDrfnq+BjrBrf0m
+        XmZq/MYiaVyOiozXrHxoFTyGEY7c2EJ7DwLwUXSk8ovFqB+vbNxWdIRFpmJpXFqX
+        /cvwfWsbAkEAxR6UUBV+r+92gBa1r3GSv7kb7PPL90abYHC4Cy0+S+jdyZQnQJiI
+        o3lJPsia0GEv9IVksZwg/YYNO2+JMC8iEQJBAND35B05U+xH42qnvARWF8+zZRGL
+        up0rjx2hMprZe8dXE+81C+uKrJIuNH+Jx8wYMpF5RWK02YEbFbzn1o+qC18CQGnG
+        GfHLRvrjdWQQS5gESqnEi96fiAB9i9y5P5kHwxj6sSB89n8sGo4WBB7DiIduz0vX
+        1IuV6wH/z9Pn6ubHM/ECQQCnGMn5AApPw/QwwqDpocg2cIA2KBDOAKqP9yimkFZN
+        Mz6H0rauN1Q2dHxaPLxvD/LHIF8YNG3goep+unihr1oR
+        -----END RSA PRIVATE KEY-----`
       }
     });
 
