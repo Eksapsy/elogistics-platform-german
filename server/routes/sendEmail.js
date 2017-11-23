@@ -21,6 +21,7 @@ module.exports = (app) => {
       tls: {
         rejectUnauthorized: false
       },
+      secure: true,
       dkim: {
         domainName: 'gpsupplies.gr',
         keySelector: '2017',
