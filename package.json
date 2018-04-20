@@ -1,0 +1,16 @@
+{
+  "name": "ApothikiGermanos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "apostolis.anastasiou.alpha@gmail.com",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "concurrently -n \"CLIENT,SERVER\" -p \"[{name}]\" -c \"blue.bold,yellow.bold\" \"npm run client\" \"npm run server\"",
+    "client": "npm start --prefix ./client",
+    "server": "npm start --prefix ./server"
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
