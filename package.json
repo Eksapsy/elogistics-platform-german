@@ -11,6 +11,7 @@
     "server": "npm start --prefix ./server"
   },
   "dependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "semantic-ui-css": "^2.3.1"
   }
 }
