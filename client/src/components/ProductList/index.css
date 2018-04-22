@@ -1,4 +1,19 @@
 .productList {
   height: 100%;
   width: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+.productList .ui .table .input {
+  max-width: 40%;
+}
+
+.productList .ui.table {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dddae5+0,ebe8f2+0,beb7cc+100 */
+  background: #f4f4f58a !important; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #f4f4f58a 0%, #f4f4f5e3 100%) fixed !important; /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #f4f4f58a 0%,#f4f4f5e3 100%) fixed !important; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #f4f4f58a 0%,#f4f4f5e3 100%) fixed !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f58a', endColorstr='#f4f4f5e3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }

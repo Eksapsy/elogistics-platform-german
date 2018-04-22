@@ -4,21 +4,11 @@ html{
 
 body {
   height: 100%;
-  margin: 0;
-  min-height: 500px;
-  /* Set background image to fixed (don't scroll along with the page) */
-  background-attachment: fixed;
-  /* Center the background image */
-  background-position: center;
-  /* Set the background image to no repeat */
-  background-repeat: no-repeat;
-  /* Scale the background image to be as large as possible */
-  background-size: cover;
 
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dddae5+0,ebe8f2+0,beb7cc+100 */
   background: #dddae5; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #dddae5 0%, #ebe8f2 0%, #beb7cc 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #dddae5 0%,#ebe8f2 0%,#beb7cc 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #dddae5 0%,#ebe8f2 0%,#beb7cc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddae5', endColorstr='#beb7cc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: -moz-linear-gradient(-45deg, #dddae5 0%, #c6c1d1 100%) fixed; /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #dddae5 0%,#c6c1d1 100%) fixed; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #dddae5 0%, #c6c1d1 100%) fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddae5', endColorstr='#c6c1d1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }

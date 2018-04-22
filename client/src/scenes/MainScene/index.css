@@ -7,3 +7,10 @@
   height: 100%;
   text-align: center;
 }
+
+#mainScene #productList {
+  position: relative;
+  z-index: 0 !important;
+}
+#mainScene #searchBar {
+}
